@@ -44,11 +44,16 @@ public class welcomePage {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel contentPanel = new JPanel();
+		JPanel topPanel = new JPanel();
+		
+		frame.getContentPane().add(contentPanel);
+		contentPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblWelcomeCenter = new JLabel("Welcome Center");
-		panel.add(lblWelcomeCenter, BorderLayout.EAST);
+		contentPanel.add(lblWelcomeCenter, BorderLayout.EAST);
+		
+		JButton btnNext = new JButton("Next");
+		contentPanel.add(btnNext, BorderLayout.SOUTH);
 	}
 }
