@@ -1,0 +1,20 @@
+General steps to follow for all files - 
+
+	- Grid Bag Layout for all panel windows
+	- Getter/Setter methods for corresponding class variables
+	- Camel casing; constant in CAPS
+	- Button - btnName
+	- Label - lblLabel
+	- Text - txtTextbox
+	- MenuBar - mnuName
+	- mnuItemName
+	- Dialog box - dlgName
+	- Panel - pnlName
+	- Frame - frmName
+	- Image - imgName
+	- Audio - auName
+
+	
+	GitHub - 
+		pull at start of day/before you start working
+		push at end of day OR when file is completed
