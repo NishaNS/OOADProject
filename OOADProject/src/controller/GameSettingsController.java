@@ -4,7 +4,7 @@
 package controller;
 
 /**
- * @author 
+ * @author - NISHA
  * For teacher
  */
 public class GameSettingsController {
