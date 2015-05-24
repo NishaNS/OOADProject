@@ -15,16 +15,9 @@ public class Audio {
 	
 	private static final String FILE_PATH = "audio/";
 	private String auFileName = "";
-	
+
 	/**
 	 * The constructor of the Audio class
-	 */
-	public Audio(){
-		this("");
-	}
-	
-	/**
-	 * The overloaded constructor of the Audio class
 	 * @param fileName
 	 */
 	public Audio(String fileName)
