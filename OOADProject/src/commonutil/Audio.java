@@ -15,7 +15,7 @@ public class Audio {
 	
 	private static final String FILE_PATH = "audio/";
 	private String auFileName = "";
-
+	private SourceDataLine audioLine;
 	/**
 	 * The constructor of the Audio class
 	 * @param fileName
@@ -47,7 +47,7 @@ public class Audio {
 	public void playAudio(){
 		File audioFile = null;
 		AudioInputStream audioStream = null;
-		SourceDataLine audioLine = null;
+		audioLine = null;
 		try
 		{
 			audioFile = new File(FILE_PATH.concat(this.auFileName));
@@ -78,4 +78,12 @@ public class Audio {
         	}
         }
 	}
+	/**
+	 * The method to stop the audio once started
+	 */
+	public void stopAudio(){
+		audioLine.stop();
+		audioLine.flush();
+	}
+	
 }
