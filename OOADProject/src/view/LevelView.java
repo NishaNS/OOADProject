@@ -148,7 +148,6 @@ public void playSelectAudio(){
 	
 	if(levelController.getSelectionPerformed()!=1){
 		setTrackVariable(2);
-		System.out.println(getTrackVariable());
 		auLevel.setauFileName("Level_medium_select_option.wav");
 		auLevel.playAudio();
 	}
@@ -161,7 +160,6 @@ public void playSelectAudio(){
 	
 	if(levelController.getSelectionPerformed()!=1){
 		setTrackVariable(3);
-		System.out.println(getTrackVariable());
 		auLevel.setauFileName("Level_difficult_select_option.wav");
 		auLevel.playAudio();
 		trackVariable=4;

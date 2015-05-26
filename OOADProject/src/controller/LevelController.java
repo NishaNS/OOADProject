@@ -40,7 +40,7 @@ public class LevelController{
 			auHelp=new Audio("");
 			this.levelView.addPressListen(new KeyListen());
 			this.levelView.addButtonListen(new ActionListen());
-			//this.levelView.playSelectAudio();
+			this.levelView.playSelectAudio();
 }
 	
 	
