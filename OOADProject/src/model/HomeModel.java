@@ -1,12 +1,17 @@
 /**
- * 
+ * The function acts 
  */
 package model;
 
+import commonutil.Audio;
+
 /**
- * @author 
- * Welcome page - the first panel
+ * @author Madhu
+ * 
  */
 public class HomeModel {
 
+    public HomeModel(){}
+
+   
 }

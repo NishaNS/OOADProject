@@ -3,6 +3,7 @@
  */
 package commonutil;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
@@ -27,7 +28,7 @@ public class Audio {
 	
 	/**
 	 * The method that is used to set the name of the audio file
-	 * @param filename
+	 * @param fileName
 	 */
 	public void setauFileName(String fileName){
 		this.auFileName = fileName;
