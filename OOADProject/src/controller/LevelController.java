@@ -33,16 +33,19 @@ public class LevelController{
 /**
  * HelpController constructor which initializes the HelpModel and HelpView objects
  */
-	public LevelController(LevelModel levelModel,LevelView levelView){
-			this.levelModel=levelModel;
-			this.levelView=levelView;
+	public LevelController(){
+			levelModel=new LevelModel();
+			levelView=new LevelView();
 			levelView.levelController=this;
 			auHelp=new Audio("");
 			this.levelView.addPressListen(new KeyListen());
 			this.levelView.addButtonListen(new ActionListen());
 			this.levelView.playSelectAudio();
 }
-	
+
+	public LevelView getView(){
+		return levelView;
+	}
 	
 	/**
 	 * The getter method for selectionPerformed variable

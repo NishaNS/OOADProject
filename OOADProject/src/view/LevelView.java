@@ -74,7 +74,8 @@ public LevelView(){
 
 	this.add(btnLevel2,constraint);
 	constraint.gridx++;
-
+	
+	this.setName("LevelView");
 	this.add(btnLevel3,constraint);
 	this.setSize(200, 200);
 	this.setBackground(Color.ORANGE);
@@ -140,9 +141,9 @@ public void playSelectAudio(){
 	}
 	
 	if(levelController.getSelectionPerformed()!=1){
-	try{
+	/*try{
 	Thread.sleep(3000);
-	}catch(Exception e){}
+	}catch(Exception e){}*/
 	}
 	
 	
@@ -152,9 +153,9 @@ public void playSelectAudio(){
 		auLevel.playAudio();
 	}
 	if(levelController.getSelectionPerformed()!=1){
-	try{
+	/*try{
 		Thread.sleep(3000);
-		}catch(Exception e){}
+		}catch(Exception e){}*/
 	}
 	
 	
