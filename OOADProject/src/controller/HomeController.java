@@ -14,6 +14,8 @@ import commonutil.Audio;
 import commonutil.PanelWithAudio;
 import model.HomeModel;
 import view.HomeView;
+import view.MainDisplayView;
+import view.ThemeView;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -31,20 +33,20 @@ public class HomeController implements ActionListener{
 	private Timer timer;
 	private Component[] components;
 	private int currentPanel = 0;
-
+	private MainDisplayController mainController;
+	
 	public HomeView getView() {
 		return view;
 	}
 
-	public HomeController(){
+	public HomeController(MainDisplayController mController){
 		this.view = new HomeView();
 		this.model = new HomeModel();
+		this.mainController = mController;
 		timer = new Timer(4000,this);
 		addListeners();
 		timer.start();
 	}
-	
-	
 	
 	private void addListeners(){
 		this.view.addContinueKeyListener(new KeyListener() {
@@ -56,8 +58,14 @@ public class HomeController implements ActionListener{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				timer.stop();
-				System.out.println("Continue pressed");
-			}
+				//System.out.println("Continue pressed");
+				ThemeController tController = mainController.getTController();
+				ThemeView tView = tController.getView();
+				view.setVisible(false);
+				(mainController.getView()).addPanels(tView);
+				tView.loadAudio();
+				}
+				
 
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -74,13 +82,13 @@ public class HomeController implements ActionListener{
 //		});
 	}
 	
-	public void playWelcomeAudio(){
-	        Audio objAudio = new Audio("welcome.wav");
-	        objAudio.playAudio();
-	        //Thread.sleep(1000);
-//	        audioTest();
-	        
-	}
+//	public void playWelcomeAudio(){
+//	        Audio objAudio = new Audio("welcome.wav");
+//	        objAudio.playAudio();
+//	        //Thread.sleep(1000);
+////	        audioTest();
+//	        
+//	}
 
 
 

@@ -19,7 +19,6 @@ import javax.swing.*;
 
 import controller.LevelController;
 import controller.ThemeController;
-
 import commonutil.Audio;
 /**
  * @author hemali
@@ -128,6 +127,15 @@ public class LevelView extends JPanel{
 
 	}
 
+	public void loadAudio(){
+		new Thread(new Runnable() {			
+			@Override
+			public void run() {		
+				
+					playSelectAudio();//pause for page load + before looping
+					} 
+				}).start();
+	}
 	/** 
 	 * The getter method for the private variable trackVariable
 	 * @return int
@@ -167,7 +175,11 @@ public class LevelView extends JPanel{
 
 	public void playSelectAudio(){
 		trackVariable=0;
+		try {
+				
+		
 		while(true){
+			Thread.sleep(1000);
 			System.out.println("true");
 			if(levelController.getSelectionPerformed()!=1){
 
@@ -206,8 +218,13 @@ public class LevelView extends JPanel{
 				break;
 			}
 		}
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+			
+		}
+		
+}
 
-	}
 	public static void main(String[] args) {
 
 		LevelController levelcontroller = new LevelController();

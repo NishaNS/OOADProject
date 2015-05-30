@@ -35,18 +35,12 @@ public class LevelController{
 		auLevel=new Audio("");
 		this.levelView.addPressListen(new KeyListen());
 		this.levelView.addButtonListen(new ActionListen());
-		new Thread(new Runnable() {			
-			@Override
-			public void run() {		
-				try {
-					Thread.sleep(3000);			//pause for page load + before looping
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} 
-				levelView.playSelectAudio();
-			}
-		}).start();
+		
 	}
+	/**
+	 * 
+	 */
+	
 	/**
 	 * The method used to get the View for this controller
 	 */

@@ -96,18 +96,19 @@ public class ThemeView extends JPanel {
 		gridbag.setConstraints(btnAlphabets, gridconstraints);
 		this.add(btnAlphabets);
 
+	
+	}
+
+	public void loadAudio(){
 		//setup and play audio
 		new Thread(new Runnable() {			
 			@Override
 			public void run() {		
 
 				try {
-					Thread.sleep(5000);			//pause for page load + before looping
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}  
-
-				while(!btnSelected) {		//loop condition
+							//pause for page load + before looping
+				 while(!btnSelected) {		//loop condition
+					Thread.sleep(1000);	
 					auObj = new Audio(fileAu1);					
 					auObj.playAudio();
 
@@ -117,6 +118,7 @@ public class ThemeView extends JPanel {
 					repaint();
 					btnFarm.requestFocus();
 					auObj.playAudio();
+					Thread.sleep(1000);	
 					
 					auObj = new Audio(fileAu3);
 					setBtnImage1(fileButton1);
@@ -125,10 +127,13 @@ public class ThemeView extends JPanel {
 					btnAlphabets.requestFocus();
 					auObj.playAudio();
 				}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} 
 			}
-		}).start();		
+				
+		}).start();	
 	}
-
 	public void setBtnImage1(String filename) {
 		imgButton1 = new AppImage(filename);		
 	}
@@ -142,7 +147,7 @@ public class ThemeView extends JPanel {
 	}
 
 	public static void setBtnSelected(boolean btnSelected) {			
-		ThemeView.btnSelected = true;		
+		btnSelected = true;		
 	}
 
 	/**
@@ -169,14 +174,14 @@ public class ThemeView extends JPanel {
 	}
 
 	// $$$$$$$$$$$$$$ delete this method later
-	public static void main(String[] args) {
-		ThemeController themecontroller = new ThemeController();
-
-		JFrame mainframe = new JFrame("THEME");
-		Container mainpanel = mainframe.getContentPane();
-		mainpanel.add(themecontroller.getView());		
-		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainframe.setVisible(true);		
-	}
+//	public static void main(String[] args) {
+//		//ThemeController themecontroller = new ThemeController();
+//
+//		JFrame mainframe = new JFrame("THEME");
+//		Container mainpanel = mainframe.getContentPane();
+//		mainpanel.add(themecontroller.getView());		
+//		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		mainframe.setVisible(true);		
+//	}
 }

@@ -53,4 +53,6 @@ public class MainDisplayView extends JFrame {
 		return this.width;
 	}
 	
+	
+	
 }

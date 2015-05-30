@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import commonutil.AppImage;
 import model.ThemeModel;
+import view.LevelView;
 import view.ThemeView;
 
 /**
@@ -20,18 +21,19 @@ public class ThemeController {
 	private ThemeView tview;
 	private ThemeModel tmodel;
 	private LevelController lcontroller;
-
-	public ThemeController() {
-
-		tview = new ThemeView();
-		tmodel = new ThemeModel();
+	private MainDisplayController mainController;
+	public ThemeController(MainDisplayController mController) {
+			tview = new ThemeView();
+			tmodel = new ThemeModel();
+			mainController=mController;
+		
 		//lcontroller = new LevelController(levelModel, levelView);
 
 		tview.addFarmBtnListener(new myActionListener());
 		tview.addAlphaBtnListener(new myActionListener());
 	}
 	
-	public JPanel getView(){
+	public ThemeView getView(){
 		return tview;
 	}
 
@@ -57,6 +59,12 @@ public class ThemeController {
 				ThemeView.setBtnSelected(true); 
 				tmodel.setTheme(1);				
 				//lcontroller.getView();
+				LevelController lController = mainController.getLController();
+				LevelView lView = lController.getView();
+				tview.setVisible(false);
+				(mainController.getView()).addPanels(lView);
+				lView.loadAudio();
+				
 			}
 
 			else if(e.getSource().toString().contains("ALPHABETS") == true) {
@@ -64,7 +72,11 @@ public class ThemeController {
 				ThemeView.setBtnSelected(true);
 				tmodel.setTheme(2);
 				//lcontroller.getView();
-				
+				LevelController lController = mainController.getLController();
+				LevelView lView = lController.getView();
+				tview.setVisible(false);
+				(mainController.getView()).addPanels(lView);
+				lView.loadAudio();
 			}
 		}
 	}	
