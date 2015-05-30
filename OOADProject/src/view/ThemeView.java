@@ -49,13 +49,17 @@ public class ThemeView extends JPanel {
 
 		//file names for all images
 		fileBackground = "Bck_Green_2_Sprayed Filter.png";		
-		fileButton1 = "Btn_Button_Farm.png";
-		fileButton2 = "Btn_Button_Farm_Clicked.png";
-		fileButton3 = "Btn_Button_Alphabets.png";		
-		fileButton4 = "Btn_Button_Alphabets_Clicked.png";
+		fileButton1 = "Btn_Farm_Updated.png";
+		fileButton2 = "Btn_Farm_Updated_Clicked.png";
+		fileButton3 = "Btn_Alphabets_Updated.png";		
+		fileButton4 = "Btn_Farm_Updated_Clicked.png";
 		fileAu1 = "Theme_1.wav";
 		fileAu2 = "Theme_2.wav";
 		fileAu3 = "Theme_3.wav";
+		
+		
+		//&&&&&&&&&&&&&&&  ADD LABEL "SELECT A THEME YOU WANT TO PLAY"
+		
 
 		//set background images
 		imgBackground = new AppImage(fileBackground);
@@ -122,8 +126,7 @@ public class ThemeView extends JPanel {
 					auObj.playAudio();
 				}
 			}
-		}).start();
-
+		}).start();		
 	}
 
 	public void setBtnImage1(String filename) {
@@ -167,8 +170,6 @@ public class ThemeView extends JPanel {
 
 	// $$$$$$$$$$$$$$ delete this method later
 	public static void main(String[] args) {
-		/*ThemeView themeView = new ThemeView();
-		ThemeModel themeModel = new ThemeModel();*/
 		ThemeController themecontroller = new ThemeController();
 
 		JFrame mainframe = new JFrame("THEME");

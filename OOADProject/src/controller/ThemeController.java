@@ -25,6 +25,7 @@ public class ThemeController {
 
 		tview = new ThemeView();
 		tmodel = new ThemeModel();
+		//lcontroller = new LevelController(levelModel, levelView);
 
 		tview.addFarmBtnListener(new myActionListener());
 		tview.addAlphaBtnListener(new myActionListener());
