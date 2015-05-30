@@ -11,13 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-//import controller.LevelController.ActionListen;
-import controller.LevelController.KeyListen;
 import commonutil.Audio;
-import model.HelpModel;
 import model.LevelModel;
-import view.HelpView;
 import view.LevelView;
 
 /**
@@ -28,7 +23,7 @@ public class LevelController{
 
 	public LevelView levelView;
 	public LevelModel levelModel;
-	private Audio auHelp;
+	private Audio auLevel;
 	private int selectionPerformed=0;
 /**
  * HelpController constructor which initializes the HelpModel and HelpView objects
@@ -37,15 +32,35 @@ public class LevelController{
 			levelModel=new LevelModel();
 			levelView=new LevelView();
 			levelView.levelController=this;
-			auHelp=new Audio("");
+			auLevel=new Audio("");
 			this.levelView.addPressListen(new KeyListen());
 			this.levelView.addButtonListen(new ActionListen());
-			this.levelView.playSelectAudio();
+			new Thread(new Runnable() {			
+				@Override
+				public void run() {		
+					try {
+						Thread.sleep(3000);			//pause for page load + before looping
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} 
+					levelView.playSelectAudio();
+				}
+			}).start();
 }
-
+	/**
+	 * The method used to get the View for this controller
+	 */
 	public LevelView getView(){
 		return levelView;
 	}
+	
+	/**
+	 * The method used to get the model for this class
+	 */
+	public LevelModel getModel(){
+		return levelModel;
+	}
+	
 	
 	/**
 	 * The getter method for selectionPerformed variable
@@ -72,27 +87,19 @@ public class LevelController{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		levelView.auLevel.stopAudio();
-		if(e.getSource().equals(levelView.btnLevel1)){
+		if(e.getSource().equals(levelView.btnEasy)){
 			setSelectionPerformed(1);
 			levelModel.setLevel(1);
-			auHelp.setauFileName("Level_easy_selected.wav");
-			auHelp.playAudio();
+			auLevel.setauFileName("/Users/hemali/git/FinalProject/OOADProject/audio/Level_easy_selected.wav");
+			auLevel.playAudio();
 			
 			
 		}
-		else if(e.getSource().equals(levelView.btnLevel2)){
-			setSelectionPerformed(1);
-			levelModel.setLevel(2);
-			auHelp.setauFileName("Level_medium_selected.wav");
-			auHelp.playAudio();
-			
-			
-		}
-		else if(e.getSource().equals(levelView.btnLevel3)){
+		else if(e.getSource().equals(levelView.btnHard)){
 			setSelectionPerformed(1);
 			levelModel.setLevel(3);
-			auHelp.setauFileName("Level_difficult_selected.wav");
-			auHelp.playAudio();
+			auLevel.setauFileName("/Users/hemali/git/FinalProject/OOADProject/audio/Level_difficult_selected.wav");
+			auLevel.playAudio();
 			
 			
 		}
@@ -112,31 +119,19 @@ public class LevelController{
 		if(levelView.getTrackVariable()==1){
 			setSelectionPerformed(1);
 			levelModel.setLevel(1);
-			levelView.auLevel.setauFileName("Level_easy_selected.wav");
+			levelView.auLevel.setauFileName("/Users/hemali/git/FinalProject/OOADProject/audio/Level_easy_selected.wav");
 			levelView.auLevel.playAudio();
 			
 		}
 		else if(levelView.getTrackVariable()==2){
 			setSelectionPerformed(1);
-			levelModel.setLevel(2);
-			auHelp.setauFileName("Level_medium_selected.wav");
-			auHelp.playAudio();
-			
-		}
-		else if(levelView.getTrackVariable()==3){
-			setSelectionPerformed(1);
 			levelModel.setLevel(3);
-			auHelp.setauFileName("Level_difficult_selected.wav");
-			auHelp.playAudio();
+			auLevel.setauFileName("/Users/hemali/git/FinalProject/OOADProject/audio/Level_difficult_selected.wav");
+			auLevel.playAudio();
 			
 		}
 		
 		
-	}
-	public void keyReleased(KeyEvent e){
-
-	}
-	public void keyTyped(KeyEvent e){
 	}
 	}
 
