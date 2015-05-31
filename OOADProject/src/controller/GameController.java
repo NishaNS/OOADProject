@@ -3,6 +3,9 @@
  */
 package controller;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JPanel;
 
 import model.Maze;
@@ -25,12 +28,9 @@ public class GameController {
 	public GameController() {
 		theme = 1;
 		level = 1;
-
 		maze = new Maze(theme, level);
-
-		gView = new GameView();
-
-
+		gView = new GameView(maze);
+		gView.addMazePanelListener(new MazeKeyListener());
 	}
 
 	public JPanel getView(){
@@ -41,4 +41,10 @@ public class GameController {
 		arrMaze = maze.getMazeLayout();
 	}
 
+	private class MazeKeyListener extends KeyAdapter{
+		public void keyPress(KeyEvent e){
+			
+		}
+	}
+	
 }

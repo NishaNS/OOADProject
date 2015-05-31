@@ -17,14 +17,14 @@ public class Player {
 	
 public Player(){
 	
-	player=new AppImage("").loadImage();
-	rightPlayer=new AppImage("").loadImage();
-	leftPlayer=new AppImage("").loadImage();
-	downPlayer=new AppImage("").loadImage();
-	upPlayer=new AppImage("").loadImage();
+	player=new AppImage("player.png").loadImage();
+//	rightPlayer=new AppImage("").loadImage();
+//	leftPlayer=new AppImage("").loadImage();
+//	downPlayer=new AppImage("").loadImage();
+//	upPlayer=new AppImage("").loadImage();
 	
-	positionX=7;
-	positionY=7;
+	positionX=0;
+	positionY=0;
 }
 public Image getPlayer(){
 	return player;

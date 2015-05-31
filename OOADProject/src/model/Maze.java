@@ -9,35 +9,32 @@ import commonutil.AppImage;
 public class Maze {
 
 	private final int[][] arrMaze = {
-			{3, 3, 3, 3, 3, 3, 3, 3},
-			{3, 0, 0, 0, 0, 0, 0, 3},
-			{3, 0, 1, 0, 1, 0, 0, 3},
-			{3, 0, 1, 0, 1, 0, 0, 3},
-			{3, 0, 0, 0, 0, 0, 0, 3},
-			{3, 3, 3, 3, 3, 3, 3, 3}
+			{0, 0, 0, 1, 1, 1, 0, 0, 0},
+			{0, 0, 0, 0, 1, 0, 0, 0, 0},
+			{0, 0, 1, 0, 0, 0, 1, 0 ,0},
+			{0, 0, 1, 0, 0, 0, 1, 0 ,0},
+			{0, 0, 1, 1, 0, 1, 1, 0 ,0},
+			{0, 0, 1, 1, 1, 1, 1, 0 ,0}
 	};
 
 	private Image grass, brick, borderV, borderH; 
 	private int t, l;
 
 	public Maze(int th, int lvl){
-		
 		t = th;
 		l = lvl;
-		
-
 		//load images
-		ImageIcon img = new ImageIcon("image\\brick.png");
+		ImageIcon img = new ImageIcon("image/brick.png");
 		brick = img.getImage();
 
-		img = new ImageIcon("image\\grass.png");
+		img = new ImageIcon("image/grass.png");
 		grass = img.getImage();
 
-		img = new ImageIcon("image\\border_h.png");
+		img = new ImageIcon("image/border_h.png");
 		borderH = img.getImage();
 
 		
-		img = new ImageIcon("image\\border_v.png");
+		img = new ImageIcon("image/border_v.png");
 		borderV = img.getImage();
 
 	}

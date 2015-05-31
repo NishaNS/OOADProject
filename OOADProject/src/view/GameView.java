@@ -9,15 +9,22 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import commonutil.AppImage;
 import model.GameModel;
+import model.Maze;
+import model.Player;
 import model.ThemeModel;
 import controller.GameController;
 import controller.ThemeController;
@@ -46,31 +53,41 @@ public class GameView extends JPanel {
 	private int pnlWidth;
 	private int pnlHeight;
 	private JLabel lblTitle;
+	
+	private int[][] arrMaze;
+	private Image grass, brick, borderV, borderH; 
+	private Maze maze;
+	private Player player;
+	private static int PIXEL_COUNT = 100;
+	
+	
+	public GameView(Maze maze) {
+		this.maze = maze;
+		arrMaze = maze.getMazeLayout();
+		initializeComponents();
+		player = new Player();
+	}
 
-
-	public GameView() {
-
-
-
+	private void initializeComponents(){
 		pnlTitle = new JPanel();
-		pnlMaze = new JPanel();
+		pnlMaze = new MazePanel();
 		pnlDashboard = new JPanel();		
 
 		fileBackground = "Bck_Green_2_Sprayed Filter.png";
 		fileTitleBck = "testTitle.png";
-		fileMazeBck = "testMaze.png";
+		//fileMazeBck = "testMaze.png";
 		fileDashBck = "testDash.png";
 
 		imgBackground = new AppImage(fileBackground);
 		imgTitleBck = new AppImage(fileTitleBck);
-		imgMazeBck = new AppImage(fileMazeBck);
+		//imgMazeBck = new AppImage(fileMazeBck);
 		imgDashBack = new AppImage(fileDashBck);
-
+		
 		gridBagLayout = new GridBagLayout();
 		gridconstraints = new GridBagConstraints();
 		this.setLayout(gridBagLayout);
 
-
+		
 		//title panel
 		gridconstraints.fill =  GridBagConstraints.HORIZONTAL;
 		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;
@@ -92,10 +109,10 @@ public class GameView extends JPanel {
 		gridconstraints.fill = GridBagConstraints.BOTH;
 		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;	//required 
 		gridconstraints.anchor = GridBagConstraints.LINE_START;
-		pnlMaze.setBackground(Color.CYAN);
+		//pnlMaze.setBackground(Color.CYAN);
 		this.add(pnlMaze, gridconstraints);
 
-
+		
 		//dashboard panel
 		gridconstraints.gridx = 2;
 		gridconstraints.gridy = 1;
@@ -107,8 +124,12 @@ public class GameView extends JPanel {
 		pnlDashboard.setBackground(Color.YELLOW);		
 		this.add(pnlDashboard, gridconstraints);
 	}
-
-	// override paint component
+	
+	public void getMazeLayout(int[][] arrMaze){
+		this.arrMaze = arrMaze;
+	}
+	
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);	
@@ -125,13 +146,71 @@ public class GameView extends JPanel {
 		return getHeight();			
 	}
 
+	public void addMazePanelListener(KeyAdapter kAdapter){
+		pnlMaze.addKeyListener(kAdapter);
+	}
+	//inner class to load the maze objects
+	private class MazePanel extends JPanel implements ActionListener{
+		private Timer timer;
+		GridBagConstraints gc=new GridBagConstraints();
+
+		MazePanel(){
+			timer = new Timer(25,this);
+			setFocusable(true);
+			GridBagLayout gl=new GridBagLayout(); 
+			this.setLayout(gl);
+			gc=new GridBagConstraints();
+			gc.gridx=0;
+			gc.gridy=0;
+			timer.start();
+		}
+		
+		
+		public void paintComponent(Graphics g){
+			super.paintComponent(g);
+			for(int x=0; x<arrMaze[0].length;x++)
+			{
+				for(int y=0; y<arrMaze.length;y++){
+					if(arrMaze[y][x] == 0)
+						{
+						g.drawImage(maze.getGrass(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
+						gc.gridx++;
+						}
+					if(arrMaze[y][x] == 1)
+						{
+						g.drawImage(maze.getBrick(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
+						gc.gridx++;
+						}
+					
+				}
+				gc.gridy++;
+			}
+			
+			g.drawImage(player.getPlayer(), player.getTileX()*PIXEL_COUNT, player.getTileY()*PIXEL_COUNT, null);
+			
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			repaint();
+			
+		}
+
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			repaint();
+//		}
+	};
+	
+	
 	// $$$$$$$$$$$$$$ delete this method later
 	public static void main(String[] args){
-		GameController gameController = new GameController();
-
+		GameView view= new GameView(new Maze(1,2));
+		//GameController gameController = new GameController();
 		JFrame mainframe = new JFrame("GAME VIEW");
 		Container mainpanel = mainframe.getContentPane();
-		mainpanel.add(gameController.getView());		
+		mainpanel.add(view);		
 		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainframe.pack();
