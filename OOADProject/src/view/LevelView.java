@@ -18,8 +18,10 @@ import java.awt.event.KeyAdapter;
 import javax.swing.*;
 
 import controller.LevelController;
+import controller.MainDisplayController;
 import controller.ThemeController;
 import commonutil.Audio;
+import commonutil.CustomButton;
 /**
  * @author hemali
  *
@@ -42,22 +44,30 @@ public class LevelView extends JPanel{
 	public Audio auLevel;
 	public LevelController levelController;
 	public ThemeController tController;
+	
+	public static String BUTTON_EASY_O_IMG = "Level1.png";
+	public static String BUTTON_HARD_O_IMG = "Level3.png";
+	public static String BUTTON_EASY_AUD = "Level_easy_select_option.wav";
+	public static String BUTTON_HARD_AUD = "Level_difficult_select_option.wav";
+	public static String BUTTON_EASY_S_IMG = "testMaze.png";
+	public static String BUTTON_HARD_S_IMG = "testMaze.png";
+	public static String PAGE_LOAD_AUD = "Level_select.wav";
+	
+	
 	/**
 	 * LevelView constructor 
 	 */
 	public LevelView(){
 		//if(tController.getTheme()==1)
 		{
-			//path of the farm level1 image
-			imgEasy=new String("image/Level1.png");
-			//path of the farm level2 image
-			imgHard=new String("image/Level3.png");
-			//path of the farm level1 selected image
 			imgEasySelected=new String("");
 			//path of the farm level2 selected image
 			imgHardSelected=new String("");
-			btnEasy=new CustomButton(imgEasy);
-			btnHard=new CustomButton(imgHard);
+			btnEasy=new CustomButton(BUTTON_EASY_O_IMG,BUTTON_EASY_AUD);
+			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD);
+			btnEasy.setName("Level1");
+			btnHard.setName("Level2");
+			setFocusable(true);
 		}
 		/*else{
 		imgEasy=new String("OOADProject/image/Level1.png");
@@ -99,43 +109,36 @@ public class LevelView extends JPanel{
 	 * custom button class
 	 *
 	 */
-	class CustomButton extends JButton{
-		String imageFile;
-		int height=400;
-		int width=400;
-		CustomButton(String m){
-			imageFile=m;
-			this.setIcon( scaleImage(height,width,new ImageIcon(imageFile)));
-		}
+	
+//	public class CustomButton extends JButton{
+//		String imageFile;
+//		int height=400;
+//		int width=400;
+//		CustomButton(String m){
+//			imageFile=m;
+//			this.setIcon( scaleImage(height,width,new ImageIcon(imageFile)));
+//		}
+//
+//		public void setImageFile(String img){
+//			imageFile=img;
+//		}
+//		/**
+//		 * The method to scale the images given to the button
+//		 */
+//		public ImageIcon scaleImage(int x,int y,ImageIcon i){
+//			Image img = i.getImage(); 
+//			Image newimg = img.getScaledInstance(x,y,  java.awt.Image.SCALE_SMOOTH);  
+//			return new ImageIcon(newimg); 
+//		}
+//		@Override
+//		protected void paintComponent(Graphics g) {
+//			super.paintComponent(g);
+//			this.setIcon(scaleImage(height,width,new ImageIcon(imageFile)));
+//		}
+//
+//	}
 
-		public void setImageFile(String img){
-			imageFile=img;
-		}
-		/**
-		 * The method to scale the images given to the button
-		 */
-		public ImageIcon scaleImage(int x,int y,ImageIcon i){
-			Image img = i.getImage(); 
-			Image newimg = img.getScaledInstance(x,y,  java.awt.Image.SCALE_SMOOTH);  
-			return new ImageIcon(newimg); 
-		}
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			this.setIcon(scaleImage(height,width,new ImageIcon(imageFile)));
-		}
-
-	}
-
-	public void loadAudio(){
-		new Thread(new Runnable() {			
-			@Override
-			public void run() {		
-				
-					playSelectAudio();//pause for page load + before looping
-					} 
-				}).start();
-	}
+	
 	/** 
 	 * The getter method for the private variable trackVariable
 	 * @return int
@@ -155,10 +158,18 @@ public class LevelView extends JPanel{
 	 * The method to add listeners to the buttons
 	 * @return void
 	 */
-	public void addPressListen(LevelController.KeyListen k){
+	/*public void addPressListen(KeyAdapter k){
+		
 		this.setFocusable(true);
+	
 		this.addKeyListener(k);
+	}*/
+	
+	public void addPressListen(KeyAdapter k){
+		btnEasy.addKeyListener(k);
+		btnHard.addKeyListener(k);
 	}
+	
 	/**
 	 * 
 	 * @param a
@@ -173,65 +184,66 @@ public class LevelView extends JPanel{
 	 * @return void
 	 */
 
-	public void playSelectAudio(){
-		trackVariable=0;
-		try {
-				
-		
-		while(true){
-			Thread.sleep(1000);
-			System.out.println("true");
-			if(levelController.getSelectionPerformed()!=1){
+//	public void playSelectAudio(){
+//		trackVariable=0;
+//		try {
+//				
+//		
+//		while(true){
+//			Thread.sleep(1000);
+//			System.out.println("true");
+//			if(levelController.getSelectionPerformed()!=1){
+//
+//				auLevel=new Audio("Level_select.wav");
+//				auLevel.playAudio();
+//				setTrackVariable(1);
+//
+//			}else{
+//				break;
+//			}
+//			if(levelController.getSelectionPerformed()!=1){
+//				btnEasy.setBackground(Color.RED);
+//				btnEasy.setOpaque(true);
+//				btnEasy.repaint();
+//				auLevel.setauFileName("Level_easy_select_option.wav");
+//				auLevel.playAudio();
+//				btnEasy.setOpaque(false);
+//				btnEasy.repaint();
+//			}
+//			else{
+//				break;	
+//			}	
+//
+//			if(levelController.getSelectionPerformed()!=1){
+//				btnHard.setBackground(Color.RED);
+//				btnHard.setOpaque(true);
+//				btnHard.repaint();
+//				setTrackVariable(2);
+//				auLevel.setauFileName("Level_difficult_select_option.wav");
+//				auLevel.playAudio();
+//				trackVariable=3;
+//				btnHard.setOpaque(false);
+//				btnHard.repaint();
+//				continue;
+//			}{
+//				break;
+//			}
+//		}
+//		}catch (InterruptedException e) {
+//			e.printStackTrace();
+//			
+//		}
+//		
+//}
 
-				auLevel=new Audio("Level_select.wav");
-				auLevel.playAudio();
-				setTrackVariable(1);
-
-			}else{
-				break;
-			}
-			if(levelController.getSelectionPerformed()!=1){
-				btnEasy.setBackground(Color.RED);
-				btnEasy.setOpaque(true);
-				btnEasy.repaint();
-				auLevel.setauFileName("Level_easy_select_option.wav");
-				auLevel.playAudio();
-				btnEasy.setOpaque(false);
-				btnEasy.repaint();
-			}
-			else{
-				break;	
-			}	
-
-			if(levelController.getSelectionPerformed()!=1){
-				btnHard.setBackground(Color.RED);
-				btnHard.setOpaque(true);
-				btnHard.repaint();
-				setTrackVariable(2);
-				auLevel.setauFileName("Level_difficult_select_option.wav");
-				auLevel.playAudio();
-				trackVariable=3;
-				btnHard.setOpaque(false);
-				btnHard.repaint();
-				continue;
-			}{
-				break;
-			}
-		}
-		}catch (InterruptedException e) {
-			e.printStackTrace();
-			
-		}
-		
-}
-
-	public static void main(String[] args) {
-
-		LevelController levelcontroller = new LevelController();
-		JFrame window = new JFrame("Level");
-		window.add(levelcontroller.getView());		
-		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		 MainDisplayController mainController=new MainDisplayController();
+//		LevelController levelcontroller = new LevelController(mainController);
+//		JFrame window = new JFrame("Level");
+//		window.add(levelcontroller.getView());
+//		levelcontroller.loadAudio();
+//		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		window.setVisible(true);
+//	}
 }

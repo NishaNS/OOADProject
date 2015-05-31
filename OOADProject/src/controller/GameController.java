@@ -36,9 +36,10 @@ public class GameController {
 		gView.addMazePanelListener(new MazeKeyListener());
 		arrMaze=maze.getMazeLayout();
 		player= gView.getPlayer();
+		
 	}
 
-	public JPanel getView(){
+	public GameView getView(){
 		return gView;
 	}
 
@@ -46,8 +47,8 @@ public class GameController {
 	private class MazeKeyListener extends KeyAdapter {
 
 		public void keyPressed (KeyEvent e) {
-
-
+			
+			System.out.println("Inside key");
 			int keycode = e.getKeyCode();
 			if (keycode == KeyEvent.VK_UP) {
 				int currentX = player.getTileX();

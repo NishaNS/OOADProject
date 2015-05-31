@@ -16,6 +16,7 @@ public class MainDisplayController {
 		private HomeController hController;
 		private ThemeController tController;
 		private LevelController lController;
+		private GameController gController;
 		private HomeView hView;
 		
 	
@@ -27,7 +28,9 @@ public class MainDisplayController {
 		if(tController==null)
 			this.tController = new ThemeController(this);
 		if(lController==null)
-			this.lController = new LevelController();
+			this.lController = new LevelController(this);
+		if(gController==null)
+			this.gController=new GameController();
 		
 		hView = hController.getView();
 		
@@ -35,7 +38,9 @@ public class MainDisplayController {
 		mainView.addPanels(hView);
 	}
 	
-	
+	public GameController getGController(){
+		return gController;
+	}
 	public ThemeController getTController(){
 		return this.tController;
 	}

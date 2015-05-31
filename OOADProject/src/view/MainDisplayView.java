@@ -4,6 +4,7 @@
 package view;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Toolkit;
 
 import javax.swing.*;
@@ -29,11 +30,43 @@ public class MainDisplayView extends JFrame {
 	}
 	
 	public void addPanels(JPanel pnlChild){
-		pnlContainer.add(pnlChild);
-		pnlChild.setVisible(true);
-		layoutCard.show(pnlContainer, "");
-		setContentPane(pnlContainer);
+		
+		/*//with card layout
+		if(pnlChild.getName() == null){
+			pnlContainer.add(pnlChild);
+			layoutCard.show(pnlContainer, "");
+			this.add(pnlContainer);
+			//setContentPane(pnlContainer);
+			pnlChild.setVisible(true);
+			pnlChild.requestFocusInWindow();
+			
+		}
+		else{
+			pnlContainer.add(pnlChild);
+			pnlChild.setVisible(true);
+			layoutCard.show(pnlContainer, "");
+			this.add(pnlContainer);
+			
+		}
+		setVisible(true);*/
+		
+		//works without card layout
+		Container c = getContentPane();
+		if(pnlChild.getName() == null){
+			//pnlChild.requestFocusInWindow();
+			System.out.println("Inside panel");
+			c.add(pnlChild);
+			pnlChild.setVisible(true);
+			pnlChild.requestFocusInWindow();
+		}
+		else
+		{
+			c.add(pnlChild);
+			pnlChild.setVisible(true);
+		}
+		
 		setVisible(true);
+		
 		
 	}
 	private void setWindowProperties(){

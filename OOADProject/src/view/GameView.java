@@ -62,17 +62,19 @@ public class GameView extends JPanel {
 	
 	
 	public GameView(Maze maze) {
+		//super();
 		this.maze = maze;
 		arrMaze = maze.getMazeLayout();
 		initializeComponents();
 		player = new Player();
+		setName("Game");
+		
 	}
 
 	private void initializeComponents(){
 		pnlTitle = new JPanel();
 		pnlMaze = new MazePanel();
-		pnlDashboard = new JPanel();		
-
+		pnlDashboard = new JPanel();	
 		fileBackground = "Bck_Green_2_Sprayed Filter.png";
 		fileTitleBck = "testTitle.png";
 		//fileMazeBck = "testMaze.png";
@@ -222,17 +224,17 @@ public class GameView extends JPanel {
 	
 	
 	// $$$$$$$$$$$$$$ delete this method later
-	public static void main(String[] args){
-		//GameView view= new GameView(new Maze(1,2));
-		GameController gameController = new GameController();
-		JFrame mainframe = new JFrame("GAME VIEW");
-		Container mainpanel = mainframe.getContentPane();
-		mainpanel.add(gameController.getView());		
-		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainframe.pack();
-		mainframe.setVisible(true);
-
-	}
+//	public static void main(String[] args){
+//		//GameView view= new GameView(new Maze(1,2));
+//		GameController gameController = new GameController();
+//		JFrame mainframe = new JFrame("GAME VIEW");
+//		Container mainpanel = mainframe.getContentPane();
+//		mainpanel.add(gameController.getView());		
+//		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		mainframe.pack();
+//		mainframe.setVisible(true);
+//
+//	}
 
 }
