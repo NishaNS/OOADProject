@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import commonutil.AppImage;
+import commonutil.Audio;
 import model.ThemeModel;
 import view.LevelView;
 import view.ThemeView;
@@ -16,23 +17,19 @@ import view.ThemeView;
  * The ThemeController implements the listeners for the buttons in ThemeView class.
  */
 
-//HELLO
-
 public class ThemeController {
 
 	private ThemeView tview;
 	private ThemeModel tmodel;
 	private LevelController lcontroller;
 	private MainDisplayController mainController;
+	
 	public ThemeController(MainDisplayController mController) {
 			tview = new ThemeView();
 			tmodel = new ThemeModel();
 			mainController=mController;
-		
-		//lcontroller = new LevelController(levelModel, levelView);
-
-		tview.addFarmBtnListener(new myActionListener());
-		tview.addAlphaBtnListener(new myActionListener());
+			tview.addFarmBtnListener(new myActionListener());
+			tview.addAlphaBtnListener(new myActionListener());
 	}
 	
 	public ThemeView getView(){
@@ -46,6 +43,41 @@ public class ThemeController {
 		return tmodel.getTheme();		
 	}
 
+	
+//	public void loadAudio(){
+//		//setup and play audio
+//		new Thread(new Runnable() {			
+//			@Override
+//			public void run() {		
+//				try {
+//					while(!btnSelected) {		
+//					Thread.sleep(1000);	
+//					auObj = new Audio(fileAu1);					
+//					auObj.playAudio();
+//
+//					auObj = new Audio(fileAu2);
+//					setBtnImage2(fileButton3);
+//					setBtnImage1(fileButton2);					
+//					repaint();
+//					btnFarm.requestFocus();
+//					auObj.playAudio();
+//					Thread.sleep(1000);	
+//					
+//					auObj = new Audio(fileAu3);
+//					setBtnImage1(fileButton1);
+//					setBtnImage2(fileButton4);
+//					repaint();
+//					btnAlphabets.requestFocus();
+//					auObj.playAudio();
+//				}
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				} 
+//			}
+//				
+//		}).start();	
+//	}
+	
 	/**
 	 * @author Nisha
 	 * Inner class to implement Action Listener for buttons in ThemeView
