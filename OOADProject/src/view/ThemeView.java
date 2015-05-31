@@ -3,6 +3,7 @@ package view;
 
 import commonutil.AppImage;
 import commonutil.Audio;
+import commonutil.CustomButton;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -33,7 +34,19 @@ public class ThemeView extends JPanel {
 	private JButton btnFarm;
 	private JButton btnAlphabets;
 	private Audio auObj;
-	private String fileAu1, fileAu2, fileAu3;
+
+	
+	
+	public static String BUTTON_FARM_O_IMG="Btn_Farm_Updated.png";
+	public static String BUTTON_ALPHABETS_O_IMG= "Btn_Alphabets_Updated.png";
+	public static String BUTTON_FARM_S_IMG="Btn_Farm_Updated_Clicked.png";
+	public static String BUTTON_ALPHABETS_S_IMG= "Btn_Alphabets_Updated_Clicked.png";
+	public static String BUTTON_FARM_AUD="Theme_2.wav";
+	public static String BUTTON_ALPHABETS_AUD= "Theme_3.wav";
+	public static String PAGE_LOAD_AUD = "Theme_1.wav";
+	private static String PAGE_BKGND = "Bck_Green_2_Sprayed Filter.png";
+	
+	
 
 	/**
 	 * The constructor setups the elements and layout for the Theme page
@@ -47,20 +60,25 @@ public class ThemeView extends JPanel {
 
 		btnSelected = false;
 
-		//file names for all images
-		fileBackground = "Bck_Green_2_Sprayed Filter.png";		
-		fileButton1 = "Btn_Farm_Updated.png";
-		fileButton2 = "Btn_Farm_Updated_Clicked.png";
-		fileButton3 = "Btn_Alphabets_Updated.png";		
-		fileButton4 = "Btn_Farm_Updated_Clicked.png";
-		fileAu1 = "Theme_1.wav";
-		fileAu2 = "Theme_2.wav";
-		fileAu3 = "Theme_3.wav";
+//		//file names for all images
+//		fileBackground = "Bck_Green_2_Sprayed Filter.png";		
+//		fileButton1 = "Btn_Farm_Updated.png";
+//		fileButton2 = "Btn_Farm_Updated_Clicked.png";
+//		fileButton3 = "Btn_Alphabets_Updated.png";		
+//		fileButton4 = "Btn_Farm_Updated_Clicked.png";
+//		fileAu1 = "Theme_1.wav";
+//		fileAu2 = "Theme_2.wav";
+//		fileAu3 = "Theme_3.wav";
 		
 		
 		//&&&&&&&&&&&&&&&  ADD LABEL "SELECT A THEME YOU WANT TO PLAY"
 		
 
+		btnFarm = new CustomButton(BUTTON_FARM_O_IMG, BUTTON_FARM_AUD);
+		btnAlphabets = new CustomButton(BUTTON_ALPHABETS_O_IMG, BUTTON_ALPHABETS_AUD);
+		
+		
+		
 		//set background images
 		imgBackground = new AppImage(fileBackground);
 		imgButton1 = new AppImage(fileButton1);
@@ -99,41 +117,41 @@ public class ThemeView extends JPanel {
 	
 	}
 
-	public void loadAudio(){
-		//setup and play audio
-		new Thread(new Runnable() {			
-			@Override
-			public void run() {		
-
-				try {
-							//pause for page load + before looping
-				 while(!btnSelected) {		//loop condition
-					Thread.sleep(1000);	
-					auObj = new Audio(fileAu1);					
-					auObj.playAudio();
-
-					auObj = new Audio(fileAu2);
-					setBtnImage2(fileButton3);
-					setBtnImage1(fileButton2);					
-					repaint();
-					btnFarm.requestFocus();
-					auObj.playAudio();
-					Thread.sleep(1000);	
-					
-					auObj = new Audio(fileAu3);
-					setBtnImage1(fileButton1);
-					setBtnImage2(fileButton4);
-					repaint();
-					btnAlphabets.requestFocus();
-					auObj.playAudio();
-				}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} 
-			}
-				
-		}).start();	
-	}
+//	public void loadAudio(){
+//		//setup and play audio
+//		new Thread(new Runnable() {			
+//			@Override
+//			public void run() {		
+//
+//				try {
+//							//pause for page load + before looping
+//				 while(!btnSelected) {		//loop condition
+//					Thread.sleep(1000);	
+//					auObj = new Audio(fileAu1);					
+//					auObj.playAudio();
+//
+//					auObj = new Audio(fileAu2);
+//					setBtnImage2(fileButton3);
+//					setBtnImage1(fileButton2);					
+//					repaint();
+//					btnFarm.requestFocus();
+//					auObj.playAudio();
+//					Thread.sleep(1000);	
+//					
+//					auObj = new Audio(fileAu3);
+//					setBtnImage1(fileButton1);
+//					setBtnImage2(fileButton4);
+//					repaint();
+//					btnAlphabets.requestFocus();
+//					auObj.playAudio();
+//				}
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				} 
+//			}
+//				
+//		}).start();	
+//	}
 	public void setBtnImage1(String filename) {
 		imgButton1 = new AppImage(filename);		
 	}
