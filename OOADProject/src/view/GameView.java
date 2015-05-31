@@ -38,7 +38,7 @@ import controller.ThemeController;
 public class GameView extends JPanel {
 
 	private JPanel pnlTitle;
-	private JPanel pnlMaze;
+	private MazePanel pnlMaze;
 	private JPanel pnlDashboard;
 	private AppImage imgBackground;
 	private AppImage imgTitleBck;
@@ -129,41 +129,58 @@ public class GameView extends JPanel {
 		this.arrMaze = arrMaze;
 	}
 	
+	public Player getPlayer(){
+		return this.player;
+	}
 	
-	@Override
-	protected void paintComponent(Graphics g) {
+	//@Override
+	/*protected void paintComponent(Graphics g) {
 		super.paintComponent(g);	
 		g.drawImage(imgBackground.loadBackGroundImage(), 1, 0, getWidth(), getHeight() , null);
 		pnlWidth = getPanelWidth();
-		pnlHeight = getPanelHeight();			
-	}
+		pnlHeight = getPanelHeight();	
+		pnlMaze.repaint();
+	}*/
 
-	public int getPanelWidth() {
+	/*public int getPanelWidth() {
 		return getWidth();			
 	}
 
 	public int getPanelHeight() {
 		return getHeight();			
-	}
+	}*/
 
+	
 	public void addMazePanelListener(KeyAdapter kAdapter){
+		pnlMaze.setFocusable(true);
+		pnlMaze.requestFocusInWindow();
 		pnlMaze.addKeyListener(kAdapter);
 	}
+	
+	public void redrawMazePanel(){		
+		pnlMaze.repaint();
+	}
+	
 	//inner class to load the maze objects
-	private class MazePanel extends JPanel implements ActionListener{
+	private class MazePanel extends JPanel {
 		private Timer timer;
 		GridBagConstraints gc=new GridBagConstraints();
 
-		MazePanel(){
-			timer = new Timer(25,this);
+		/*MazePanel(){
+			
 			setFocusable(true);
+			requestFocusInWindow();
+			
+			
+			//timer = new Timer(25,this);
+			
 			GridBagLayout gl=new GridBagLayout(); 
 			this.setLayout(gl);
 			gc=new GridBagConstraints();
 			gc.gridx=0;
 			gc.gridy=0;
-			timer.start();
-		}
+			//timer.start();
+		}*/
 		
 		
 		public void paintComponent(Graphics g){
@@ -174,28 +191,28 @@ public class GameView extends JPanel {
 					if(arrMaze[y][x] == 0)
 						{
 						g.drawImage(maze.getGrass(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
-						gc.gridx++;
+						//gc.gridx++;
 						}
 					if(arrMaze[y][x] == 1)
 						{
 						g.drawImage(maze.getBrick(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
-						gc.gridx++;
+						//gc.gridx++;
 						}
 					
 				}
-				gc.gridy++;
+				//gc.gridy++;
 			}
 			
 			g.drawImage(player.getPlayer(), player.getTileX()*PIXEL_COUNT, player.getTileY()*PIXEL_COUNT, null);
 			
 		}
 
-		@Override
+		/*@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			repaint();
 			
-		}
+		}*/
 
 //		@Override
 //		public void actionPerformed(ActionEvent e) {
@@ -206,11 +223,11 @@ public class GameView extends JPanel {
 	
 	// $$$$$$$$$$$$$$ delete this method later
 	public static void main(String[] args){
-		GameView view= new GameView(new Maze(1,2));
-		//GameController gameController = new GameController();
+		//GameView view= new GameView(new Maze(1,2));
+		GameController gameController = new GameController();
 		JFrame mainframe = new JFrame("GAME VIEW");
 		Container mainpanel = mainframe.getContentPane();
-		mainpanel.add(view);		
+		mainpanel.add(gameController.getView());		
 		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainframe.pack();
