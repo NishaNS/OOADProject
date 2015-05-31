@@ -97,7 +97,7 @@ public class ThemeController {
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
-				lView.loadAudio();
+				lController.loadAudio();
 				
 			}
 
@@ -110,7 +110,7 @@ public class ThemeController {
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
-				lView.loadAudio();
+				lController.loadAudio();
 			}
 		}
 	}	
