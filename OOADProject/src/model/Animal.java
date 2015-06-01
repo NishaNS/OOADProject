@@ -14,6 +14,9 @@ Audio auAnimal;
 AppImage imgAnimal;
 boolean isFound;
 
+public Animal(String name){
+	this.name=name;
+}
 /**
  * The method used to get the name of the animal
  * @return String
@@ -48,16 +51,32 @@ public void setPositionY(int y) {
 	// TODO Auto-generated method stub
 	positionY=y;
 }
-@Override
-public Image getImage() {
+public Image getImageFromPath() {
 	// TODO Auto-generated method stub
 	imgAnimal=new AppImage(name+".png");
 	return imgAnimal.loadImage();
 }
+
+public Image getAnimalImage(){
+	imgAnimal=new AppImage(name+".png");
+	return imgAnimal.loadImage();
+}
+/**
+ * returns the set animal image
+ */
+@Override
+public Image getImage() {
+	// TODO Auto-generated method stub
+	return animalImage;
+}
+/**
+ * set the image for the animal;this method is useful since we have the grass image before the actual animal image 
+ * called 
+ */
 @Override
 public void setImage(Image img) {
 	// TODO Auto-generated method stub
-	
+	animalImage=img;
 }
 @Override
 public void playAudio() {

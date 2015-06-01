@@ -22,8 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import commonutil.AppImage;
+import model.Animal;
 import model.GameModel;
 import model.Maze;
+import model.MazeElement;
 import model.Player;
 import model.ThemeModel;
 import controller.GameController;
@@ -35,7 +37,7 @@ import controller.ThemeController;
  * 	Defines the layout page for the main game view
  *
  */
-public class GameView extends JPanel {
+public class GameView extends JPanel{
 
 	private JPanel pnlTitle;
 	private MazePanel pnlMaze;
@@ -59,7 +61,8 @@ public class GameView extends JPanel {
 	private Maze maze;
 	private Player player;
 	private static int PIXEL_COUNT = 100;
-	
+	public MazeElement parrot;
+	public MazeElement sheep;
 	
 	public GameView(Maze maze) {
 		//super();
@@ -125,6 +128,14 @@ public class GameView extends JPanel {
 		gridconstraints.weightx = 0.4;		//adjust the width
 		pnlDashboard.setBackground(Color.YELLOW);		
 		this.add(pnlDashboard, gridconstraints);
+		
+		//setting animals
+		parrot=new Animal("parrot");
+		parrot.setImage(null);
+		
+		sheep=new Animal("sheep");
+		sheep.setImage(null);
+		
 	}
 	
 	public void getMazeLayout(int[][] arrMaze){
@@ -163,43 +174,44 @@ public class GameView extends JPanel {
 		pnlMaze.repaint();
 	}
 	
+public MazeElement getParrot(){
+	return parrot;
+}
+public MazeElement getSheep(){
+	return sheep;
+}
 	//inner class to load the maze objects
 	private class MazePanel extends JPanel {
 		private Timer timer;
 		GridBagConstraints gc=new GridBagConstraints();
-
-		/*MazePanel(){
-			
-			setFocusable(true);
-			requestFocusInWindow();
-			
-			
-			//timer = new Timer(25,this);
-			
-			GridBagLayout gl=new GridBagLayout(); 
-			this.setLayout(gl);
-			gc=new GridBagConstraints();
-			gc.gridx=0;
-			gc.gridy=0;
-			//timer.start();
-		}*/
-		
 		
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
+			g.drawImage(new ImageIcon("image/farm.png").getImage(), 0, 0, null);
+			if(parrot.isFound()){
+				
+
+			}
 			for(int x=0; x<arrMaze[0].length;x++)
 			{
 				for(int y=0; y<arrMaze.length;y++){
-					if(arrMaze[y][x] == 0)
-						{
-						g.drawImage(maze.getGrass(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
-						//gc.gridx++;
-						}
+//					if(arrMaze[y][x] == 0)
+//						{
+//						g.drawImage(maze.getGrass(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
+//						//gc.gridx++;
+//						}
 					if(arrMaze[y][x] == 1)
 						{
 						g.drawImage(maze.getBrick(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
 						//gc.gridx++;
 						}
+					if(arrMaze[y][x] == 2){
+						g.drawImage(parrot.getImage(), x*PIXEL_COUNT, y*PIXEL_COUNT,null);
+					}
+					
+					if(arrMaze[y][x] == 3){
+						g.drawImage(sheep.getImage(), x*PIXEL_COUNT, y*PIXEL_COUNT,null);
+					}
 					
 				}
 				//gc.gridy++;
@@ -209,32 +221,34 @@ public class GameView extends JPanel {
 			
 		}
 
-		/*@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			repaint();
-			
-		}*/
 
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			repaint();
-//		}
+		
+	
 	};
 	
-	
-	// $$$$$$$$$$$$$$ delete this method later
-//	public static void main(String[] args){
-//		//GameView view= new GameView(new Maze(1,2));
-//		GameController gameController = new GameController();
-//		JFrame mainframe = new JFrame("GAME VIEW");
-//		Container mainpanel = mainframe.getContentPane();
-//		mainpanel.add(gameController.getView());		
-//		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		mainframe.pack();
-//		mainframe.setVisible(true);
-//
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//		if(arrMaze[player.getTileY()][player.getTileX()] == 2){
+//			parrot.setisFound(true);
+//			redrawMazePanel();
+//			
+//		}
 //	}
 
+	// $$$$$$$$$$$$$$ delete this method later
+	public static void main(String[] args){
+		//GameView view= new GameView(new Maze(1,2));
+		GameController gameController = new GameController();
+		JFrame mainframe = new JFrame("GAME VIEW");
+		Container mainpanel = mainframe.getContentPane();
+		mainpanel.add(gameController.getView());		
+		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainframe.pack();
+		mainframe.setVisible(true);
+
+	}
+
+	
 }

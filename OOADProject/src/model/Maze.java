@@ -10,7 +10,7 @@ public class Maze {
 
 	private final int[][] arrMaze = {
 			{0, 0, 0, 1, 1, 1, 0, 0, 0},
-			{0, 0, 0, 0, 1, 0, 0, 0, 0},
+			{0, 0, 0, 2, 1, 0, 0, 3, 0},
 			{0, 0, 1, 0, 0, 0, 1, 0 ,0},
 			{0, 0, 1, 0, 0, 0, 1, 0 ,0},
 			{0, 0, 1, 1, 0, 1, 1, 0 ,0},
@@ -24,7 +24,7 @@ public class Maze {
 		t = th;
 		l = lvl;
 		//load images
-		ImageIcon img = new ImageIcon("image/brick.png");
+		ImageIcon img = new ImageIcon("image/tree.png");
 		brick = img.getImage();
 
 		img = new ImageIcon("image/grass.png");

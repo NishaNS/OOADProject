@@ -6,8 +6,11 @@ package controller;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.RepaintManager;
+
+import commonutil.Audio;
 
 import model.Maze;
 import model.Player;
@@ -23,11 +26,11 @@ public class GameController {
 	private ThemeController tController;
 	private LevelController lController;
 	private int theme, level;
-
+	private Audio auGame;
 	private Maze maze;
 	private Player player;
 	private int[][] arrMaze;
-
+	private int animalCount;
 	public GameController() {
 		theme = 1;
 		level = 1;
@@ -36,6 +39,7 @@ public class GameController {
 		gView.addMazePanelListener(new MazeKeyListener());
 		arrMaze=maze.getMazeLayout();
 		player= gView.getPlayer();
+		animalCount=0;
 		
 	}
 
@@ -57,6 +61,13 @@ public class GameController {
 				{
 					if(arrMaze[currentY - 1][currentX] != 1)
 						player.move(0, -1);
+					if(arrMaze[currentY][currentX]==2){
+						gView.getParrot().setImage(gView.getParrot().getAnimalImage());
+						gView.getParrot().playAudio();
+						}
+					if(arrMaze[currentY][currentX]==3){
+						gView.getSheep().setImage(gView.getSheep().getAnimalImage());
+						}
 				}
 				gView.redrawMazePanel();
 
@@ -69,6 +80,13 @@ public class GameController {
 				{
 					if(arrMaze[currentY + 1][currentX] != 1)
 						player.move(0, 1);
+					if(arrMaze[currentY][currentX]==2){
+						gView.getParrot().setImage(gView.getParrot().getAnimalImage());
+						gView.getParrot().playAudio();
+						}
+					if(arrMaze[currentY][currentX]==3){
+						gView.getSheep().setImage(gView.getSheep().getAnimalImage());
+						}
 				}
 				gView.redrawMazePanel();
 			}
@@ -80,6 +98,13 @@ public class GameController {
 				{
 					if(arrMaze[currentY][currentX - 1] != 1)
 						player.move(-1, 0);
+					if(arrMaze[currentY][currentX]==2){
+						gView.getParrot().setImage(gView.getParrot().getAnimalImage());
+						}
+					if(arrMaze[currentY][currentX]==3){
+						gView.getSheep().setImage(gView.getSheep().getAnimalImage());
+						}
+					
 				}
 				gView.redrawMazePanel();
 			}
@@ -91,6 +116,12 @@ public class GameController {
 				{
 					if(arrMaze[currentY][currentX + 1] != 1)
 						player.move(1, 0);
+					if(arrMaze[currentY][currentX]==2){
+						gView.getParrot().setImage(gView.getParrot().getAnimalImage());
+					}
+					if(arrMaze[currentY][currentX]==3){
+						gView.getSheep().setImage(gView.getSheep().getAnimalImage());
+						}
 				}
 				gView.redrawMazePanel();
 			}

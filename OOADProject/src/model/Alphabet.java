@@ -88,4 +88,10 @@ public class Alphabet implements MazeElement {
 		isFound=found;
 	}
 
+	@Override
+	public Image getAnimalImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
