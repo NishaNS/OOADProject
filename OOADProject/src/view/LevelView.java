@@ -63,10 +63,8 @@ public class LevelView extends JPanel{
 			imgEasySelected=new String("");
 			//path of the farm level2 selected image
 			imgHardSelected=new String("");
-			btnEasy=new CustomButton(BUTTON_EASY_O_IMG,BUTTON_EASY_AUD);
-			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD);
-			btnEasy.setName("Level1");
-			btnHard.setName("Level2");
+			btnEasy=new CustomButton(BUTTON_EASY_O_IMG,BUTTON_EASY_AUD,"Easy","Level1");
+			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD,"Hard","Level2");
 			setFocusable(true);
 		}
 		/*else{

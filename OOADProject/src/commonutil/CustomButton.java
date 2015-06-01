@@ -10,9 +10,11 @@ public class CustomButton extends JButton{
 	
 	
 	private String imageFile;
-	private int height=400;
-	private int width=400;
+	//private int height=400;
+	//private int width=400;
 	private String audioFile;
+	private String toolTip;
+	private String name;
 	
 	private static String IMG_FILE_PATH = "image/";
 	//private static String AUD_FILE_PATH = "audio/";
@@ -21,7 +23,18 @@ public class CustomButton extends JButton{
 	public CustomButton(String imgFile, String audFile){
 		this.imageFile=IMG_FILE_PATH+ imgFile;
 		this.audioFile =  audFile;
-		this.setIcon(scaleImage(height,width,new ImageIcon(imageFile)));
+		this.setIcon(new ImageIcon(imageFile));
+	}
+	
+	public CustomButton(String imgFile, String audFile,String toolTipText, String name){
+		this.imageFile=IMG_FILE_PATH+ imgFile;
+		this.audioFile =  audFile;
+		this.setOpaque(false);
+		this.setContentAreaFilled(false);
+		this.setBorderPainted(false);	
+		this.setName(name);
+		this.setToolTipText(toolTipText);
+		this.setIcon(new ImageIcon(imageFile));
 	}
 	
 	public String getAudioFile(){
@@ -49,13 +62,14 @@ public class CustomButton extends JButton{
 	 */
 	public ImageIcon scaleImage(int x,int y,ImageIcon i){
 		Image img = i.getImage(); 
-		Image newimg = img.getScaledInstance(x,y,  java.awt.Image.SCALE_SMOOTH);  
+		Image newimg = img.getScaledInstance(x,y,java.awt.Image.SCALE_SMOOTH);  
 		return new ImageIcon(newimg); 
 	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		this.setIcon(scaleImage(height,width,new ImageIcon(imageFile)));
+		this.setIcon(new ImageIcon(imageFile));
+		//this.setIcon(scaleImage(height,width,new ImageIcon(imageFile)));
 	}
 
 }
