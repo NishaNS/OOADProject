@@ -28,8 +28,8 @@ import commonutil.CustomButton;
  */
 public class LevelView extends JPanel{
 
-	public CustomButton btnEasy;
-	public CustomButton btnHard;
+	private CustomButton btnEasy;
+	private CustomButton btnHard;
 	private JLabel lblDisplay1;
 	private JLabel lblDisplay2;
 
@@ -103,39 +103,18 @@ public class LevelView extends JPanel{
 		this.setBackground(Color.ORANGE);
 
 	}
-	/**
-	 * custom button class
-	 *
-	 */
 	
-//	public class CustomButton extends JButton{
-//		String imageFile;
-//		int height=400;
-//		int width=400;
-//		CustomButton(String m){
-//			imageFile=m;
-//			this.setIcon( scaleImage(height,width,new ImageIcon(imageFile)));
-//		}
-//
-//		public void setImageFile(String img){
-//			imageFile=img;
-//		}
-//		/**
-//		 * The method to scale the images given to the button
-//		 */
-//		public ImageIcon scaleImage(int x,int y,ImageIcon i){
-//			Image img = i.getImage(); 
-//			Image newimg = img.getScaledInstance(x,y,  java.awt.Image.SCALE_SMOOTH);  
-//			return new ImageIcon(newimg); 
-//		}
-//		@Override
-//		protected void paintComponent(Graphics g) {
-//			super.paintComponent(g);
-//			this.setIcon(scaleImage(height,width,new ImageIcon(imageFile)));
-//		}
-//
-//	}
+	
+	public CustomButton getBtnLevel1()
+	{
+		return this.btnEasy;
+	}
 
+
+	public CustomButton getBtnLevel2()
+	{
+		return this.btnHard;
+	}
 	
 	/** 
 	 * The getter method for the private variable trackVariable
@@ -156,14 +135,8 @@ public class LevelView extends JPanel{
 	 * The method to add listeners to the buttons
 	 * @return void
 	 */
-	/*public void addPressListen(KeyAdapter k){
-		
-		this.setFocusable(true);
 	
-		this.addKeyListener(k);
-	}*/
-	
-	public void addPressListen(KeyAdapter k){
+	public void addMyKeyListener(KeyAdapter k){
 		btnEasy.addKeyListener(k);
 		btnHard.addKeyListener(k);
 	}
@@ -172,7 +145,7 @@ public class LevelView extends JPanel{
 	 * 
 	 * @param a
 	 */
-	public void addButtonListen(ActionListener a){
+	public void addMyActionListener(ActionListener a){
 		btnEasy.addActionListener(a);
 		btnHard.addActionListener(a);
 	}
@@ -182,57 +155,7 @@ public class LevelView extends JPanel{
 	 * @return void
 	 */
 
-//	public void playSelectAudio(){
-//		trackVariable=0;
-//		try {
-//				
-//		
-//		while(true){
-//			Thread.sleep(1000);
-//			System.out.println("true");
-//			if(levelController.getSelectionPerformed()!=1){
-//
-//				auLevel=new Audio("Level_select.wav");
-//				auLevel.playAudio();
-//				setTrackVariable(1);
-//
-//			}else{
-//				break;
-//			}
-//			if(levelController.getSelectionPerformed()!=1){
-//				btnEasy.setBackground(Color.RED);
-//				btnEasy.setOpaque(true);
-//				btnEasy.repaint();
-//				auLevel.setauFileName("Level_easy_select_option.wav");
-//				auLevel.playAudio();
-//				btnEasy.setOpaque(false);
-//				btnEasy.repaint();
-//			}
-//			else{
-//				break;	
-//			}	
-//
-//			if(levelController.getSelectionPerformed()!=1){
-//				btnHard.setBackground(Color.RED);
-//				btnHard.setOpaque(true);
-//				btnHard.repaint();
-//				setTrackVariable(2);
-//				auLevel.setauFileName("Level_difficult_select_option.wav");
-//				auLevel.playAudio();
-//				trackVariable=3;
-//				btnHard.setOpaque(false);
-//				btnHard.repaint();
-//				continue;
-//			}{
-//				break;
-//			}
-//		}
-//		}catch (InterruptedException e) {
-//			e.printStackTrace();
-//			
-//		}
-//		
-//}
+
 
 //	public static void main(String[] args) {
 //		 MainDisplayController mainController=new MainDisplayController();
