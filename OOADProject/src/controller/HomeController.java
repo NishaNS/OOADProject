@@ -63,7 +63,7 @@ public class HomeController implements ActionListener{
 				ThemeView tView = tController.getView();
 				view.setVisible(false);
 				(mainController.getView()).addPanels(tView);
-				tView.loadAudio();
+				tController.loadAudio();
 				}
 				
 

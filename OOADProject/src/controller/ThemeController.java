@@ -3,6 +3,9 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
@@ -22,16 +25,22 @@ public class ThemeController {
 	private ThemeView tview;
 	private ThemeModel tmodel;
 	private LevelController lcontroller;
-	private MainDisplayController mainController;
-	
+	private MainDisplayController mainController;	
+	private static boolean btnSelected;		//variable for audio loop condition
+	private Audio auObj;
+
 	public ThemeController(MainDisplayController mController) {
-			tview = new ThemeView();
-			tmodel = new ThemeModel();
-			mainController=mController;
-			tview.addFarmBtnListener(new myActionListener());
-			tview.addAlphaBtnListener(new myActionListener());
+		tview = new ThemeView();
+		tmodel = new ThemeModel();
+		mainController=mController;
+		btnSelected = false;
+		auObj = new Audio("");
+		
+		tview.addBtnListener(new myActionListener());
+		tview.addMyKeyListener(new myKeyListener());		
 	}
-	
+
+
 	public ThemeView getView(){
 		return tview;
 	}
@@ -43,41 +52,54 @@ public class ThemeController {
 		return tmodel.getTheme();		
 	}
 
-	
-//	public void loadAudio(){
-//		//setup and play audio
-//		new Thread(new Runnable() {			
-//			@Override
-//			public void run() {		
-//				try {
-//					while(!btnSelected) {		
-//					Thread.sleep(1000);	
-//					auObj = new Audio(fileAu1);					
-//					auObj.playAudio();
-//
-//					auObj = new Audio(fileAu2);
-//					setBtnImage2(fileButton3);
-//					setBtnImage1(fileButton2);					
-//					repaint();
-//					btnFarm.requestFocus();
-//					auObj.playAudio();
-//					Thread.sleep(1000);	
-//					
-//					auObj = new Audio(fileAu3);
-//					setBtnImage1(fileButton1);
-//					setBtnImage2(fileButton4);
-//					repaint();
-//					btnAlphabets.requestFocus();
-//					auObj.playAudio();
-//				}
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				} 
-//			}
-//				
-//		}).start();	
-//	}
-	
+
+	public void loadAudio(){
+		//setup and play audio
+		new Thread(new Runnable() {			
+
+
+			@Override
+			public void run() {		
+				try {
+					while(!btnSelected) {		
+						Thread.sleep(1000);	
+						auObj.setauFileName(ThemeView.AUD_PAGE_LOAD);					
+						auObj.playAudio();
+						tview.getBtnFarm().requestFocus();
+						auObj.setauFileName(tview.getBtnFarm().getAudioFile());
+						tview.getBtnFarm().requestFocus();
+						tview.getBtnFarm().setButton(ThemeView.BUTTON_FARM_S_IMG);
+						tview.getBtnAlphabets().setButton(ThemeView.BUTTON_ALPHABETS_O_IMG);				
+
+						if(btnSelected == true) {
+							auObj.stopAudio();	
+							break;
+						}
+						
+						auObj.playAudio();
+
+						Thread.sleep(1000);
+
+						auObj.setauFileName(tview.getBtnAlphabets().getAudioFile());
+						tview.getBtnAlphabets().requestFocus();
+						tview.getBtnFarm().setButton(ThemeView.BUTTON_FARM_O_IMG);
+						tview.getBtnAlphabets().setButton(ThemeView.BUTTON_ALPHABETS_S_IMG);
+
+						if(btnSelected == true) {
+							auObj.stopAudio();	
+							break;
+						}
+
+						auObj.playAudio();
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} 
+			}
+
+		}).start();	
+	}
+
 	/**
 	 * @author Nisha
 	 * Inner class to implement Action Listener for buttons in ThemeView
@@ -89,23 +111,21 @@ public class ThemeController {
 		public void actionPerformed(ActionEvent e) {			
 
 			if(e.getSource().toString().contains("FARM") == true) {
-				
-				ThemeView.setBtnSelected(true); 
-				tmodel.setTheme(1);				
-				//lcontroller.getView();
+
+				btnSelected = true; 
+				tmodel.setTheme(1);
 				LevelController lController = mainController.getLController();
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
 				lController.loadAudio();
-				
+
 			}
 
 			else if(e.getSource().toString().contains("ALPHABETS") == true) {
-			
-				ThemeView.setBtnSelected(true);
+
+				btnSelected = true; 
 				tmodel.setTheme(2);
-				//lcontroller.getView();
 				LevelController lController = mainController.getLController();
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
@@ -114,4 +134,34 @@ public class ThemeController {
 			}
 		}
 	}	
+
+	public class myKeyListener extends KeyAdapter {
+
+		public void keyPressed(KeyEvent e){
+
+			System.out.println("HEREEE");
+
+			if(e.getSource().toString().contains("FARM") == true) {
+				btnSelected = true; 
+				tmodel.setTheme(1);
+				LevelController lController = mainController.getLController();
+				LevelView lView = lController.getView();
+				tview.setVisible(false);
+				(mainController.getView()).addPanels(lView);
+				lController.loadAudio();
+
+			}
+			else if(e.getSource().toString().contains("ALPHABETS") == true) {
+				btnSelected = true; 
+				tmodel.setTheme(2);
+				LevelController lController = mainController.getLController();
+				LevelView lView = lController.getView();
+				tview.setVisible(false);
+				(mainController.getView()).addPanels(lView);
+				lController.loadAudio();
+			}
+		}
+
+	}
+
 }
