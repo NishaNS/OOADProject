@@ -63,7 +63,7 @@ public class Alphabet implements MazeElement {
 	}
 
 	@Override
-	public void setImage(Image img) {
+	public void setImage(String img) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -88,10 +88,10 @@ public class Alphabet implements MazeElement {
 		isFound=found;
 	}
 
-	@Override
-	public Image getAnimalImage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//@Override
+//	public Image getAnimalImage() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

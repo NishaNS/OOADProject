@@ -21,6 +21,9 @@ public class Audio {
 	 * The constructor of the Audio class
 	 * @param fileName
 	 */
+	public Audio(){
+		
+	}
 	public Audio(String fileName)
 	{
 		this.auFileName = fileName;

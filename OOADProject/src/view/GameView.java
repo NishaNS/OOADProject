@@ -4,6 +4,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -11,9 +12,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,10 +27,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import commonutil.AppImage;
+import commonutil.MazeElementPane;
 import model.Animal;
 import model.GameModel;
 import model.Maze;
 import model.MazeElement;
+import model.MazeElements;
 import model.Player;
 import model.ThemeModel;
 import controller.GameController;
@@ -40,7 +47,7 @@ import controller.ThemeController;
 public class GameView extends JPanel{
 
 	private JPanel pnlTitle;
-	private MazePanel pnlMaze;
+	private MazeDrawingPanel pnlMaze;
 	private JPanel pnlDashboard;
 	private AppImage imgBackground;
 	private AppImage imgTitleBck;
@@ -55,28 +62,33 @@ public class GameView extends JPanel{
 	private int pnlWidth;
 	private int pnlHeight;
 	private JLabel lblTitle;
-	
+
 	private int[][] arrMaze;
-	private Image grass, brick, borderV, borderH; 
 	private Maze maze;
 	private Player player;
 	private static int PIXEL_COUNT = 100;
-	public MazeElement parrot;
-	public MazeElement sheep;
 	
+	
+	//Mad
+	private MazeElements mazeObject;
+	private MazeElementPane p;
+	//end Mad
+
 	public GameView(Maze maze) {
-		//super();
 		this.maze = maze;
 		arrMaze = maze.getMazeLayout();
-		initializeComponents();
 		player = new Player();
 		setName("Game");
-		
+		initializeComponents();
 	}
 
+	public void setMazeObject(MazeElements mObject){
+		this.mazeObject = mObject;
+	}
+	
 	private void initializeComponents(){
 		pnlTitle = new JPanel();
-		pnlMaze = new MazePanel();
+		pnlMaze = new MazeDrawingPanel(player,maze,arrMaze, maze.getTheme());
 		pnlDashboard = new JPanel();	
 		fileBackground = "Bck_Green_2_Sprayed Filter.png";
 		fileTitleBck = "testTitle.png";
@@ -87,12 +99,12 @@ public class GameView extends JPanel{
 		imgTitleBck = new AppImage(fileTitleBck);
 		//imgMazeBck = new AppImage(fileMazeBck);
 		imgDashBack = new AppImage(fileDashBck);
-		
+
 		gridBagLayout = new GridBagLayout();
 		gridconstraints = new GridBagConstraints();
 		this.setLayout(gridBagLayout);
 
-		
+
 		//title panel
 		gridconstraints.fill =  GridBagConstraints.HORIZONTAL;
 		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;
@@ -117,7 +129,7 @@ public class GameView extends JPanel{
 		//pnlMaze.setBackground(Color.CYAN);
 		this.add(pnlMaze, gridconstraints);
 
-		
+
 		//dashboard panel
 		gridconstraints.gridx = 2;
 		gridconstraints.gridy = 1;
@@ -128,127 +140,145 @@ public class GameView extends JPanel{
 		gridconstraints.weightx = 0.4;		//adjust the width
 		pnlDashboard.setBackground(Color.YELLOW);		
 		this.add(pnlDashboard, gridconstraints);
-		
-		//setting animals
-		parrot=new Animal("parrot");
-		parrot.setImage(null);
-		
-		sheep=new Animal("sheep");
-		sheep.setImage(null);
-		
 	}
-	
+
 	public void getMazeLayout(int[][] arrMaze){
 		this.arrMaze = arrMaze;
 	}
-	
+
 	public Player getPlayer(){
 		return this.player;
 	}
-	
-	//@Override
-	/*protected void paintComponent(Graphics g) {
-		super.paintComponent(g);	
-		g.drawImage(imgBackground.loadBackGroundImage(), 1, 0, getWidth(), getHeight() , null);
-		pnlWidth = getPanelWidth();
-		pnlHeight = getPanelHeight();	
-		pnlMaze.repaint();
-	}*/
 
-	/*public int getPanelWidth() {
-		return getWidth();			
-	}
-
-	public int getPanelHeight() {
-		return getHeight();			
-	}*/
-
-	
 	public void addMazePanelListener(KeyAdapter kAdapter){
 		pnlMaze.setFocusable(true);
 		pnlMaze.requestFocusInWindow();
 		pnlMaze.addKeyListener(kAdapter);
 	}
-	
+
 	public void redrawMazePanel(){		
 		pnlMaze.repaint();
 	}
-	
-public MazeElement getParrot(){
-	return parrot;
-}
-public MazeElement getSheep(){
-	return sheep;
-}
-	//inner class to load the maze objects
-	private class MazePanel extends JPanel {
-		private Timer timer;
-		GridBagConstraints gc=new GridBagConstraints();
-		
-		public void paintComponent(Graphics g){
-			super.paintComponent(g);
-			g.drawImage(new ImageIcon("image/farm.png").getImage(), 0, 0, null);
-			if(parrot.isFound()){
-				
 
-			}
-			for(int x=0; x<arrMaze[0].length;x++)
-			{
-				for(int y=0; y<arrMaze.length;y++){
-//					if(arrMaze[y][x] == 0)
-//						{
-//						g.drawImage(maze.getGrass(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
-//						//gc.gridx++;
-//						}
-					if(arrMaze[y][x] == 1)
-						{
-						g.drawImage(maze.getBrick(), x*PIXEL_COUNT, y*PIXEL_COUNT, null);
-						//gc.gridx++;
-						}
-					if(arrMaze[y][x] == 2){
-						g.drawImage(parrot.getImage(), x*PIXEL_COUNT, y*PIXEL_COUNT,null);
-					}
-					
-					if(arrMaze[y][x] == 3){
-						g.drawImage(sheep.getImage(), x*PIXEL_COUNT, y*PIXEL_COUNT,null);
-					}
-					
-				}
-				//gc.gridy++;
-			}
-			
-			g.drawImage(player.getPlayer(), player.getTileX()*PIXEL_COUNT, player.getTileY()*PIXEL_COUNT, null);
-			
-		}
-
-
-		
-	
-	};
-	
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		// TODO Auto-generated method stub
-//		if(arrMaze[player.getTileY()][player.getTileX()] == 2){
-//			parrot.setisFound(true);
-//			redrawMazePanel();
-//			
-//		}
-//	}
-
-	// $$$$$$$$$$$$$$ delete this method later
-	public static void main(String[] args){
-		//GameView view= new GameView(new Maze(1,2));
-		GameController gameController = new GameController();
-		JFrame mainframe = new JFrame("GAME VIEW");
-		Container mainpanel = mainframe.getContentPane();
-		mainpanel.add(gameController.getView());		
-		mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainframe.pack();
-		mainframe.setVisible(true);
-
+	public void makeGlassPane(){
+		//pnlMaze.
+		createGlassPane();
 	}
 
+	public void removeGlassPane(){
+		//pnlMaze.
+		removeGlassPane1();
+	}
 	
+
+	public void createGlassPane(){
+		p=new MazeElementPane();
+		p.setOpaque(true); 
+		p.setBackground(Color.blue);
+		p.add(new JLabel(new ImageIcon("image/"+ mazeObject.getName()+ ".png"))); 
+		pnlMaze.getRootPane().setGlassPane(p);   
+
+		p.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent me)      
+			{   
+				me.consume();                            
+				Toolkit.getDefaultToolkit().beep();      
+			}                                            
+		});   
+
+		p.addKeyListener(new KeyAdapter() {
+			public void keyPressed (KeyEvent me)      
+			{   
+				me.consume();                            
+				Toolkit.getDefaultToolkit().beep();      
+			}                                            
+		});
+		p.repaint();
+		p.setVisible(true); 
+		p.setFocusable(true);
+		p.requestFocus();
+	}
+	
+	
+	public void removeGlassPane1(){
+		if(mazeObject.isFound()){
+			new Thread(new Runnable(){
+				@Override
+				public void run(){
+					try{
+						mazeObject.playAudio();
+						//Thread.sleep(3000);
+						p.setVisible(false);
+						
+					}catch(Exception ex){}
+				}
+			}).start();
+			
+			}
+	}
+//	
+//	public class MazePanel extends JPanel {
+//		private Timer timer;
+//		GridBagConstraints gc=new GridBagConstraints();
+//		MazeElementPane p;
+//
+//		public void paintComponent(Graphics g){
+//			super.paintComponent(g);
+//			g.drawImage(new ImageIcon("image/farm.png").getImage(), 0, 0, this);
+//			for(int x=0; x<arrMaze[0].length;x++){
+//				for(int y=0; y<arrMaze.length;y++){
+//					if(arrMaze[y][x] == 1){
+//						g.drawImage(maze.getBlock(), x*PIXEL_COUNT, y*PIXEL_COUNT, this);
+//					}
+//				}
+//			}
+//			g.drawImage(player.getPlayer(), player.getTileX()*PIXEL_COUNT, player.getTileY()*PIXEL_COUNT, this);
+//		}
+
+
+//		public void createGlassPane(){
+//			p=new MazeElementPane();
+//			p.setOpaque(true); 
+//			p.setBackground(Color.blue);
+//			p.add(new JLabel(new ImageIcon("image/"+ mazeObject.getName()+ ".png"))); 
+//			getRootPane().setGlassPane(p);   
+//
+//			p.addMouseListener(new MouseAdapter() {
+//				public void mousePressed(MouseEvent me)      
+//				{   
+//					me.consume();                            
+//					Toolkit.getDefaultToolkit().beep();      
+//				}                                            
+//			});   
+//
+//			p.addKeyListener(new KeyAdapter() {
+//				public void keyPressed (KeyEvent me)      
+//				{   
+//					me.consume();                            
+//					Toolkit.getDefaultToolkit().beep();      
+//				}                                            
+//			});
+//			p.repaint();
+//			p.setVisible(true); 
+//			p.setFocusable(true);
+//			p.requestFocus();
+//		}
+//		
+//		public void removeGlassPane(){
+//			if(mazeObject.isFound()){
+//				new Thread(new Runnable(){
+//					@Override
+//					public void run(){
+//						try{
+//							mazeObject.playAudio();
+//							//Thread.sleep(3000);
+//							p.setVisible(false);
+//							
+//						}catch(Exception ex){}
+//					}
+//				}).start();
+//				
+//				}
+//		}
+//	};
 }
