@@ -30,12 +30,20 @@ public class MainDisplayController {
 		if(lController==null)
 			this.lController = new LevelController(this);
 		if(gController==null)
-			this.gController=new GameController();
+			this.gController=new GameController(this);
 		
 		hView = hController.getView();
 		
 		hView.setSize(mainView.getWindowWidth(), mainView.getWindowHeight());
 		mainView.addPanels(hView);
+	}
+	
+	public HomeController getHController(){
+	return hController;
+	}
+	
+	public void close(){
+		//Window
 	}
 	
 	public GameController getGController(){
@@ -55,5 +63,6 @@ public class MainDisplayController {
 	
 	public static void main(String[] args){
 		new MainDisplayController();
+
 	}
 }
