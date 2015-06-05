@@ -30,7 +30,7 @@ public class MainDisplayController {
 		if(lController==null)
 			this.lController = new LevelController(this);
 		if(gController==null)
-			this.gController=new GameController(this);
+			this.gController=new GameController();
 		
 		hView = hController.getView();
 		

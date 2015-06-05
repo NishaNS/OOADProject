@@ -27,7 +27,7 @@ public class MazeDrawingPanel extends JPanel {
 	private Image block;
 	
 	private static final String IMAGE_PATH = "image/";
-	private static final String IMG_BACKGROUND_T1 = "farm.png";
+	private static final String IMG_BACKGROUND_T1 = "farm2.jpg";
 	private static final String IMG_BACKGROUND_T2 = "farm.png";
 	private static String IMG_T1_BLOCK = "tree.png";
 	private static String IMG_T2_BLOCK = "tree.png";
@@ -55,7 +55,7 @@ public class MazeDrawingPanel extends JPanel {
 	
 	public void paintComponent(Graphics g){
 			super.paintComponent(g);
-			g.drawImage(backgroundImage, 0, 0, this);
+			//g.drawImage(backgroundImage, 0, 0, this);
 			for(int x=0; x<arrMaze[0].length;x++){
 				for(int y=0; y<arrMaze.length;y++){
 					if(arrMaze[y][x] == 1){
