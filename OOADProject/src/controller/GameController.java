@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 
 import commonutil.Audio;
+
+import commonutil.MazeElementPane;
+
 import model.Game;
 import model.GameModel;
 import model.Maze;
@@ -30,14 +33,26 @@ public class GameController {
 	private LevelController lController;
 	private GameModel gModel;
 	private Audio auGame;
-	private int[][] arrMaze;
+
 	private Maze maze;
 	private Player player;
+
 	private Game game;
-	private MazeElement[] mazeObjects;
+
 	private Timer localTimer = new Timer(1000,new MyTimer());
 
-	public GameController() {
+	private int[][] arrMaze;
+	private int countElements;
+	private MainDisplayController mainController;
+
+	//Mad
+	private MazeElement[] mazeObjects;
+	private int mazeElementsFound;
+	//end Mad
+
+
+ 	public GameController(MainDisplayController main) {
+		mainController=main;
 		initializeComponents();
 		addListeners();
 	}
@@ -50,6 +65,9 @@ public class GameController {
 		arrMaze = maze.getMazeLayout();
 		player = gView.getPlayer();
 		auGame = new Audio("goodjob.wav");
+		game.setLevel(maze.getLevel());
+		game.setTheme(maze.getTheme());
+		
 	}
 
 	private void addListeners(){
@@ -67,41 +85,57 @@ public class GameController {
 	}
 
 	private void checkForMazeElements(){
+
 		int playerX =player.getTileY();
 		int playerY = player.getTileX();
 		int gameScore = game.getScore();
-			
+
 		if(arrMaze[playerX][playerY]==2){
+			mazeElementsFound++;
 			gameScore = gameScore + 10;
 			game.setScore(gameScore);
 			gView.setScore(game.getScore());
 			MazeElements objElement = maze.getMazeElement(playerX, playerY);
+			objElement.setisFound(true);
+			System.out.println(objElement.getName());
+
 			gView.setMazeObject(objElement);
 			objElement.setisFound(true);
 			arrMaze[playerX][playerY] = 0;
 			gView.makeGlassPane();
 			gView.removeGlassPane();
+			
+			if((game.getLevel()==1 && mazeElementsFound == 5) || (game.getLevel()==2 && mazeElementsFound == 10) ){
+				localTimer.stop();
+				gView.setVisible(false);
+				gView.setFocusable(false);
+				EndGameController end=new EndGameController(game,mainController);
+				mainController.getView().addPanels(end.getView());
+				end.loadAudio();
+			}
 		}
+
 		else if(arrMaze[playerX][playerY]==3){
 			gameScore = gameScore + 5;
 			game.setScore(gameScore);
 			gView.setScore(game.getScore());
 			//playaudio -- you found an egg
 			new Thread(new Runnable(){
-					@Override
-					public void run(){
-						try{
-							auGame.playAudio();
-							//isTimerPaused = false;
-						}catch(Exception ex){}
-					}
-				}).start();
+				@Override
+				public void run(){
+					try{
+						auGame.playAudio();
+						//isTimerPaused = false;
+					}catch(Exception ex){}
+				}
+			}).start();
+
 		}
 	}
 
 	private class MyTimer implements ActionListener {
 		int temp;
-        int time;
+		int time;
 		public void actionPerformed(ActionEvent e) {
 			if(gView.getIsTimerPaused()){
 				time = game.getTime();
@@ -115,16 +149,16 @@ public class GameController {
 				System.out.println("Timer Resumed:" + time);
 			}
 		}
-		
+
 	}
 
 	private class MazeKeyListener extends KeyAdapter {
 
 		private boolean downKey = false;
-		
+
 		public void keyReleased (KeyEvent e) {
 			int keyCode = e.getKeyCode();
-				if (keyCode == KeyEvent.VK_DOWN) {downKey = false;}
+			if (keyCode == KeyEvent.VK_DOWN) {downKey = false;}
 		}
 
 		public void keyPressed (KeyEvent e) {
@@ -171,7 +205,8 @@ public class GameController {
 
 			}
 		}
-		
+
+	}
 		private void playAudio(String fileName){
 			auGame.setauFileName(fileName);
 			new Thread(new Runnable(){
@@ -183,9 +218,23 @@ public class GameController {
 				}
 			}).start();
 		}
-	}
-
 	
 }
 
+/*
+ * 
+			countElements++;
+			if(countElements==3){
+				Game g=new Game();
+				g.setLevel(1);
+				g.setTheme(1);
+				g.setTime(190);
+				g.setScore(200);
+				this.getView().setVisible(false);
+				this.getView().setFocusable(false);
+				EndGameController end=new EndGameController(g,mainController);
+				mainController.getView().addPanels(end.getView());
+				end.loadAudio();
 
+			}*/
+ 
