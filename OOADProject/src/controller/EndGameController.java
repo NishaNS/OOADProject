@@ -69,25 +69,25 @@ public class EndGameController {
 		public void actionPerformed(ActionEvent e) {
 			auEnd.stopAudio();
 			if(e.getSource().toString().contains("Continue")){
+				System.out.println("Continue!");
 				setSelectionPerformed(1);
-				//levelModel.setLevel(1);
 				auEnd.setauFileName(CONTINUE_S_AU);
 				auEnd.playAudio();
-//				GameController gController = mainController.getGController();
-//				GameView gView = gController.getView();
-//				levelView.setVisible(false);
-//				(mainController.getView()).addPanels(gView);
+				endGameView.setVisible(false);
+				endGameView.setFocusable(false);
+				MainDisplayController mainC=new MainDisplayController();
+				mainC.getView().setVisible(true);
+				mainController.getView().setVisible(false);
+				mainController.getView().dispose();
+				mainController.close();
+			
 
 			}
 			else if(e.getSource().toString().contains("Exit")){
 				setSelectionPerformed(1);
-//				levelModel.setLevel(3);
 				auEnd.setauFileName(EXIT_S_AU);
 				auEnd.playAudio();
-//				GameController gController = mainController.getGController();
-//				GameView gView = gController.getView();
-//				levelView.setVisible(false);
-//				(mainController.getView()).addPanels(gView);
+
 
 
 			}
@@ -102,45 +102,24 @@ public class EndGameController {
 			{
 				System.out.println("Continue!");
 				setSelectionPerformed(1);
-//				levelModel.setLevel(1);
+
 				auEnd.setauFileName(CONTINUE_S_AU);
 				auEnd.playAudio();
 				endGameView.setVisible(false);
 				endGameView.setFocusable(false);
-				MainDisplayController mainC=new MainDisplayController();
-				mainC.getView().setVisible(true);
-				//mainC.getView().setWindowProperties();
 				mainController.getView().setVisible(false);
 				mainController.getView().dispose();
-				mainController.close();
 				
-				//mainC.getView().MAXIMIZED_BOTH;
-				//mainC.getView().setVisible(true);
-				//mainController.getView().setVisible(false);
-//				mainController.getView().dispose(); 
-				//mainController.getView().dispatchEvent(new WindowEvent(mainController.getView(), WindowEvent.WINDOW_CLOSING));;
-//				MainDisplayController mainC=new MainDisplayController();
-//				mainC.getView().pack();
-//				mainC.getView().setVisible(true);
-//				GameView gView = gController.getView();
-//				levelView.getBtnLevel1().setFocusable(false);
-//				
-//				levelView.setVisible(false);
-//				(mainController.getView()).addPanels(gView);
+				MainDisplayController mainC=new MainDisplayController();
+				mainC.getView().setVisible(true);
+				
 			}
 			if(e.getSource().toString().contains("Exit"))
 			{
 				System.out.println("Exit!");
 				setSelectionPerformed(1);
-				//levelModel.setLevel(3);
 				auEnd.setauFileName(EXIT_S_AU);
 				auEnd.playAudio();
-//				GameController gController = mainController.getGController();
-//				GameView gView = gController.getView();
-//				levelView.getBtnLevel2().setFocusable(false);
-//				levelView.setFocusable(false);
-//				levelView.setVisible(false);
-//				(mainController.getView()).addPanels(gView);
 			}
 		}
 	}
@@ -224,18 +203,5 @@ public class EndGameController {
 }
 	
 	
-//	public static void main(String args[]){
-//		JFrame window = new JFrame("End Game");
-//		Game g=new Game();
-//		g.setLevel(1);
-//		g.setTheme(1);
-//		g.setTime(190);
-//		g.setScore(200);
-//		EndGameController end=new EndGameController(g);
-//		window.add(end.getView());
-//		end.loadAudio();
-//		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		window.setVisible(true);
-//	}
+
 }

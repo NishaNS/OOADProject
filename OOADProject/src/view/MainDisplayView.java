@@ -78,7 +78,7 @@ public class MainDisplayView extends JFrame {
 		setSize(this.width, this.height);
 		setUndecorated(false);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public int getWindowHeight(){
