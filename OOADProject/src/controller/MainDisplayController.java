@@ -3,6 +3,9 @@
  */
 package controller;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+
 import view.HomeView;
 import view.MainDisplayView;
 
@@ -43,7 +46,8 @@ public class MainDisplayController {
 	}
 	
 	public void close(){
-		//Window
+		WindowEvent winClosingEvent= new WindowEvent(this.getView(),WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
 	}
 	
 	public GameController getGController(){

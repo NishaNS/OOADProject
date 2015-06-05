@@ -20,12 +20,13 @@ public class MainDisplayView extends JFrame {
 	private int height;
 	
 	public MainDisplayView(){
+		setWindowProperties();
 		if(pnlContainer==null)
 			pnlContainer = new JPanel();
 		if(layoutCard==null){
 			layoutCard = new CardLayout();
 			pnlContainer.setLayout(layoutCard);
-		setWindowProperties();
+		
 		}
 	}
 	
@@ -69,13 +70,15 @@ public class MainDisplayView extends JFrame {
 		
 		
 	}
-	private void setWindowProperties(){
+	public void setWindowProperties(){
+		
 		Toolkit tkit = Toolkit.getDefaultToolkit();
 		this.width = tkit.getScreenSize().width; 
 		this.height = tkit.getScreenSize().height;
 		setSize(this.width, this.height);
 		setUndecorated(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	public int getWindowHeight(){

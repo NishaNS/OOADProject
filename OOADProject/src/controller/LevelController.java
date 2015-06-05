@@ -39,8 +39,6 @@ public class LevelController{
 		levelModel=new LevelModel();
 		levelView=new LevelView();
 		levelView.setTrackVariable(1);
-		//levelView.levelController=this;
-		//levelView.setFocusable(true);
 		auLevel=new Audio("");
 		levelView.addMyKeyListener(new KeyListen());
 		levelView.addMyActionListener(new ActionListen());
@@ -162,6 +160,7 @@ public class LevelController{
 			}
 		}
 	}
+	
 	public void loadAudio(){
 		new Thread(new Runnable() {			
 			@Override

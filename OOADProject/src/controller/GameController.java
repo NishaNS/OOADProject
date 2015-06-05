@@ -14,6 +14,7 @@ import javax.swing.RepaintManager;
 
 import commonutil.Audio;
 import commonutil.MazeElementPane;
+import model.Game;
 import model.GameModel;
 import model.Maze;
 import model.MazeElement;
@@ -35,12 +36,15 @@ public class GameController {
 	private Maze maze;
 	private Player player;
 	private int[][] arrMaze;
+	private int countElements;
+	private MainDisplayController mainController;
 	
 	//Mad
 		private MazeElement[] mazeObjects;
 	//end Mad
 
-	public GameController() {
+	public GameController(MainDisplayController main) {
+		mainController=main;
 		initializeComponents();
 		addListeners();
 	}
@@ -69,7 +73,23 @@ public class GameController {
 		checkForMazeElements();
 	}
 
+	
 	private void checkForMazeElements(){
+		countElements++;
+		if(countElements==3){
+			Game g=new Game();
+			g.setLevel(1);
+			g.setTheme(1);
+			g.setTime(190);
+			g.setScore(200);
+			this.getView().setVisible(false);
+			this.getView().setFocusable(false);
+			EndGameController end=new EndGameController(g,mainController);
+			mainController.getView().addPanels(end.getView());
+			end.loadAudio();
+			
+		}
+		else{
 		if(arrMaze[player.getTileY()][player.getTileX()]==2){
 			//System.out.println("X:" + player.getTileX() + " " + "Y:" + player.getTileY());
 			MazeElements objElement = maze.getMazeElement(player.getTileY(), player.getTileX());
@@ -81,6 +101,7 @@ public class GameController {
 			gView.makeGlassPane();
 //			gView.getParrot().setisFound(true);
 			gView.removeGlassPane();
+		}
 		}
 	}
 
@@ -142,6 +163,7 @@ public class GameController {
 
 			}
 		}
+		
 		
 		private void playAudio(String fileName){
 			auGame.setauFileName(fileName);
