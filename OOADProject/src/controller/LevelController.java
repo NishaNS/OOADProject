@@ -101,7 +101,10 @@ public class LevelController{
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				GameView gView = gController.getView();
+				levelView.getBtnLevel1().setEnabled(false);
+				levelView.setEnabled(false);
 				levelView.setVisible(false);
+				
 				(mainController.getView()).addPanels(gView);
 
 			}
@@ -112,7 +115,10 @@ public class LevelController{
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				GameView gView = gController.getView();
+				levelView.getBtnLevel2().setEnabled(false);
+				levelView.setEnabled(false);
 				levelView.setVisible(false);
+				
 				(mainController.getView()).addPanels(gView);
 
 

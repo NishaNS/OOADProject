@@ -96,17 +96,6 @@ public class EndGameView extends JPanel {
 		
 	}
 	
-//	/**
-//	 * The methods to get and set selectionPerformed variable
-//	 * @return
-//	 */
-//	public int getSelectionPerformed(){
-//		return selectionPerformed;
-//	}
-//	
-//	public void setSelectionPerformed(int set){
-//		selectionPerformed=set;
-//	}
 	/**
 	 * The method to set buttons image 
 	 */
@@ -121,9 +110,6 @@ public class EndGameView extends JPanel {
 			}
 		};
 		
-//		cButton.addActionListener(ActionListener e);
-//		cButton.addKeyListener(new KeyListen());
-//		
 		eButton=new JButton("Exit"){
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
@@ -133,8 +119,6 @@ public class EndGameView extends JPanel {
 				eButton.setPreferredSize(new Dimension((int)(0.18*d.getWidth()),(int)(0.12*d.getHeight())));
 			}
 		};
-//		eButton.addActionListener(new ActionListen());
-//		eButton.addKeyListener(new KeyListen());
 	}
 	
 	public JButton getCButton(){
@@ -245,14 +229,12 @@ public class EndGameView extends JPanel {
 		
 		GridBagConstraints constraints=new GridBagConstraints();
 		
-		//constraints.anchor=GridBagConstraints.FIRST_LINE_START;
 		constraints.gridx=0;
 		constraints.gridy=0;
 		constraints.gridwidth=2;
 		constraints.weightx=1;
 		constraints.weighty=0.1;
-		
-		//constraints.fill=GridBagConstraints.BOTH;
+
 		theme_level.setForeground(Color.BLUE);
 		theme_level.setText(game.getTheme()+" - "+game.getLevel());
 		theme_level.setFont(font);
@@ -333,7 +315,6 @@ public class EndGameView extends JPanel {
 		constraints.gridy=0;
 		constraints.weighty=1;
 		constraints.weightx=0.5;
-		//constraints.anchor=GridBagConstraints.FIRST_LINE_START;
 		constraints.anchor=GridBagConstraints.BELOW_BASELINE;
 		footer.add(eButton, constraints);
 		
@@ -370,21 +351,7 @@ public class EndGameView extends JPanel {
 	}
 	
 	
-//	public static void main(String args[]){
-//		JFrame window = new JFrame("End Game");
-//		Game g=new Game();
-//		g.setLevel(1);
-//		g.setTheme(1);
-//		g.setTime(190);
-//		g.setScore(200);
-//		EndGameView egameView=new EndGameView(g); 
-//		window.add(egameView);
-//		//gameView.loadAudio();
-//		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		window.setVisible(true);
-////		egameView.loadAudio();
-//	}
+
 	
 	
 }
