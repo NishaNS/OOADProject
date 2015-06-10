@@ -185,7 +185,6 @@ public class EndGameController {
 			}	
 
 			if(getSelectionPerformed()!=1){
-				//levelView.setTrackVariable(2);
 				System.out.println(getSelectionPerformed());
 				endGameView.getEButton().requestFocus();
 				auEnd.setauFileName(EXIT_AU);
