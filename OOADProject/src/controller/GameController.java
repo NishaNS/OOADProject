@@ -48,6 +48,7 @@ public class GameController {
 	//Mad
 	private MazeElement[] mazeObjects;
 	private int mazeElementsFound;
+	private int bonusCount;
 	//end Mad
 
 
@@ -55,6 +56,7 @@ public class GameController {
 		mainController=main;
 		initializeComponents();
 		addListeners();
+		
 	}
 
 	private void initializeComponents(){
@@ -94,7 +96,7 @@ public class GameController {
 			mazeElementsFound++;
 			gameScore = gameScore + 10;
 			game.setScore(gameScore);
-			gView.setScore(game.getScore());
+			gView.getScorePanel().setScore(game.getScore());
 			MazeElements objElement = maze.getMazeElement(playerX, playerY);
 			objElement.setisFound(true);
 			System.out.println(objElement.getName());
@@ -116,9 +118,12 @@ public class GameController {
 		}
 
 		else if(arrMaze[playerX][playerY]==3){
+			arrMaze[playerX][playerY] = 0;
 			gameScore = gameScore + 5;
+			bonusCount++;
 			game.setScore(gameScore);
-			gView.setScore(game.getScore());
+			gView.getScorePanel().setScore(game.getScore());
+			gView.getBonusPanel().loadBonusImage("img_t1_bonus".concat(bonusCount+"").concat(".png"));
 			//playaudio -- you found an egg
 			new Thread(new Runnable(){
 				@Override
@@ -139,13 +144,13 @@ public class GameController {
 		public void actionPerformed(ActionEvent e) {
 			if(gView.getIsTimerPaused()){
 				time = game.getTime();
-				gView.setTime(time/60, time%60);
+				gView.getScorePanel().setTime(time/60, time%60);
 				System.out.println("Timer Paused:" + time);
 			}else{
 				temp++;
 				game.setTime(temp);
 				time = game.getTime();
-				gView.setTime(time/60, time%60);
+				gView.getScorePanel().setTime(time/60, time%60);
 				System.out.println("Timer Resumed:" + time);
 			}
 		}

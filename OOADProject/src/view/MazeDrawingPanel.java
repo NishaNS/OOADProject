@@ -27,7 +27,7 @@ public class MazeDrawingPanel extends JPanel {
 	private Image block;
 	
 	private static final String IMAGE_PATH = "image/";
-	private static final String IMG_BACKGROUND_T1 = "farm2.jpg";
+	private static final String IMG_BACKGROUND_T1 = "landscape.jpg";
 	private static final String IMG_BACKGROUND_T2 = "farm.png";
 	private static String IMG_T1_BLOCK = "tree.png";
 	private static String IMG_T2_BLOCK = "tree.png";
