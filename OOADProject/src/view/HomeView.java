@@ -162,6 +162,11 @@ public class HomeView extends JPanel {
     public JButton getContinueButton(){
     	return btnContinue;
     }
+    
+    public JButton getTeacherLgnButton(){
+    	return btnTeacherLgn;
+    }
+    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;

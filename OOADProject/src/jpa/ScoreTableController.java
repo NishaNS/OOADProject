@@ -7,22 +7,36 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import view.ThemeView;
+import controller.MainDisplayController;
+
 public class ScoreTableController implements ListSelectionListener, TableModelListener {
 
 	private ScoreListGUI scoreTableView;
 	private ScoreTableModel scoreTableModel;
-
-	public ScoreTableController(ScoreListGUI scoreTableView) {
-
-		this.scoreTableView = scoreTableView;
-
-		// create the tableModel using the data in the cachedRowSet
+	
+	public ScoreTableController(MainDisplayController mController){
+		this.scoreTableView = new ScoreListGUI(this);
 		scoreTableModel = new ScoreTableModel();
-		scoreTableModel.addTableModelListener(this);		
+		scoreTableModel.addTableModelListener(this);
 	}
+	
+	/*public ScoreTableController(ScoreListGUI scoreTableView){
+		//this.scoreTableView = scoreTableView;
+		// create the tableModel using the data in the cachedRowSet
+		
+	}*/
 
 	public TableModel getTableModel() {
 		return scoreTableModel;
+	}
+	
+	public ScoreListGUI getView(){
+		return scoreTableView;
+	}
+	
+	public ScoreTableController getController(){
+		return this;
 	}
 
 	@Override

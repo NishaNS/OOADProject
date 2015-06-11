@@ -6,6 +6,7 @@ package controller;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 
+import jpa.ScoreTableController;
 import model.Student;
 import view.HomeView;
 import view.MainDisplayView;
@@ -24,6 +25,7 @@ public class MainDisplayController {
 		private HelpController helpController;
 		private CreditsController cController;
 		private HomeView hView;
+		private ScoreTableController scoreController;
 	
 	public MainDisplayController(){
 		
@@ -41,6 +43,8 @@ public class MainDisplayController {
 			this.helpController=new HelpController(this);
 		if(cController==null)
 			this.cController=new CreditsController(this);
+		if (scoreController==null)
+			this.scoreController=new  ScoreTableController(this);
 		
 		hView = hController.getView();
 		this.getView().setJMenuBar(hView.getMenu());
@@ -62,6 +66,10 @@ public class MainDisplayController {
 	public void close(){
 		WindowEvent winClosingEvent= new WindowEvent(this.getView(),WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
+	
+	public ScoreTableController getScoreController(){
+		return scoreController;
 	}
 	
 	public GameController getGController(){

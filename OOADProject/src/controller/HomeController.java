@@ -27,6 +27,9 @@ import javax.swing.Timer;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import jpa.ScoreListGUI;
+import jpa.ScoreTableController;
+
 
 /**
  * @author Madhu
@@ -228,6 +231,28 @@ public class HomeController implements ActionListener{
 					mainController.getView().repaint();
 					(mainController.getView()).addPanels(tView);
 					tController.loadAudio();
+				}
+			}
+			
+		});
+		
+		this.view.addTeacherLoginListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(e.getSource().equals(view.getTeacherLgnButton())){
+					selectionPerformed=true;
+					ScoreTableController scoreController = mainController.getScoreController();
+					ScoreListGUI scoreView = scoreController.getView();
+					scoreView.addJTable();
+					view.getContinueButton().setEnabled(false);
+					view.getContinueButton().setFocusable(false);
+					view.setVisible(false);
+					mainController.getView().setJMenuBar(null);
+					mainController.getView().repaint();
+					(mainController.getView()).addPanels(scoreView);
+					
 				}
 			}
 			
