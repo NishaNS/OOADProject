@@ -114,6 +114,10 @@ public class LevelController{
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				gController.setStudent(student);
+				int theme=mainController.getTController().getTheme();
+				int level=mainController.getLController().getLevel();
+				gController.initializeComponents(theme,level);
+				gController.addListeners();
 				GameView gView = gController.getView();
 				
 				levelView.getBtnLevel1().setEnabled(false);
@@ -129,7 +133,12 @@ public class LevelController{
 				auLevel.setauFileName(LevelView.LEVEL_HARD_AUD_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
+				
 				gController.setStudent(student);
+				int theme=mainController.getTController().getTheme();
+				int level=mainController.getLController().getLevel();
+				gController.initializeComponents(theme,level);
+				gController.addListeners();
 				GameView gView = gController.getView();
 				levelView.getBtnLevel2().setEnabled(false);
 				levelView.setEnabled(false);
@@ -162,6 +171,10 @@ public class LevelController{
 				
 				GameController gController = mainController.getGController();
 				gController.setStudent(student);
+				int theme=mainController.getTController().getTheme();
+				int level=mainController.getLController().getLevel();
+				gController.initializeComponents(theme,level);
+				gController.addListeners();
 				GameView gView = gController.getView();
 				levelView.getBtnLevel1().setFocusable(false);
 				levelView.setFocusable(false);
@@ -177,6 +190,10 @@ public class LevelController{
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				gController.setStudent(student);
+				int theme=mainController.getTController().getTheme();
+				int level=mainController.getLController().getLevel();
+				gController.initializeComponents(theme,level);
+				gController.addListeners();
 				GameView gView = gController.getView();
 				levelView.getBtnLevel2().setFocusable(false);
 				levelView.setFocusable(false);

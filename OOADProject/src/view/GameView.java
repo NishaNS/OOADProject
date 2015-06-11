@@ -72,6 +72,8 @@ public class GameView extends JPanel{
 
 	private int[][] arrMaze;
 	private Maze maze;
+	private int theme;
+	private int level;
 	private Player player;
 	private static int PIXEL_COUNT = 100;
 	
@@ -86,12 +88,40 @@ public class GameView extends JPanel{
 	 private JLabel scoreField;
 	 private JLabel minField;
 	 private JLabel secField;
+	 private JLabel scoreLabel;
+	 private JLabel timeLabel;
 	//end Mad
-
+	 
+	 private String MAZE_BG="image/";
+	 public GameController control;
+	 
 	public GameView(Maze maze) {
+		
 		this.maze = maze;
 		arrMaze = maze.getMazeLayout();
 		player = new Player();
+		theme=maze.getTheme();
+		level=maze.getLevel();
+		if(theme==1 && level==1)
+			{
+			player.setInitialPositon(0, 0);
+			MAZE_BG=MAZE_BG+"TestingWelcomePage.png";
+			}		
+		else if(theme==1 && level==2)
+			{
+			player.setInitialPositon(0, 0);
+			MAZE_BG=MAZE_BG+"TestingWelcomePage.png";
+			}	
+		else if(theme==2 && level==1)
+			{
+			player.setInitialPositon(9, 0);
+			MAZE_BG="";
+			}	
+		else
+			{
+			player.setInitialPositon(9, 0);
+			MAZE_BG="";
+			}	
 		setName("Game");
 		initializeComponents();
 	}
@@ -112,6 +142,15 @@ public class GameView extends JPanel{
 		scoreField.setText(score+"");
 	}
 	
+	public void setPnlDashBoard(int count){
+		if(theme==1)
+		{pnlDashboard.loadBonusImage("Egg"+Integer.toString(count));	
+		pnlDashboard.reDraw();}
+		else{
+			pnlDashboard.loadBonusImage("Fish"+Integer.toString(count));
+			pnlDashboard.reDraw();
+		}
+	}
 	public void setTime(int mins, int secs){
 		minField.setText(mins+"");
 		if(secs<10)
@@ -122,181 +161,141 @@ public class GameView extends JPanel{
 	
 	private void initializeComponents(){
 		pnlTitle = new JPanel();
+		pnlTitle.setOpaque(false);
+		
 		pnlMaze = new MazeDrawingPanel(player,maze,arrMaze, maze.getTheme());
 		
+		
+		pnlMaze.setOpaque(false);
 		pnlDashboard = new MazeBonus(maze.getTheme());	
 		pnlScoreBoard = new JPanel();
+		pnlScoreBoard.setOpaque(false);
 		fileBackground = "Bck_Green_2_Sprayed Filter.png";
 		fileTitleBck = "testTitle.png";
 		//fileMazeBck = "testMaze.png";
 		fileDashBck = "testDash.png";
-
+		
 		imgBackground = new AppImage(fileBackground);
 		imgTitleBck = new AppImage(fileTitleBck);
 		//imgMazeBck = new AppImage(fileMazeBck);
 		imgDashBack = new AppImage(fileDashBck);
-
-		gridBagLayout = new GridBagLayout();
-		gridconstraints = new GridBagConstraints();
-		this.setLayout(gridBagLayout);
-		//setOpaque(true);
-
-		//Madhu begin
-		//title Panel
-		gridconstraints.fill = GridBagConstraints.HORIZONTAL;
-		gridconstraints.anchor = GridBagConstraints.FIRST_LINE_START;
-		gridconstraints.weightx = 1;
-		gridconstraints.ipady = 100;
-		gridconstraints.gridx = 0;       
-		gridconstraints.gridy = 0;
-		gridconstraints.gridwidth = 3;
-		gridconstraints.gridheight = 1;
-		//pnlTitle.setBackground(Color.PINK);
-		pnlTitle.setOpaque(false);
-		this.add(pnlTitle, gridconstraints);
-		
-		//game Panel
-		gridconstraints.fill = GridBagConstraints.BOTH;
-		gridconstraints.anchor = GridBagConstraints.LINE_START;
-		gridconstraints.weightx = 0.8;
-		gridconstraints.weighty = 0.9;
-		gridconstraints.gridx = 0;
-		gridconstraints.gridy = 1;
-		gridconstraints.gridwidth = 2;
-		gridconstraints.gridheight = 2;
-		pnlMaze.setOpaque(false);
-		this.add(pnlMaze, gridconstraints);
-		
-		//scoreBoard
-		gridconstraints.fill = GridBagConstraints.BOTH;
-		gridconstraints.anchor = GridBagConstraints.LINE_END;
-		gridconstraints.weightx = 0.2;
-		gridconstraints.weighty = 0.45;
-		gridconstraints.gridx = 2;
-		gridconstraints.gridy = 1;
-		gridconstraints.gridwidth = 1;
-		gridconstraints.gridheight = 1;
-		//pnlScoreBoard.setBackground(Color.RED);	
-		pnlScoreBoard.setOpaque(false);
-		
-		//add labels for score and time
-		 JLabel scoreLabel = new JLabel("SCORE");
-		 scoreField = new JLabel();
-		 scoreField.setText("0");
-		   
-		 JLabel timeLabel = new JLabel("TIME");
+		scoreField = new JLabel();
+		scoreLabel = new JLabel();
+		scoreLabel.setText("SCORE");
+		scoreLabel.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
+		scoreLabel.setForeground(Color.MAGENTA);
+        scoreField.setText("0");
+        scoreField.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
+        scoreField.setForeground(Color.MAGENTA);
+        
+		  
+		 timeLabel = new JLabel("TIME");
+		 timeLabel.setFont(new Font("Lucida Sans", Font.ITALIC, 25)); 
+		 timeLabel.setText("Time");
+		 
 		 minField = new JLabel();
+		 minField.setFont(new Font("Lucida Sans", Font.ITALIC, 25)); 
 		 minField.setText("0");
+		 minField.setText("0");
+		 
 		 secField = new JLabel();
+		 secField.setFont(new Font("Lucida Sans", Font.ITALIC, 25)); 
 		 secField.setText("0");
+		 secField.setText("00");
 		 
-		 scoreLabel.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
-		 scoreField.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
-		 /*
-		  * label.setMinimumSize(width, height);
-label.setPreferedSize(width, height);
-label.setMaximumSize(width, height);
-		  */
-		 Dimension d=new Dimension(50,20);
-		 scoreLabel.setMinimumSize(d);
-		 scoreLabel.setPreferredSize(d);;
-		 scoreLabel.setMaximumSize(d);
-		 scoreLabel.setForeground(Color.magenta);
-		// scoreField.setBounds(1, 1, 25, 20);
-		 scoreField.setForeground(Color.magenta);
-		 timeLabel.setBounds(1,1,20,20);
-		 timeLabel.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
-		 minField.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
-		 secField.setFont(new Font("Lucida Sans", Font.ITALIC, 25));
-		// pnlScoreBoard.add(scoreLabel);
-		 pnlScoreBoard.add(scoreField);
-		// pnlScoreBoard.add(timeLabel);
-		 pnlScoreBoard.add(minField);
-		 pnlScoreBoard.add(secField);
-		 pnlScoreBoard.setBounds(0, 0, 100, 300);
-		 pnlScoreBoard.setOpaque(true);
 		 pnlScoreBoard.setBackground(Color.cyan);
-		 
-		 
-		   
+        
 		
-		this.add(pnlScoreBoard, gridconstraints);
-		
-		//dashboard
-		gridconstraints.fill = GridBagConstraints.BOTH;
-		gridconstraints.anchor = GridBagConstraints.LAST_LINE_END;
-		gridconstraints.weightx = 0.2;
-		gridconstraints.weighty = 0.45;
-		gridconstraints.gridx = 2;
-		gridconstraints.gridy = 2;
-		gridconstraints.gridwidth = 1;
-		gridconstraints.gridheight = 1;
-		//pnlDashboard.setBackground(Color.YELLOW);
-		pnlDashboard.setOpaque(false);
-		this.add(pnlDashboard, gridconstraints);
-		
-		
-//		 Toolkit tkit = Toolkit.getDefaultToolkit();
-//		   int windowWidth = tkit.getScreenSize().width; 
-//		   int windowHeight = tkit.getScreenSize().height;
-//			 
-//		   setSize(windowWidth, windowHeight);
-		
-		//Madhu end
-		
+		setPanelLayout();
 
-//		//title panel
-//		gridconstraints.fill =  GridBagConstraints.HORIZONTAL;
-//		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;
-//		gridconstraints.anchor = GridBagConstraints.FIRST_LINE_START;	//starts alignment at top
-//		gridconstraints.ipady = 100;      //make this component tall ; hardcoded value is fine here as resize happens automatically
-//		gridconstraints.ipadx = 1;		
-//		gridconstraints.weightx = 1;
-//		gridconstraints.weighty = 1;	//keep x, y = 1, else centers panel
-//		gridconstraints.gridwidth = 3;	//makes it span whole window
-//		gridconstraints.insets = new Insets(3,3,3,3);
-//		pnlTitle.setBackground(Color.PINK);
-//		this.add(pnlTitle, gridconstraints);
+	}
+	
+	
+	public void setPanelLayout(){
+		       
+        javax.swing.GroupLayout pnlScoreBoardLayout = new javax.swing.GroupLayout(pnlScoreBoard);
+        pnlScoreBoard.setLayout(pnlScoreBoardLayout);
+        pnlScoreBoardLayout.setHorizontalGroup(
+                pnlScoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlScoreBoardLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(pnlScoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlScoreBoardLayout.createSequentialGroup()
+                            .addComponent(scoreLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(scoreField)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(timeLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(minField)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(secField)
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap())
+            );
+            pnlScoreBoardLayout.setVerticalGroup(
+                pnlScoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlScoreBoardLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(pnlScoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scoreLabel)
+                        .addComponent(scoreField)
+                        .addComponent(timeLabel)
+                        .addComponent(minField)
+                        .addComponent(secField))
+                    .addGap(18, 18, 18)
+                    .addComponent(pnlDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(565, Short.MAX_VALUE))
+            );
 
+        javax.swing.GroupLayout pnlTitleLayout = new javax.swing.GroupLayout(pnlTitle);
+        pnlTitle.setLayout(pnlTitleLayout);
+        pnlTitleLayout.setHorizontalGroup(
+            pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlTitleLayout.setVerticalGroup(
+            pnlTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
 
-//		//maze panel
-//		gridconstraints.gridx = 1;
-//		gridconstraints.gridy = 1;
-//		gridconstraints.ipady = 600;
-//		gridconstraints.fill = GridBagConstraints.BOTH;
-//		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;	//required 
-//		gridconstraints.anchor = GridBagConstraints.LINE_START;
-//		//pnlMaze.setBackground(Color.CYAN);
-//		this.add(pnlMaze, gridconstraints);
+        javax.swing.GroupLayout pnlMazeLayout = new javax.swing.GroupLayout(pnlMaze);
+        pnlMaze.setLayout(pnlMazeLayout);
+        pnlMazeLayout.setHorizontalGroup(
+            pnlMazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        pnlMazeLayout.setVerticalGroup(
+            pnlMazeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlMaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlScoreBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pnlTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlMaze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlScoreBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
-//		//dashboard panel
-//		gridconstraints.gridx = 3;
-//		gridconstraints.gridy = 1;
-//		
-//		gridconstraints.ipady = 300;
-//		gridconstraints.fill = GridBagConstraints.BOTH;
-//		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;	//required 
-//		gridconstraints.gridheight = GridBagConstraints.RELATIVE;
-//		gridconstraints.anchor = GridBagConstraints.LINE_END;
-//		gridconstraints.weightx = 0.4;		//adjust the width
-//		gridconstraints.weighty = 0.45;	
-//		pnlScoreBoard.setBackground(Color.RED);		
-//		this.add(pnlScoreBoard, gridconstraints);
-//		
-//		//dashboard panel
-//		gridconstraints.gridx = 3 ;
-//		gridconstraints.gridy = 2;
-//		gridconstraints.ipady = 300;
-//		gridconstraints.fill = GridBagConstraints.VERTICAL;
-//		gridconstraints.gridwidth = GridBagConstraints.RELATIVE;	//required 
-//		gridconstraints.gridheight = GridBagConstraints.RELATIVE;
-//		gridconstraints.anchor = GridBagConstraints.LAST_LINE_END;
-//		gridconstraints.weightx = 0.4;		//adjust the width
-//		gridconstraints.weighty = 0.45;	
-//		pnlDashboard.setBackground(Color.YELLOW);		
-//		this.add(pnlDashboard, gridconstraints);
-//		
+       // pack();
+
+		
+		
 	}
 
 	public void getMazeLayout(int[][] arrMaze){
@@ -339,8 +338,7 @@ label.setMaximumSize(width, height);
 		//p.setBackground(Color.blue);
 		p.add(new JLabel(new ImageIcon("image/"+ mazeObject.getName()+ ".png"))); 
 		pnlMaze.getRootPane().setGlassPane(p);   
-
-		p.addMouseListener(new MouseAdapter() {
+				p.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent me)      
 			{   
 				me.consume();                            
@@ -359,6 +357,11 @@ label.setMaximumSize(width, height);
 		p.setVisible(true); 
 		p.setFocusable(true);
 		p.requestFocus();
+//		if(control.temp==1)
+//			try{
+//		Thread.sleep(5000);
+//			}catch(Exception e){}
+
 	}
 	
 	
@@ -369,7 +372,8 @@ label.setMaximumSize(width, height);
 				public void run(){
 					try{
 						mazeObject.playAudio();
-						//Thread.sleep(3000);
+						//if(control.temp==1)
+						//Thread.sleep(5000);
 						p.setVisible(false);
 						isTimerPaused = false;
 
@@ -384,12 +388,12 @@ label.setMaximumSize(width, height);
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Image backgroundImage;
-		Image imgBackground = new AppImage("farm2.jpg").loadBackGroundImage();
+		Image imgBackground = new AppImage(MAZE_BG).loadBackGroundImage();
 		File filename = null;
 		try {
-			filename = new File("image/farm2.jpg");
+			filename = new File(MAZE_BG);
 		      backgroundImage = ImageIO.read(filename);
-		      g.drawImage(imgBackground, 0, 0, this);
+		      g.drawImage(backgroundImage, 0, 0, this);
 		    } catch (IOException e) {System.out.println("Error in reading the maze panel background image");}
 		
 	}

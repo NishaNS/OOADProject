@@ -235,7 +235,7 @@ public class EndGameView extends JPanel {
 	public void bodyConstraints(){
 		GridBagLayout gridBag=new GridBagLayout();
 		body.setLayout(gridBag);
-		Font font=new Font("",Font.ITALIC,35);
+		Font font=new Font("Comic Sans MS",Font.ITALIC,50);
 		
 		GridBagConstraints constraints=new GridBagConstraints();
 		
@@ -278,9 +278,10 @@ public class EndGameView extends JPanel {
 		time_l.setText("Time is " + game.getTime());
 		time_p.setBackground(Color.getHSBColor(20, 20, 20));
 		time_p.setOpaque(false);
-		time_p.setPreferredSize(new Dimension(150,50));
-		font=new Font("",Font.ITALIC,40);
+		time_p.setPreferredSize(new Dimension(300,50));
+		font=new Font("Comic Sans MS",Font.ITALIC,40);
 		time_l.setFont(font);
+		time_l.setPreferredSize(new Dimension(300,50));
 		time_l.setForeground(Color.RED);
 		time_p.add(time_l);
 		time_p.setVisible(true);
@@ -296,10 +297,11 @@ public class EndGameView extends JPanel {
 		constraints.fill=GridBagConstraints.BOTH;
 		score_l.setText("Score is "+game.getScore());
 		score_p.setBackground(Color.getHSBColor(20, 20, 20));
-		score_p.setPreferredSize(new Dimension(150,50));
-		font=new Font("",Font.ITALIC,40);
+		score_p.setPreferredSize(new Dimension(300,50));
+		font=new Font("Comic Sans MS",Font.ITALIC,40);
 		score_l.setFont(font);
 		score_p.setOpaque(false);
+		score_l.setPreferredSize(new Dimension(300,50));
 		score_p.setBorder(BorderFactory.createBevelBorder(10));
 		score_l.setForeground(Color.RED);
 		score_p.add(score_l);

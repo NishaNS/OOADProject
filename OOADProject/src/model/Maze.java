@@ -12,7 +12,7 @@ import commonutil.MazeAnimals;
 
 
 public class Maze {
-
+	//private final int[][] arrMaze;
 	private final int[][] arrMaze1 = {
 			 	{0, 0, 3, 0, 0, 0, 0, 0, 0, 0},
 	            {2, 0, 0, 0, 3, 0, 0, 0, 0, 0},
@@ -23,11 +23,28 @@ public class Maze {
     };
 	
 	private final int[][] arrMaze2 = {
+			{0, 0, 0, 1, 0, 0, 0, 0, 0, 2},
+            {0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+            {0, 2, 0, 1, 2, 0, 0, 2 ,1, 2},
+            {0, 0, 0, 0, 1, 1, 1, 0 ,0, 0},
+            {0, 0, 0, 2, 0, 2, 0, 2 ,0, 0},
+            {2, 0, 1, 1, 1, 0, 0, 0 ,0, 2}
+};
+	private final int[][] arrMaze3 = {
+			{0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
+            {2, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {0, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
+            {0, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
+            {2, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
+            {0, 0, 0, 0, 2, 0, 2, 0, 0, 0}
+};
+	
+	private final int[][] arrMaze4 = {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {0, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
             {0, 0, 0, 0, 0, 0, 0, 0 ,0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0 ,0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0 ,0, 0},
+            {1, 1, 1, 1, 1, 1, 1, 1 ,1, 0},
             {0, 0, 0, 0, 0, 0, 0, 0 ,0, 0}
 };
 
@@ -41,7 +58,7 @@ public class Maze {
 	private static String IMG_T1_PATH = "grass.png";
 	private static String IMG_T1_BLOCK = "tree.png";
 	private static String IMG_T2_PATH = "";
-	private static String IMG_T2_BLOCK = "";
+	private static String IMG_T2_BLOCK = "grass.png";
 	private static int COUNT_LEVEL1_MAZEELEMENTS = 5;
 	private static int COUNT_LEVEL2_MAZEELEMENTS = 10;
 	private MazeAnimals enumAnimal;
@@ -57,7 +74,7 @@ public class Maze {
 			noOfElements = COUNT_LEVEL2_MAZEELEMENTS;
 		loadMazeLayout();
 		initializeMazeElement(theme);
-		Display();
+		//Display();
 
 	}
 	
@@ -81,23 +98,49 @@ public class Maze {
 		/*y corresponds to row of map; 
 		within that gets a particular col; 
 		then decide what tile to put down*/
-
-		return arrMaze1;		
+		if(theme==1 && level==1)
+			return arrMaze1;		
+		else if(theme==1 && level==2)
+			return arrMaze2;
+		else if(theme==2 && level==1)
+			return arrMaze3;
+		else
+			return arrMaze4;
 	}
 
 	private void loadMazeLayout(){
 		int[] mazeElementPosition;
-		if(level==1)
+		System.out.println("Theme "+theme+" Level "+level);
+		if(theme==1 && level==1)
+			{
 			mazeElementPosition = getMazeElementPosition(arrMaze1);
-		else
+			
+			}
+		else if( theme==1 && level==2 )
+			{
 			mazeElementPosition = getMazeElementPosition(arrMaze2);
+			}
+		else if(theme==2 && level==1)
+			{
+			mazeElementPosition = getMazeElementPosition(arrMaze3);
+			}
+		else 
+			{
+			mazeElementPosition = getMazeElementPosition(arrMaze4);
+			}
 		if(theme == 1){
 				createKeyValuePair(mazeElementPosition,enumAnimal);
-				createMazeObjects();
+				if(level==1)
+				createMazeObjects(arrMaze1);
+				else
+				createMazeObjects(arrMaze2);	
 			}
 		else if(theme == 2){
 				createKeyValuePair(mazeElementPosition,enumAlphabets);
-				createMazeObjects();
+				if(level==1)
+				createMazeObjects(arrMaze3);
+				else 
+				createMazeObjects(arrMaze4);
 			}
 		}
 		
@@ -153,7 +196,7 @@ public class Maze {
 		}
 	}
 
-	private void createMazeObjects(){
+	private void createMazeObjects(int[][] arrMaze){
 //		if(this.theme == 1)
 //			this.mazeObjects = new Animal[noOfElements];
 //		else if(theme == 2)
@@ -183,13 +226,13 @@ public class Maze {
 			 mazeObjects[i] = new MazeElements();
 			 Integer key = entry.getKey();
 			 String  value = entry.getValue().toString();
-			 if((key % arrMaze1[0].length)>0)
+			 if((key % arrMaze[0].length)>0)
 	            {
-				 this.mazeObjects[i].setPositionX(key/arrMaze1[0].length);
-				 this.mazeObjects[i].setPositionY(key%arrMaze1[0].length);
+				 this.mazeObjects[i].setPositionX(key/arrMaze[0].length);
+				 this.mazeObjects[i].setPositionY(key%arrMaze[0].length);
 	            }else
 	            {
-	            	this.mazeObjects[i].setPositionX(key/arrMaze1[0].length);
+	            	this.mazeObjects[i].setPositionX(key/arrMaze[0].length);
 	            	 this.mazeObjects[i].setPositionY(0);
 	            }
 			 this.mazeObjects[i].setName(value);
@@ -209,10 +252,10 @@ public class Maze {
 		return objTemp;
 	}
 	
-	public void Display(){
-		for (MazeElements obj : mazeObjects) {
-			System.out.println("Name:" + obj.getName() + " " + "X:" + obj.getPositionX() + " " + "Y:" + obj.getPositionY());
-		}
-	}
+//	public void Display(){
+//		for (MazeElements obj : mazeObjects) {
+//			System.out.println("Name:" + obj.getName() + " " + "X:" + obj.getPositionX() + " " + "Y:" + obj.getPositionY());
+//		}
+//	}
 
 }

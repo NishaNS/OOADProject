@@ -23,8 +23,12 @@ public Player(){
 //	downPlayer=new AppImage("").loadImage();
 //	upPlayer=new AppImage("").loadImage();
 	
-	positionX=0;
-	positionY=0;
+	
+}
+
+public void  setInitialPositon(int x,int y){
+	positionX=x;
+	positionY=y;
 }
 public Image getPlayer(){
 	return player;

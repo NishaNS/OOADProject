@@ -40,9 +40,10 @@ public class MazeBonus extends JPanel {
 		//System.out.println("Bonus:" + fileName);
 	}
 	
-	public void reDraw(Graphics2D myGraphics){
+	public void reDraw(){
 		lblBonus.setIcon(iconLogo);
 		lblBonus.setVisible(true);
+		repaint();
 	}
 	
 	public void paintComponent(Graphics g){

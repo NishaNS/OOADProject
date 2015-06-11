@@ -38,7 +38,10 @@ public class GameController {
 	private Maze maze;
 	private Player player;
 	private Student student;
-
+	
+	private int theme;
+	private int level;
+	
 	private Game game;
 
 	private Timer localTimer = new Timer(1000,new MyTimer());
@@ -50,25 +53,32 @@ public class GameController {
 	//Mad
 	private MazeElement[] mazeObjects;
 	private int mazeElementsFound;
+	private int mazebonusFound;
 	//end Mad
 
-
+	public int temp;
  	public GameController(MainDisplayController main) {
 		mainController=main;
-		initializeComponents();
-		addListeners();
+		//initializeComponents();
+		//addListeners();
 		student=new Student();
+		
+//		int theme=mainController.getTController().getTheme();
+//		int level=mainController.getLController().getLevel();
 	}
 
  	public void setStudent(Student s){
  		student.setFirstName(s.getFirstName());
 		student.setLastName(s.getLastName());
  	}
-	private void initializeComponents(){
+	public void initializeComponents(int theme,int level){
 		//maze = new Maze(tController.getTheme(), lController.getLevel());
-		maze = new Maze(1, 1);
+		//int theme=mainController.getTController().getTheme();
+		//int level=mainController.getLController().getLevel();
+		maze = new Maze(theme, level);
 		game = new Game();
 		gView = new GameView(maze);
+		gView.control=this;
 		arrMaze = maze.getMazeLayout();
 		player = gView.getPlayer();
 		auGame = new Audio("goodjob.wav");
@@ -77,7 +87,7 @@ public class GameController {
 		
 	}
 
-	private void addListeners(){
+	public void addListeners(){
 		gView.addMazePanelListener(new MazeKeyListener());
 	}
 
@@ -98,7 +108,9 @@ public class GameController {
 		int gameScore = game.getScore();
 
 		if(arrMaze[playerX][playerY]==2){
-			mazeElementsFound++;
+			
+			++mazeElementsFound;
+			
 			gameScore = gameScore + 10;
 			game.setScore(gameScore);
 			gView.setScore(game.getScore());
@@ -112,14 +124,22 @@ public class GameController {
 			gView.makeGlassPane();
 			gView.removeGlassPane();
 			
-			if((game.getLevel()==1 && mazeElementsFound == 5) || (game.getLevel()==2 && mazeElementsFound == 10) ){
-				localTimer.stop();
-				gView.setVisible(false);
-				gView.setFocusable(false);
+			
+			 if((game.getLevel()==1 && mazeElementsFound == 5) || (game.getLevel()==2 && mazeElementsFound == 10) ){
+				
 				EndGameController end=new EndGameController(game,mainController);
 				end.setStudent(student);
+				gView.makeGlassPane();
+				gView.setVisible(true);
+				{try{
+					Thread.sleep(7000);
+					}catch(Exception e){}
+				}
+				gView.setVisible(false);
+				gView.setFocusable(false);
 				mainController.getView().addPanels(end.getView());
 				end.loadAudio();
+				
 			}
 		}
 
@@ -127,6 +147,8 @@ public class GameController {
 			gameScore = gameScore + 5;
 			game.setScore(gameScore);
 			gView.setScore(game.getScore());
+			gView.setPnlDashBoard(++mazebonusFound);
+			System.out.println("Bonus found"+ mazebonusFound);
 			//playaudio -- you found an egg
 			new Thread(new Runnable(){
 				@Override
@@ -137,7 +159,7 @@ public class GameController {
 					}catch(Exception ex){}
 				}
 			}).start();
-
+			arrMaze[playerX][playerY] = 0;
 		}
 	}
 
