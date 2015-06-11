@@ -59,6 +59,10 @@ public class ScoreTableController implements ListSelectionListener, TableModelLi
 		scoreTableModel.addRow(data_array);
 	}
 
+	public void addEndResult(String[] data_array) {
+		scoreTableModel.addEndResult(data_array);
+	}
+	
 	public void deleteRow(String gameID) {
 		scoreTableModel.deleteRow(gameID);
 	}

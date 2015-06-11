@@ -125,6 +125,19 @@ public class ScoreTableModel extends AbstractTableModel {
 		 }
 		 numrows++;
 	}
+	
+	public void addEndResult(String[] data_array) {
+		//update database only - table model not updated
+		EntityTransaction userTransaction = manager.getTransaction();
+		userTransaction.begin();
+		StudentScoreDetails newRecord = scoreListService.createCourse((String)data_array[0], (String)data_array[1], (String)data_array[2], 
+																		(String)data_array[3], (String)data_array[4], Integer.parseInt(data_array[5]), 
+																		data_array[6], (String)data_array[7]);
+		userTransaction.commit();
+		System.out.println("end of game result commited");
+		
+		 
+	}
 
 	public void addTableModelListener(ScoreTableController scoreTableController) {
 		// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        NOT THERE!!!

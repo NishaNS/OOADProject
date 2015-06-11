@@ -35,8 +35,10 @@ public class EndGameController {
 	private String CONTINUE_AU="End_game_Continue.wav";
 	private String EXIT_AU="End_game_Exit.wav";
 	
+	//database
+	private static boolean storeDBResult = true;
 	
-	EndGameController(Game g,MainDisplayController main){
+	EndGameController(Game g, MainDisplayController main){
 		mainController=main;
 		endGameView=new EndGameView(g);
 		this.game=g;
@@ -95,12 +97,33 @@ public class EndGameController {
 
 			}
 			else if(e.getSource().toString().contains("Exit")){
+				
 				setSelectionPerformed(1);
 				auEnd.setauFileName(EXIT_S_AU);
 				auEnd.playAudio();
-
-
-
+				
+				//Store game result to Database
+				
+				String[] data_array = new String[8];
+				data_array[0] = "default";				//autoincrement Primary key
+				data_array[1] = student.getFirstName();
+				data_array[2] = student.getLastName();
+				
+				if(game.getTheme() == 1)
+					data_array[3] = "Farm";
+				else if(game.getTheme() == 2)
+					data_array[3] = "Alphabets";
+				
+				data_array[4] = Integer.toString(game.getLevel());
+				data_array[5] = Integer.toString(game.getScore());
+				data_array[6] = Integer.toString(game.getTime());
+				data_array[7] = "NOW()";				//insert current time in DB
+				
+				if(storeDBResult == true) {
+					mainController.getScoreController().addEndResult(data_array);
+					storeDBResult = false;
+				}
+				
 			}
 		}
 	}
@@ -127,10 +150,30 @@ public class EndGameController {
 			}
 			if(e.getSource().toString().contains("Exit"))
 			{
-				System.out.println("Exit!");
 				setSelectionPerformed(1);
 				auEnd.setauFileName(EXIT_S_AU);
 				auEnd.playAudio();
+				
+				//Store game result to Database
+				String[] data_array = new String[8];
+				data_array[0] = "default";				//autoincrement Primary key
+				data_array[1] = student.getFirstName();
+				data_array[2] = student.getLastName();
+				
+				if(game.getTheme() == 1)
+					data_array[3] = "Farm";
+				else if(game.getTheme() == 2)
+					data_array[3] = "Alphabets";
+				
+				data_array[4] = Integer.toString(game.getLevel());
+				data_array[5] = Integer.toString(game.getScore());
+				data_array[6] = Integer.toString(game.getTime());
+				data_array[7] = "NOW()";				//insert current time in DB
+				
+				if(storeDBResult == true) {
+					mainController.getScoreController().addEndResult(data_array);
+					storeDBResult = false;
+				}
 			}
 		}
 	}
