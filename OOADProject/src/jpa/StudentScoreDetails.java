@@ -3,6 +3,8 @@ package jpa;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -11,6 +13,8 @@ import javax.persistence.*;
 public class StudentScoreDetails implements Serializable {
 
 	//Indicates that the persistence provider must assign primary keys for the entity
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)	 	//AUTO, TABLE
 	@Column
@@ -120,7 +124,7 @@ public class StudentScoreDetails implements Serializable {
 		else if (i == 7) 
 			return getCreatedTime().toString();
 		else
-			throw new Exception("Error: invalid column index in courselist table"); 
+			throw new Exception("Error: invalid column index in scorelist table"); 
 	}
 
 	public String getColumnName(int i) throws Exception {
@@ -128,19 +132,19 @@ public class StudentScoreDetails implements Serializable {
 		String colName = null;
 
 		if (i == 0)
-			colName = "Game ID";
+			colName = "Game_ID";
 		else if (i == 1)
-			colName = "First Name";		
+			colName = "First_Name";		
 		else if (i == 2)
-			colName = "Last Name";
+			colName = "Last_Name";
 		else if (i == 3) 
-			colName = "Game Theme";
+			colName = "Game_Theme";
 		else if (i == 4)
-			colName = "Game Level";
+			colName = "Game_Level";
 		else if (i == 5)
-			colName = "Game Score";
+			colName = "Game_Score";
 		else if (i == 6)
-			colName = "Game Time";
+			colName = "Game_Time";
 		else if (i == 7)			
 			colName = "Created_Time";		
 		else
@@ -151,7 +155,7 @@ public class StudentScoreDetails implements Serializable {
 
 	public void setColumnData(int i, Object value) throws Exception {
 		if (i == 0) 
-			GameID = (int) value;
+			GameID = Integer.parseInt((String) value);
 		else if (i == 1) 
 			First_Name = (String) value;
 		else if (i == 2) 
@@ -161,11 +165,19 @@ public class StudentScoreDetails implements Serializable {
 		else if (i == 4) 
 			Game_Level = (String) value;
 		else if (i == 5)
-			Game_Score = (int) value;
+			Game_Score = Integer.parseInt((String) value);
 		else if (i == 6)
 			Game_Time = (String) value;
-		else if (i == 7)
-			Created_Time = (Timestamp) value;
+		
+		else if (i == 7) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS");
+
+		    Date parsedTimeStamp = dateFormat.parse((String) value);
+
+		    Created_Time = new Timestamp(parsedTimeStamp.getTime());
+			
+		}
+		
 		else
 			throw new Exception("Error: invalid column index in scorelist table");    		
 	}

@@ -93,7 +93,7 @@ public class ScoreTableModel extends AbstractTableModel {
 			fireTableCellUpdated(row, col);
 			
 		} catch(Exception err) {
-			err.toString();
+			System.out.println(err.toString());
 		}	
 	}
 
@@ -115,7 +115,7 @@ public class ScoreTableModel extends AbstractTableModel {
 		userTransaction.commit();
 		System.out.println("add transaction commited");
 		
-		 // set the current row to rowIndex
+		// set the current row to rowIndex
 		scoreResultList.add(newRecord);
 		int row = scoreResultList.size();
 		int col = 0;
@@ -135,8 +135,6 @@ public class ScoreTableModel extends AbstractTableModel {
 																		data_array[6], (String)data_array[7]);
 		userTransaction.commit();
 		System.out.println("end of game result commited");
-		
-		 
 	}
 
 	public void addTableModelListener(ScoreTableController scoreTableController) {
@@ -152,7 +150,10 @@ public class ScoreTableModel extends AbstractTableModel {
 		userTransaction.commit();
 		System.out.println("delete transaction commited");
 
-		// add code to update JTable%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+		// add code to update JTable%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		// update the data in the model to the entries in array
+		//scoreResultList.remove())
 
 	}
 
@@ -171,8 +172,5 @@ public class ScoreTableModel extends AbstractTableModel {
 
 		// add code to update JTable%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	}
-
-
-
-
 }
+

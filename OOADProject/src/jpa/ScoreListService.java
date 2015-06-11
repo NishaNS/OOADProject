@@ -31,7 +31,10 @@ public class ScoreListService {
 		details.setGameTime(Game_Time);
 
 		manager.persist(details);
+		System.out.println("list service - add mthd!!");
 		return details;
+		
+		
 	}   
 
 	// method to read a record

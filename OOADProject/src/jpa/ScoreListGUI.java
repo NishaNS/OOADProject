@@ -27,14 +27,11 @@ public class ScoreListGUI extends JPanel {
 
 	/**
 	 * Creates new form ScoreListUpdated
-	 * @param scoreTableController2 
+	 * @param scoreTableController 
 	 */
 	public ScoreListGUI(ScoreTableController TableController) {
 		initComponents();		
-		 this.scoreTableController = TableController;
-		//scoreTableController = new ScoreTableController(this);
-		//if(this.isVisible())
-		// addJTable();
+		this.scoreTableController = TableController;
 	}
 
 	public void addJTable() {
@@ -416,13 +413,6 @@ public class ScoreListGUI extends JPanel {
 		data_array[6] = getGameTime();
 		data_array[7] = "NOW()";		//insert current time in DB
 
-		/*data_array[1] = "John";
-    	data_array[2] = "Doe";
-    	data_array[3] = "Farm";
-    	data_array[4] = "2";
-    	data_array[5] = "99";
-    	data_array[6] = "5:12";*/
-
 		//send all data to table controller
 		scoreTableController.addRow(data_array);
 	}
@@ -451,20 +441,6 @@ public class ScoreListGUI extends JPanel {
 		scoreTableController.deleteRow(gameid);
 	}
 
-	/*public static void main(String[] args){
-		// Create and display the form 
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				JFrame window = new JFrame();
-				Container c = window.getContentPane();  
-				window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				window.add(new ScoreListGUI());
-				window.setVisible(true);
-			}
-		});
-	}*/
-
-
 	// Variables declaration - do not modify                     
 	private JPanel contentPane;
 	private JLabel lblBanner;
@@ -492,6 +468,6 @@ public class ScoreListGUI extends JPanel {
 	private JTable tblScoreTable;
 	private AppImage background;
 	private String imgBackground;
-	
+
 	// End of variables declaration                   
 }

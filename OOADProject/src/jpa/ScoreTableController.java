@@ -83,6 +83,7 @@ public class ScoreTableController implements ListSelectionListener, TableModelLi
 			//create a new table model with new data
 			scoreTableModel = new ScoreTableModel(scoreTableModel.getList(), scoreTableModel.getEntityManager());
 			scoreTableModel.addTableModelListener(this);
+			
 			//update the JTable with  new data
 			scoreTableView.updateTable();
 
