@@ -1,0 +1,26 @@
+use OOAD_Project;
+
+CREATE TABLE IF NOT EXISTS StudentScoreDetails (
+	GameID INT(100) NOT NULL AUTO_INCREMENT,
+    First_Name VARCHAR(100),
+    Last_Name VARCHAR(100),
+    Game_Theme VARCHAR(50),
+    Game_Level INT(10),
+    Game_Score INT(100),
+    Game_Time TIME,
+    Created_Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (GameID)
+);
+
+DESC StudentScoreDetails;
+
+INSERT INTO StudentScoreDetails VALUES (
+	DEFAULT,
+    'MEREDITH',
+    'GREY',
+    'ALPHABETS',
+    '1',
+    '12',
+    '5:00:00',
+	 NOW()
+);
