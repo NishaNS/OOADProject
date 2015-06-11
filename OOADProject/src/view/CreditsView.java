@@ -1,52 +1,45 @@
-/**
- * 
- */
 package view;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-import commonutil.Audio;
-import controller.HelpController;
-/**
- * @author hemali
- *
- */
-public class HelpView extends JPanel{
-	
+public class CreditsView extends JPanel{
 	private JButton back;
 	private JTextArea info;
-	private String BACK_BTN_IMG="image/Exit.png";
+	private String BACK_IMG_PATH="image/Exit.png";
 	private String BACKGROUND_IMG="image/HelpCreditsBG.png";
-	
-	private String information="Please press the right arrow key to move right\n"
-							  +"Please press the left arrow key to move to the left\n"
+	private String information="The credits goes to  \n"
+							  +"www.accepela.com \n"
 							  +"Please press the up arrow key to move up\n"
-							  +"Please press the down arrow key to move down\n";
+							  +"Please press the down arrow key to move down\n ";
 	
-	public HelpView(){
-	GridBagLayout grid=new GridBagLayout();
-	setLayout(grid);
-	GridBagConstraints c=new GridBagConstraints();
-	c.gridx=0;
-	c.gridy=0;
-	back=new JButton(){
-		public void paintComponent(Graphics g){
-			super.paintComponent(g);
-			back.setIcon(new ImageIcon(BACK_BTN_IMG));
-			 back.setBorder(BorderFactory.createEmptyBorder());
-		}
-	};
+	public CreditsView(){
+		GridBagLayout grid=new GridBagLayout();
+		setLayout(grid);
+		GridBagConstraints c=new GridBagConstraints();
+		c.gridx=0;
+		c.gridy=0;
+		back=new JButton(){
+			public void paintComponent(Graphics g){
+				super.paintComponent(g);
+				back.setIcon(new ImageIcon(BACK_IMG_PATH));
+				back.setBorder(BorderFactory.createEmptyBorder());
+			}
+		};
 	info=new JTextArea(information);
 	Font font=new Font(Font.SANS_SERIF,Font.ITALIC,30);
 	info.setBackground( new Color(0, 0, 0, 1) );
+	//info.setEditable(false);
 	info.setEditable(false);
 	info.setOpaque(true);
 	info.setFont(font);

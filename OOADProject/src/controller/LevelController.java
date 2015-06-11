@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 
 import commonutil.Audio;
 import model.LevelModel;
+import model.Student;
 import view.GameView;
 import view.LevelView;
 
@@ -30,6 +31,8 @@ public class LevelController{
 	private int selectionPerformed=0;
 	private MainDisplayController mainController;
 	private GameController gameController;
+	private Student student;
+	//private int theme;
 	/**
 	 * HelpController constructor which initializes the HelpModel and HelpView objects
 	 */
@@ -37,9 +40,11 @@ public class LevelController{
 		
 		this.mainController=mainController;
 		levelModel=new LevelModel();
-		levelView=new LevelView();
+		levelView=new LevelView(mainController.getTController().getTheme());
 		levelView.setTrackVariable(1);
 		auLevel=new Audio("");
+		student=new Student();
+		
 		levelView.addMyKeyListener(new KeyListen());
 		levelView.addMyActionListener(new ActionListen());
 		
@@ -86,6 +91,14 @@ public class LevelController{
 	
 	/**
 	 * 
+	 * @param s
+	 */
+	public void setStudent(Student s){
+		student.setFirstName(s.getFirstName());
+		student.setLastName(s.getLastName());
+	}
+	/**
+	 * 
 	 * private inner ActionListener class 
 	 *
 	 */
@@ -97,10 +110,12 @@ public class LevelController{
 			if(e.getSource().toString().contains("Level1")){
 				setSelectionPerformed(1);
 				levelModel.setLevel(1);
-				auLevel.setauFileName("Level_easy_selected.wav");
+				auLevel.setauFileName(LevelView.LEVEL_EASY_AUD_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
+				gController.setStudent(student);
 				GameView gView = gController.getView();
+				
 				levelView.getBtnLevel1().setEnabled(false);
 				levelView.setEnabled(false);
 				levelView.setVisible(false);
@@ -110,10 +125,11 @@ public class LevelController{
 			}
 			else if(e.getSource().toString().contains("Level2")){
 				setSelectionPerformed(1);
-				levelModel.setLevel(3);
-				auLevel.setauFileName("Level_difficult_selected.wav");
+				levelModel.setLevel(2);
+				auLevel.setauFileName(LevelView.LEVEL_HARD_AUD_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
+				gController.setStudent(student);
 				GameView gView = gController.getView();
 				levelView.getBtnLevel2().setEnabled(false);
 				levelView.setEnabled(false);
@@ -135,15 +151,17 @@ public class LevelController{
 
 		public void keyPressed(KeyEvent e){
 			auLevel.stopAudio();
+			System.out.println(student.getFirstName()+student.getLastName());
 			if(e.getSource().toString().contains("Level1"))
 			{
 				System.out.println("Level 1 pressed!");
 				setSelectionPerformed(1);
 				levelModel.setLevel(1);
-				auLevel.setauFileName("Level_easy_selected.wav");
+				auLevel.setauFileName(LevelView.LEVEL_EASY_AUD_S);
 				auLevel.playAudio();
 				
 				GameController gController = mainController.getGController();
+				gController.setStudent(student);
 				GameView gView = gController.getView();
 				levelView.getBtnLevel1().setFocusable(false);
 				levelView.setFocusable(false);
@@ -154,10 +172,11 @@ public class LevelController{
 			{
 				System.out.println("Level 2 pressed!");
 				setSelectionPerformed(1);
-				levelModel.setLevel(3);
-				auLevel.setauFileName("Level_difficult_selected.wav");
+				levelModel.setLevel(2);
+				auLevel.setauFileName(LevelView.LEVEL_HARD_AUD_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
+				gController.setStudent(student);
 				GameView gView = gController.getView();
 				levelView.getBtnLevel2().setFocusable(false);
 				levelView.setFocusable(false);

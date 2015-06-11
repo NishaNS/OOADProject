@@ -10,8 +10,11 @@ import commonutil.GUIComponent;
 import commonutil.PanelWithAudio;
 
 import javax.swing.*;
+import javax.swing.event.MenuListener;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -26,27 +29,55 @@ public class HomeView extends JPanel {
     private List<PanelWithAudio> audioPanels = new ArrayList<PanelWithAudio>();
     private JButton btnContinue;
     private JButton btnTeacherLgn;
-    private JTextField txtStudentName;
+    private JTextField txtStudentFirstName;
+    private JTextField txtStudentLastName;
     private JLabel lblOptional;
+    private JMenuBar menuBar;
+    private JMenu options;
+    private JMenuItem help;
+    private JMenuItem credits;
 
     public HomeView() {
-        AppImage img = new AppImage("welcomepg.png");
-        backgroundImage = img.loadBackGroundImage();
-        PanelWithAudio pnlContinue = new PanelWithAudio(new Audio("continuekey.wav"));
-        btnContinue = GUIComponent.createButton("", "Continue");
-        pnlContinue.add(btnContinue);
-        pnlContinue.setBackground(Color.GREEN);
-        audioPanels.add(pnlContinue);
-
-        PanelWithAudio  pnlTeacher = new PanelWithAudio(new Audio("goodjob.wav"));
-        btnTeacherLgn = GUIComponent.createButton("", "Teacher Login");
+//        AppImage img = new AppImage("TestingWelcomePage.png");
+//        backgroundImage = img.loadBackGroundImage();
+    	PanelWithAudio  pnlTeacher = new PanelWithAudio(new Audio("goodjob.wav"));
+        btnTeacherLgn = GUIComponent.createButton("BtnTeacherLogin.png", "");
+        btnTeacherLgn.setBorder(BorderFactory.createEmptyBorder());
         pnlTeacher.add(btnTeacherLgn);
-        pnlTeacher.setBackground(Color.GREEN);
+        pnlTeacher.setBackground(Color.ORANGE);
         audioPanels.add(pnlTeacher);
+        
+    	backgroundImage=new ImageIcon("image/TestingWelcomePage.png").getImage();
+        PanelWithAudio pnlContinue = new PanelWithAudio(new Audio("continuekey.wav"));
+        btnContinue = GUIComponent.createButton("BtnContinue.png", "");
+        btnContinue.setBorder(BorderFactory.createEmptyBorder());
+        pnlContinue.add(btnContinue);
+        pnlContinue.setBackground(Color.ORANGE);
+        audioPanels.add(pnlContinue);
+        
+        
+       
 
-        txtStudentName = new JTextField("--Enter the student name--");
-        lblOptional = new JLabel("(optional)");
+        Font font=new Font(Font.SANS_SERIF,Font.ITALIC,20);
+
+        txtStudentFirstName = new JTextField("Enter First name(optional)");
+        //lblOptional = new JLabel("(optional)");
+        txtStudentFirstName.setFont(font);
+       // btnContinue.setFocusable(true);
+        
+        txtStudentLastName = new JTextField("Enter Last name(optional)");
+        //lblOptional = new JLabel("(optional)");
         btnContinue.setFocusable(true);
+        txtStudentLastName.setFont(font);
+        
+        
+        menuBar=new JMenuBar();
+        options=new JMenu("Options");
+        help=new JMenuItem("Help");
+        credits=new JMenuItem("Credits");
+        
+        
+        
         addComponents();
     }
 
@@ -54,9 +85,9 @@ public class HomeView extends JPanel {
         btnContinue.addKeyListener(kListener);
     }
 
-    public void addContinueMouseListener(MouseListener mListener) {
-        btnContinue.addMouseListener(mListener);
-    }
+//    public void addContinueMouseListener(MouseListener mListener) {
+//        btnContinue.addMouseListener(mListener);
+//    }
 
     public void addContinueActionListener(ActionListener listener) {
         btnContinue.addActionListener(listener);
@@ -65,19 +96,72 @@ public class HomeView extends JPanel {
     public void addTeacherLoginListener(ActionListener listener) {
         btnTeacherLgn.addActionListener(listener);
     }
-
-    private void addComponents() {
-        for(PanelWithAudio panel : audioPanels){
-            add(panel);
-        }
-        add(txtStudentName);
-        add(lblOptional);
+    
+    public void addTextField1Listener(FocusListener f){
+    	txtStudentFirstName.addFocusListener(f);
     }
-
+    public void addTextField2Listener(FocusListener f){
+    	txtStudentLastName.addFocusListener(f);
+    }
+    
+    public void addMenuListListener(MenuListener m){
+    	options.addMenuListener(m);
+    }
+    
+    public void addMenuActionListener(ActionListener a){
+    	help.addActionListener(a);
+    	credits.addActionListener(a);
+    }
+    private void addComponents() {
+    	
+    	//c.anchor=GridBagConstraints.LINE_START;
+    
+    	//constraints.gridwidth;
+    	
+    	add(txtStudentFirstName);
+    	
+      	 add(txtStudentLastName); 
+    	options.add(help);
+        options.add(credits);
+        menuBar.add(options);
+        //add(menuBar,constraints);
+        
+        
+       //Insets in=new Insets(0,0,0,20);
+        for(PanelWithAudio panel : audioPanels){
+            add(panel); 
+           
+            }
+        
+    	
+        
+    }
+    
+    public JMenuItem getHelp(){
+    	return help;
+    }
+    
+    public JMenuItem getCredits(){
+    	return credits;
+    }
+    
+    public JMenuBar getMenu(){
+    	return menuBar;
+    }
     public List<PanelWithAudio> getAudioPanels() {
         return audioPanels;
     }
-
+    public JTextField getFirstNameTextField(){
+    	return txtStudentFirstName;
+    }
+    
+    public JTextField getLastNameTextField(){
+    	return txtStudentLastName;
+    }
+    
+    public JButton getContinueButton(){
+    	return btnContinue;
+    }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;

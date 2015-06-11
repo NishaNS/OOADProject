@@ -6,6 +6,7 @@ package controller;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 
+import model.Student;
 import view.HomeView;
 import view.MainDisplayView;
 
@@ -20,10 +21,12 @@ public class MainDisplayController {
 		private ThemeController tController;
 		private LevelController lController;
 		private GameController gController;
+		private HelpController helpController;
+		private CreditsController cController;
 		private HomeView hView;
-		
 	
 	public MainDisplayController(){
+		
 		if(mainView==null)
 			mainView = new MainDisplayView();
 		if(hController==null)
@@ -34,11 +37,22 @@ public class MainDisplayController {
 			this.lController = new LevelController(this);
 		if(gController==null)
 			this.gController=new GameController(this);
+		if(helpController==null)
+			this.helpController=new HelpController(this);
+		if(cController==null)
+			this.cController=new CreditsController(this);
 		
 		hView = hController.getView();
-		
+		this.getView().setJMenuBar(hView.getMenu());
 		hView.setSize(mainView.getWindowWidth(), mainView.getWindowHeight());
 		mainView.addPanels(hView);
+	}
+	public CreditsController getCrController(){
+		return cController; 
+	}
+	
+	public HelpController getHlController(){
+		return helpController;
 	}
 	
 	public HomeController getHController(){

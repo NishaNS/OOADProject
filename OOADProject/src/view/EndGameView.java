@@ -60,14 +60,15 @@ public class EndGameView extends JPanel {
 	private Dimension d=toolkit.getScreenSize();
 	
 	private String FOOTER_IMG;
-	private String BODY_IMG;
+	private String BODY_IMG="image/cloud_burst.png";
 
-	private String CONTINUE_U_IMG="image/Continue.png";
+	private String CONTINUE_O_IMG="image/Continue.png";
 	private String CONTINUE_S_IMG="image/";
-	private String CONTINUE_IMG=CONTINUE_U_IMG;
-	private String EXIT_U_IMG="image/Exit.png";
+	private String CONTINUE_IMG=CONTINUE_O_IMG;
+	private String EXIT_O_IMG="image/Exit.png";
 	private String EXIT_S_IMG;
-	private String EXIT_IMG=EXIT_U_IMG;
+	private String EXIT_IMG=EXIT_O_IMG;
+	private String STAR_IMG="";
 	
 
 //	private String SELECTION_AU="End_game_select_option.wav";
@@ -79,7 +80,8 @@ public class EndGameView extends JPanel {
 	
 
 	public EndGameView(Game game){
-		
+		this.game=game;
+		System.out.println(game.getTime());
 		star=new JLabel();
 		congrats=new JLabel();
 		theme_level=new JLabel();
@@ -87,7 +89,7 @@ public class EndGameView extends JPanel {
 		score_l=new JLabel();
 		FOOTER_IMG="image/endGameTitle.png";
 		BODY_IMG="image/cloud_burst.png";
-		this.game=game;
+		
 		setButtons();
 		setPanel();
 		settings();
@@ -104,7 +106,7 @@ public class EndGameView extends JPanel {
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				cButton.setIcon(new ImageIcon(CONTINUE_IMG));
-				cButton.setOpaque(false);
+				cButton.setBorder(BorderFactory.createEmptyBorder());
 				validate();
 				cButton.setPreferredSize(new Dimension((int)(0.18*d.getWidth()),(int)(0.12*d.getHeight())));
 			}
@@ -114,7 +116,8 @@ public class EndGameView extends JPanel {
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				eButton.setIcon(new ImageIcon(EXIT_IMG));
-				eButton.setOpaque(false);
+				
+				eButton.setBorder(BorderFactory.createEmptyBorder());
 				validate();
 				eButton.setPreferredSize(new Dimension((int)(0.18*d.getWidth()),(int)(0.12*d.getHeight())));
 			}
@@ -162,15 +165,17 @@ public class EndGameView extends JPanel {
 //			}
 		};	
 		
+		footer.setOpaque(false);
 		body=new JPanel(){
-			public void paintComponent(Graphics g){
-				super.paintComponent(g);
-				g.drawImage(new ImageIcon(BODY_IMG).getImage(), 0, 0,(int)(d.getWidth()),(int)(0.8*d.getHeight()),null);
-				
-			}
+//			public void paintComponent(Graphics g){
+//				super.paintComponent(g);
+//				g.drawImage(new ImageIcon(BODY_IMG).getImage(), 0, 0,(int)(d.getWidth()),(int)(0.8*d.getHeight()),null);
+//				
+//			}
 				
 		};
 		
+		body.setOpaque(false);
 		time_p=new JPanel(){
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
@@ -186,14 +191,19 @@ public class EndGameView extends JPanel {
 	 */
 	public void loadStarImage(){
 		
-		if(game.getTime() < 180){
-		 star.setIcon(new ImageIcon("image/Three_star.png"));
+		if(game.getTime() < 100){
+		 //star.setIcon(new ImageIcon("image/Three_star.png"));
+		STAR_IMG="image/Three_star.png";
 		}
-		else if(game.getTime() >= 180 && game.getTime()<=360){
-		star.setIcon(new ImageIcon("image/Two_star.png"));	
+		else if(game.getTime() >= 100 && game.getTime()<=360){
+		//star.setIcon(new ImageIcon("image/Two_star.png"));
+			STAR_IMG="image/Two_star.png";
 		}
-		else{
-		star.setIcon(new ImageIcon("image/One_star.png"));	
+		else if(game.getTime()>360){
+		System.out.println("one star");
+		//star.setIcon(new ImageIcon("image/One_star.png"));
+		STAR_IMG="image/One_star.png";
+		System.out.println("one star");
 		}
 		
 	}
@@ -204,7 +214,7 @@ public class EndGameView extends JPanel {
 	}
 	
 	public void cButtonReset(){
-		CONTINUE_IMG=CONTINUE_U_IMG;
+		CONTINUE_IMG=CONTINUE_O_IMG;
 		cButton.repaint();
 
 	}
@@ -216,7 +226,7 @@ public class EndGameView extends JPanel {
 	
 	public void eButtonReset()
 	{
-		EXIT_IMG=EXIT_U_IMG;
+		EXIT_IMG=EXIT_O_IMG;
 		eButton.repaint();
 	}
 	/**
@@ -255,6 +265,7 @@ public class EndGameView extends JPanel {
 		constraints.weightx=1;
 		constraints.weighty=0.4;
 		loadStarImage();
+		star.setIcon(new ImageIcon(STAR_IMG));
 		body.add(star, constraints);
 		
 		constraints.gridx=0;
@@ -336,7 +347,7 @@ public class EndGameView extends JPanel {
 		bodyConstraints();
 		constraints.anchor=GridBagConstraints.FIRST_LINE_START;
 		constraints.fill=GridBagConstraints.BOTH;
-		body.setBackground(Color.CYAN);
+		//body.setBackground(Color.CYAN);
 		this.add(body,constraints);
 		
 		constraints.gridx=0;
@@ -345,11 +356,15 @@ public class EndGameView extends JPanel {
 		constraints.weightx=1;
 		footerConstraints();
 		constraints.anchor=GridBagConstraints.FIRST_LINE_START;
-		footer.setBackground(Color.RED);
+		//footer.setBackground(Color.RED);
 		this.add(footer,constraints);
 		
 	}
 	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		g.drawImage(new ImageIcon(BODY_IMG).getImage(), 0, 0, this);
+	}
 	
 
 	

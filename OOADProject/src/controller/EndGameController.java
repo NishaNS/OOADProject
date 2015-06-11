@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import model.Game;
+import model.Student;
 import commonutil.Audio;
 import view.EndGameView;
 
@@ -24,6 +25,7 @@ public class EndGameController {
 	private EndGameView endGameView;
 	private Audio auEnd;
 	private Game game;
+	private Student student;
 	MainDisplayController mainController;
 	
 	//Audio filename for selected buttons
@@ -38,6 +40,7 @@ public class EndGameController {
 		mainController=main;
 		endGameView=new EndGameView(g);
 		this.game=g;
+		student=new Student();
 		endGameView.addEndActionListener(new EndActionListener());
 		endGameView.addEndKeyListener(new EndKeyListener());
 		auEnd=new Audio(""); 
@@ -62,6 +65,14 @@ public class EndGameController {
 	
 	public void setScanRate(int scanrate){
 		this.scanrate=scanrate;
+	}
+	/**
+	 * 
+	 * @param s
+	 */
+	public void setStudent(Student s){
+		student.setFirstName(s.getFirstName());
+		student.setLastName(s.getLastName());
 	}
 	private class EndActionListener implements ActionListener{
 
@@ -145,7 +156,7 @@ public class EndGameController {
 
 	public void loadStarAudio(){
 		if(game.getTime() < 180){
-			 	auEnd.setauFileName("One_star.wav");
+			 	auEnd.setauFileName("Three_star.wav");
 			 	auEnd.playAudio();
 			}
 			else if(game.getTime() >= 180 && game.getTime() <= 360){
@@ -153,7 +164,7 @@ public class EndGameController {
 				auEnd.playAudio();
 			}
 			else{
-				auEnd.setauFileName("Three_stars.wav");
+				auEnd.setauFileName("One_stars.wav");
 				auEnd.playAudio();
 			}
 	}

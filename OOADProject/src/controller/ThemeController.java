@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import commonutil.AppImage;
 import commonutil.Audio;
+import model.Student;
 import model.ThemeModel;
 import view.LevelView;
 import view.ThemeView;
@@ -28,13 +29,17 @@ public class ThemeController {
 	private MainDisplayController mainController;	
 	private static boolean btnSelected;		//variable for audio loop condition
 	private Audio auObj;
+	private Student student;
 
+	
 	public ThemeController(MainDisplayController mController) {
 		tview = new ThemeView();
 		tmodel = new ThemeModel();
 		mainController=mController;
 		btnSelected = false;
 		auObj = new Audio("");
+		
+		student=new Student();
 		
 		tview.addBtnListener(new myActionListener());
 		tview.addMyKeyListener(new myKeyListener());		
@@ -51,7 +56,14 @@ public class ThemeController {
 	public int getTheme() {		
 		return tmodel.getTheme();		
 	}
-
+	/**
+	 * 
+	 * @param s
+	 */
+	public void setStudent(Student s){
+		student.setFirstName(s.getFirstName());
+		student.setLastName(s.getLastName());
+	}
 
 	public void loadAudio(){
 		//setup and play audio
@@ -109,13 +121,16 @@ public class ThemeController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {			
-
+			auObj.stopAudio();
 			if(e.getSource().toString().contains("FARM") == true) {
 
 				btnSelected = true; 
 				tmodel.setTheme(1);
 				LevelController lController = mainController.getLController();
+				lController.setStudent(student);
 				LevelView lView = lController.getView();
+				tview.getBtnFarm().setEnabled(false);
+				tview.getBtnFarm().setFocusable(false);
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
 				lController.loadAudio();
@@ -127,7 +142,10 @@ public class ThemeController {
 				btnSelected = true; 
 				tmodel.setTheme(2);
 				LevelController lController = mainController.getLController();
+				lController.setStudent(student);
 				LevelView lView = lController.getView();
+				tview.getBtnAlphabets().setEnabled(false);
+				tview.getBtnAlphabets().setFocusable(false);
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
 				lController.loadAudio();
@@ -138,13 +156,14 @@ public class ThemeController {
 	public class myKeyListener extends KeyAdapter {
 
 		public void keyPressed(KeyEvent e){
-
+			auObj.stopAudio();
 			System.out.println("HEREEE");
 
 			if(e.getSource().toString().contains("FARM") == true) {
 				btnSelected = true; 
 				tmodel.setTheme(1);
 				LevelController lController = mainController.getLController();
+				lController.setStudent(student);
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
@@ -155,6 +174,7 @@ public class ThemeController {
 				btnSelected = true; 
 				tmodel.setTheme(2);
 				LevelController lController = mainController.getLController();
+				lController.setStudent(student);
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);

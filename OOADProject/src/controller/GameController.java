@@ -15,6 +15,7 @@ import commonutil.Audio;
 import commonutil.MazeElementPane;
 
 import model.Game;
+import model.Student;
 import model.GameModel;
 import model.Maze;
 import model.MazeElement;
@@ -36,6 +37,7 @@ public class GameController {
 
 	private Maze maze;
 	private Player player;
+	private Student student;
 
 	private Game game;
 
@@ -48,7 +50,6 @@ public class GameController {
 	//Mad
 	private MazeElement[] mazeObjects;
 	private int mazeElementsFound;
-	private int bonusCount;
 	//end Mad
 
 
@@ -56,9 +57,13 @@ public class GameController {
 		mainController=main;
 		initializeComponents();
 		addListeners();
-		
+		student=new Student();
 	}
 
+ 	public void setStudent(Student s){
+ 		student.setFirstName(s.getFirstName());
+		student.setLastName(s.getLastName());
+ 	}
 	private void initializeComponents(){
 		//maze = new Maze(tController.getTheme(), lController.getLevel());
 		maze = new Maze(1, 1);
@@ -96,7 +101,7 @@ public class GameController {
 			mazeElementsFound++;
 			gameScore = gameScore + 10;
 			game.setScore(gameScore);
-			gView.getScorePanel().setScore(game.getScore());
+			gView.setScore(game.getScore());
 			MazeElements objElement = maze.getMazeElement(playerX, playerY);
 			objElement.setisFound(true);
 			System.out.println(objElement.getName());
@@ -112,18 +117,16 @@ public class GameController {
 				gView.setVisible(false);
 				gView.setFocusable(false);
 				EndGameController end=new EndGameController(game,mainController);
+				end.setStudent(student);
 				mainController.getView().addPanels(end.getView());
 				end.loadAudio();
 			}
 		}
 
 		else if(arrMaze[playerX][playerY]==3){
-			arrMaze[playerX][playerY] = 0;
 			gameScore = gameScore + 5;
-			bonusCount++;
 			game.setScore(gameScore);
-			gView.getScorePanel().setScore(game.getScore());
-			gView.getBonusPanel().loadBonusImage("img_t1_bonus".concat(bonusCount+"").concat(".png"));
+			gView.setScore(game.getScore());
 			//playaudio -- you found an egg
 			new Thread(new Runnable(){
 				@Override
@@ -144,13 +147,13 @@ public class GameController {
 		public void actionPerformed(ActionEvent e) {
 			if(gView.getIsTimerPaused()){
 				time = game.getTime();
-				gView.getScorePanel().setTime(time/60, time%60);
+				gView.setTime(time/60, time%60);
 				System.out.println("Timer Paused:" + time);
 			}else{
 				temp++;
 				game.setTime(temp);
 				time = game.getTime();
-				gView.getScorePanel().setTime(time/60, time%60);
+				gView.setTime(time/60, time%60);
 				System.out.println("Timer Resumed:" + time);
 			}
 		}

@@ -2,16 +2,16 @@ package model;
 
 public class Student {
 
-private String name;
-
+private String firstname;
+private String lastname;
 
 
 /**
  * 
  * @return
  */
-public String getName(){
-	return name;
+public String getFirstName(){
+	return firstname;
 }
 
 
@@ -19,8 +19,24 @@ public String getName(){
  * 
  * @param name
  */
-public void setName(String name){
-	this.name=name;
+public void setFirstName(String name){
+	this.firstname=name;
+}
+
+/**
+ * 
+ * @return
+ */
+public String getLastName(){
+	return lastname;
+}
+
+/**
+ * 
+ * @param str
+ */
+public void setLastName(String str){
+	this.lastname=str;
 }
 
 }

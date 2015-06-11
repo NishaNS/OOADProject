@@ -43,38 +43,70 @@ public class LevelView extends JPanel{
 	private int trackVariable;
 	public Audio auLevel;
 	public LevelController levelController;
-	public ThemeController tController;
+	private int theme;
 	
-	public static String BUTTON_EASY_O_IMG = "Level1.png";
-	public static String BUTTON_HARD_O_IMG = "Level3.png";
-	public static String BUTTON_EASY_AUD = "Level_easy_select_option.wav";
-	public static String BUTTON_HARD_AUD = "Level_difficult_select_option.wav";
-	public static String BUTTON_EASY_S_IMG = "testMaze.png";
-	public static String BUTTON_HARD_S_IMG = "testMaze.png";
-	public static String PAGE_LOAD_AUD = "Level_select.wav";
+	public static String BUTTON_EASY_O_IMG_T1 = "Level1.png";
+	public static String BUTTON_HARD_O_IMG_T1 = "Level3.png";	
+	public static String BUTTON_EASY_S_IMG_T1 = "testMaze.png";
+	public static String BUTTON_HARD_S_IMG_T1 = "testMaze.png";
+	
+	public static String PAGE_LOAD_AUD = "";
+	public static String PAGE_LOAD_AUD_T1 = "Level_select.wav";
+	public static String PAGE_LOAD_AUD_T2 = "Level_select.wav";
+	
+	public static String BUTTON_EASY_AUD = "";
+	public static String BUTTON_HARD_AUD = "";
+	public static String BUTTON_EASY_AUD_T1 = "Level_easy_select_option.wav";
+	public static String BUTTON_HARD_AUD_T1 = "Level_difficult_select_option.wav";
+	public static String BUTTON_EASY_AUD_T2 = "Level_easy_select_option.wav";
+	public static String BUTTON_HARD_AUD_T2 = "Level_difficult_select_option.wav";
+	
+	public static String BUTTON_EASY_O_IMG_T2 = "Level1.png";
+	public static String BUTTON_HARD_O_IMG_T2 = "Level3.png";
+	public static String BUTTON_EASY_S_IMG_T2 = "testMaze.png";
+	public static String BUTTON_HARD_S_IMG_T2 = "testMaze.png";
+	
+	public static String BUTTON_EASY_O_IMG = "";
+	public static String BUTTON_HARD_O_IMG = "";
+	public static String BUTTON_EASY_S_IMG = "";
+	public static String BUTTON_HARD_S_IMG = "";
+	
+	public static String T1_L1_AUD="";
+	public static String T1_L2_AUD="";
+	public static String T2_L1_AUD="";
+	public static String T2_L2_AUD="";
+	
+	public static String LEVEL_EASY_AUD_S="Level_easy_selected.wav";
+	public static String LEVEL_HARD_AUD_S="Level_difficult_selected.wav";
+	
+	
 	
 	
 	/**
 	 * LevelView constructor 
 	 */
-	public LevelView(){
-		//if(tController.getTheme()==1)
+	public LevelView(int theme){
+		if(theme == 1)
 		{
-			imgEasySelected=new String("");
-			//path of the farm level2 selected image
-			imgHardSelected=new String("");
+			BUTTON_EASY_O_IMG=BUTTON_EASY_O_IMG_T1;
+			BUTTON_HARD_O_IMG=BUTTON_HARD_O_IMG_T1;
+			BUTTON_EASY_AUD=BUTTON_EASY_AUD_T1;
+			BUTTON_HARD_AUD=BUTTON_HARD_AUD_T1;
+			PAGE_LOAD_AUD=PAGE_LOAD_AUD_T1;
 			btnEasy=new CustomButton(BUTTON_EASY_O_IMG,BUTTON_EASY_AUD,"Easy","Level1");
 			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD,"Hard","Level2");
 			setFocusable(true);
 		}
-		/*else{
-		imgEasy=new String("OOADProject/image/Level1.png");
-	imgHard=new String("/Users/hemali/git/FinalProject/OOADProject/image/Level3.png");
-	imgEasySelected=new String("");
-	imgHardSelected=new String("");
-	btnEasy=new CustomButton(imgEasy);
-	btnHard=new CustomButton(imgHard);
-	}*/
+		else{
+			BUTTON_EASY_O_IMG=BUTTON_EASY_O_IMG_T2;
+			BUTTON_HARD_O_IMG=BUTTON_HARD_O_IMG_T2;
+			BUTTON_EASY_AUD=BUTTON_EASY_AUD_T2;
+			BUTTON_HARD_AUD=BUTTON_HARD_AUD_T2;
+			PAGE_LOAD_AUD=PAGE_LOAD_AUD_T2;
+			btnEasy=new CustomButton(BUTTON_EASY_O_IMG,BUTTON_EASY_AUD,"Easy","Level1");
+			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD,"Hard","Level2");
+			setFocusable(true);
+	}
 		lblDisplay1=new JLabel("Select the level");
 		lblDisplay2=new JLabel("(Default level is easy)");
 
@@ -104,6 +136,13 @@ public class LevelView extends JPanel{
 
 	}
 	
+	public void setTheme(int th){
+		theme=th;
+	}
+	
+	public int getTheme(){
+		return theme;
+	}
 	
 	public CustomButton getBtnLevel1()
 	{
@@ -155,16 +194,4 @@ public class LevelView extends JPanel{
 	 * @return void
 	 */
 
-
-
-//	public static void main(String[] args) {
-//		 MainDisplayController mainController=new MainDisplayController();
-//		LevelController levelcontroller = new LevelController(mainController);
-//		JFrame window = new JFrame("Level");
-//		window.add(levelcontroller.getView());
-//		levelcontroller.loadAudio();
-//		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		window.setVisible(true);
-//	}
 }
