@@ -40,13 +40,8 @@ public class LevelController{
 		
 		this.mainController=mainController;
 		levelModel=new LevelModel();
-		levelView=new LevelView(mainController.getTController().getTheme());
-		levelView.setTrackVariable(1);
-		auLevel=new Audio("");
-		student=new Student();
 		
-		levelView.addMyKeyListener(new KeyListen());
-		levelView.addMyActionListener(new ActionListen());
+		
 		
 	}
 	/**
@@ -56,6 +51,16 @@ public class LevelController{
 	/**
 	 * The method used to get the View for this controller
 	 */
+	public void initializeView(int theme){
+		levelView=new LevelView(theme);
+		levelView.setTrackVariable(1);
+		auLevel=new Audio("");
+		student=new Student();
+		
+		levelView.addMyKeyListener(new KeyListen());
+		levelView.addMyActionListener(new ActionListen());	
+	}
+	
 	public LevelView getView(){
 		return levelView;
 	}

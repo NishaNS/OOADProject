@@ -45,10 +45,10 @@ public class LevelView extends JPanel{
 	public LevelController levelController;
 	private int theme;
 	
-	public static String BUTTON_EASY_O_IMG_T1 = "Level1.png";
-	public static String BUTTON_HARD_O_IMG_T1 = "Level3.png";	
-	public static String BUTTON_EASY_S_IMG_T1 = "testMaze.png";
-	public static String BUTTON_HARD_S_IMG_T1 = "testMaze.png";
+	public static String BUTTON_EASY_O_IMG_T1 = "LvlBtnFarm1.png";
+	public static String BUTTON_HARD_O_IMG_T1 = "LvlBtnFarm2.png";	
+	public static String BUTTON_EASY_S_IMG_T1 = "LvlBtnFarmClicked_1.png";
+	public static String BUTTON_HARD_S_IMG_T1 = "LvlBtnFarmClicked_1.png";
 	
 	public static String PAGE_LOAD_AUD = "";
 	public static String PAGE_LOAD_AUD_T1 = "Level_select.wav";
@@ -61,10 +61,10 @@ public class LevelView extends JPanel{
 	public static String BUTTON_EASY_AUD_T2 = "Level_easy_select_option.wav";
 	public static String BUTTON_HARD_AUD_T2 = "Level_difficult_select_option.wav";
 	
-	public static String BUTTON_EASY_O_IMG_T2 = "Level1.png";
-	public static String BUTTON_HARD_O_IMG_T2 = "Level3.png";
-	public static String BUTTON_EASY_S_IMG_T2 = "testMaze.png";
-	public static String BUTTON_HARD_S_IMG_T2 = "testMaze.png";
+	public static String BUTTON_EASY_O_IMG_T2 = "BtnLvlAlpha1.png";
+	public static String BUTTON_HARD_O_IMG_T2 = "BtnLvlAlpha2.png";
+	public static String BUTTON_EASY_S_IMG_T2 = "BtnLvlAlphaClicked_1.png";
+	public static String BUTTON_HARD_S_IMG_T2 = "BtnLvlAlphaClicked_2.png";
 	
 	public static String BUTTON_EASY_O_IMG = "";
 	public static String BUTTON_HARD_O_IMG = "";
@@ -86,10 +86,14 @@ public class LevelView extends JPanel{
 	 * LevelView constructor 
 	 */
 	public LevelView(int theme){
+		System.out.println("Theme "+theme);
 		if(theme == 1)
 		{
 			BUTTON_EASY_O_IMG=BUTTON_EASY_O_IMG_T1;
 			BUTTON_HARD_O_IMG=BUTTON_HARD_O_IMG_T1;
+			BUTTON_HARD_S_IMG=BUTTON_HARD_S_IMG_T1;
+			BUTTON_EASY_S_IMG=BUTTON_EASY_S_IMG_T1;
+			
 			BUTTON_EASY_AUD=BUTTON_EASY_AUD_T1;
 			BUTTON_HARD_AUD=BUTTON_HARD_AUD_T1;
 			PAGE_LOAD_AUD=PAGE_LOAD_AUD_T1;
@@ -103,6 +107,8 @@ public class LevelView extends JPanel{
 			BUTTON_EASY_AUD=BUTTON_EASY_AUD_T2;
 			BUTTON_HARD_AUD=BUTTON_HARD_AUD_T2;
 			PAGE_LOAD_AUD=PAGE_LOAD_AUD_T2;
+			BUTTON_HARD_S_IMG=BUTTON_HARD_S_IMG_T2;
+			BUTTON_EASY_S_IMG=BUTTON_EASY_S_IMG_T2;
 			btnEasy=new CustomButton(BUTTON_EASY_O_IMG,BUTTON_EASY_AUD,"Easy","Level1");
 			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD,"Hard","Level2");
 			setFocusable(true);

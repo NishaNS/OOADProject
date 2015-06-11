@@ -127,8 +127,10 @@ public class ThemeController {
 				btnSelected = true; 
 				tmodel.setTheme(1);
 				LevelController lController = mainController.getLController();
+				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
 				LevelView lView = lController.getView();
+				
 				tview.getBtnFarm().setEnabled(false);
 				tview.getBtnFarm().setFocusable(false);
 				tview.setVisible(false);
@@ -142,6 +144,7 @@ public class ThemeController {
 				btnSelected = true; 
 				tmodel.setTheme(2);
 				LevelController lController = mainController.getLController();
+				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
 				LevelView lView = lController.getView();
 				tview.getBtnAlphabets().setEnabled(false);
@@ -163,6 +166,7 @@ public class ThemeController {
 				btnSelected = true; 
 				tmodel.setTheme(1);
 				LevelController lController = mainController.getLController();
+				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
@@ -174,6 +178,7 @@ public class ThemeController {
 				btnSelected = true; 
 				tmodel.setTheme(2);
 				LevelController lController = mainController.getLController();
+				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
