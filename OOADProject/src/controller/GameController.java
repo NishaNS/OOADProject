@@ -108,6 +108,18 @@ public class GameController {
 		gView.redrawMazePanel();
 		checkForMazeElements();
 	}
+	private boolean hasGameEnded(){
+		return ((game.getLevel()==1 && mazeElementsFound == 5) || (game.getLevel()==2 && mazeElementsFound == 10) );
+	}
+
+	private void endGame() {
+		EndGameController end=new EndGameController(game,mainController);
+		end.setStudent(student);
+		gView.setVisible(false);
+		gView.setFocusable(false);
+		mainController.getView().addPanels(end.getView());
+		end.loadAudio();
+	}
 
 	private void checkForMazeElements(){
 
@@ -130,25 +142,21 @@ public class GameController {
 			objElement.setisFound(true);
 			arrMaze[playerX][playerY] = 0;
 			gView.makeGlassPane();
-			gView.removeGlassPane();
-			
-			
-			 if((game.getLevel()==1 && mazeElementsFound == 5) || (game.getLevel()==2 && mazeElementsFound == 10) ){
-				
-				EndGameController end=new EndGameController(game,mainController);
-				end.setStudent(student);
-				gView.makeGlassPane();
-				gView.setVisible(true);
-				{try{
-					Thread.sleep(7000);
-					}catch(Exception e){}
-				}
-				gView.setVisible(false);
-				gView.setFocusable(false);
-				mainController.getView().addPanels(end.getView());
-				end.loadAudio();
-				
+			if(hasGameEnded()){
+				EndExectuor endExectuor = new EndExectuor(){
+					@Override
+					public void run() {
+						endGame();
+					}
+				};
+				gView.removeGlassPane(endExectuor);
+			}else {
+				gView.removeGlassPane(null);
 			}
+
+			
+			
+
 		}
 
 		else if(arrMaze[playerX][playerY]==3){

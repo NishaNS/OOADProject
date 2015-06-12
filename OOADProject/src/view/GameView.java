@@ -33,6 +33,7 @@ import javax.swing.Timer;
 
 import commonutil.AppImage;
 import commonutil.MazeElementPane;
+import controller.EndExectuor;
 import model.Animal;
 import model.GameModel;
 import model.Maze;
@@ -323,9 +324,9 @@ public class GameView extends JPanel{
 		createGlassPane();
 	}
 
-	public void removeGlassPane(){
+	public void removeGlassPane(EndExectuor endExectuor){
 		//pnlMaze.
-		removeGlassPane1();
+		removeGlassPane1(endExectuor);
 
 		System.out.println("Timer Paused:" + false);
 		
@@ -365,7 +366,7 @@ public class GameView extends JPanel{
 	}
 	
 	
-	public void removeGlassPane1(){
+	public void removeGlassPane1(EndExectuor endExectuor){
 		if(mazeObject.isFound()){
 			new Thread(new Runnable(){
 				@Override
@@ -376,6 +377,9 @@ public class GameView extends JPanel{
 						//Thread.sleep(5000);
 						p.setVisible(false);
 						isTimerPaused = false;
+						if(endExectuor != null){
+							endExectuor.run();
+						}
 
 					}catch(Exception ex){}
 					finally{p = null;}
