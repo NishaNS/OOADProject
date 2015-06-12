@@ -14,21 +14,21 @@ import commonutil.MazeAnimals;
 public class Maze {
 	//private final int[][] arrMaze;
 	private final int[][] arrMaze1 = {
-			 	{0, 0, 3, 0, 0, 0, 0, 0, 0, 0},
-	            {2, 0, 0, 0, 3, 0, 0, 0, 0, 0},
-	            {2, 0, 1, 1, 3, 1, 1, 0 ,0, 0},
-	            {2, 0, 1, 1, 3, 1, 1, 0 ,0, 0},
-	            {2, 0, 0, 0, 3, 0, 0, 0 ,0, 0},
+			 	{0, 0, 3, 0, 0, 2, 0, 0, 0, 0},
+	            {0, 0, 0, 0, 3, 0, 0, 0, 2, 0},
+	            {0, 2, 1, 1, 3, 1, 1, 0 ,0, 0},
+	            {0, 0, 1, 1, 3, 1, 1, 0 ,0, 0},
+	            {0, 0, 0, 2, 3, 0, 0, 0 ,0, 0},
 	            {2, 0, 0, 0, 0, 0, 0, 0 ,0, 0}
     };
 	
 	private final int[][] arrMaze2 = {
-			{0, 0, 0, 1, 0, 0, 0, 0, 0, 2},
-            {0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-            {0, 2, 0, 1, 2, 0, 0, 2 ,1, 2},
-            {0, 0, 0, 0, 1, 1, 1, 0 ,0, 0},
-            {0, 0, 0, 2, 0, 2, 0, 2 ,0, 0},
-            {2, 0, 1, 1, 1, 0, 0, 0 ,0, 2}
+			{0, 0, 3, 0, 2, 0, 0, 1, 0, 3},
+            {0, 0, 1, 2, 1, 0, 0, 2, 0, 2},
+            {3, 2, 0, 0, 1, 2, 0, 1 ,1, 0},
+            {0, 0, 1, 0, 1, 0, 0, 0 ,0, 3},
+            {1, 2, 0, 2, 3, 0, 1, 2 ,0, 0},
+            {0, 0, 0, 0, 1, 0, 2, 0 ,0, 0}
 };
 	private final int[][] arrMaze3 = {
 			{0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
@@ -99,7 +99,7 @@ public class Maze {
 		within that gets a particular col; 
 		then decide what tile to put down*/
 		if(theme==1 && level==1)
-			return arrMaze1;		
+			return arrMaze1;
 		else if(theme==1 && level==2)
 			return arrMaze2;
 		else if(theme==2 && level==1)
@@ -235,8 +235,8 @@ public class Maze {
 	            	this.mazeObjects[i].setPositionX(key/arrMaze[0].length);
 	            	 this.mazeObjects[i].setPositionY(0);
 	            }
-			 this.mazeObjects[i].setName(value);
-			 this.mazeObjects[i].setImage(value);
+				 this.mazeObjects[i].setName(value);
+				 this.mazeObjects[i].setImage(value);
 			 this.mazeObjects[i].setisFound(false);
 			 i++;
 		}

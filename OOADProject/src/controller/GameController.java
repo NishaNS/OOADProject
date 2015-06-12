@@ -33,15 +33,15 @@ public class GameController {
 	private GameModel gModel;
 	private Audio auGame;
 	private Audio auLoad; 
-	
+
 
 	private Maze maze;
 	private Player player;
 	private Student student;
-	
+
 	private int theme;
 	private int level;
-	
+
 	private Game game;
 
 	private Timer localTimer = new Timer(1000,new MyTimer());
@@ -55,34 +55,35 @@ public class GameController {
 	private int mazeElementsFound;
 	private int mazebonusFound;
 	//end Mad
-	
+
 	private static String MAZE_LOAD_AUD="";
 	private static String BONUS_AUD="";
 	public int temp;
- 	public GameController(MainDisplayController main) {
+	public GameController(MainDisplayController main) {
 		mainController=main;
 		//initializeComponents();
 		//addListeners();
 		student=new Student();
 		auLoad=new Audio("");
-		
-//		int theme=mainController.getTController().getTheme();
-//		int level=mainController.getLController().getLevel();
+
+		//		int theme=mainController.getTController().getTheme();
+		//		int level=mainController.getLController().getLevel();
 	}
 
- 	public void setStudent(Student s){
- 		student.setFirstName(s.getFirstName());
+	public void setStudent(Student s){
+		student.setFirstName(s.getFirstName());
 		student.setLastName(s.getLastName());
- 	}
+	}
 	public void initializeComponents(int theme,int level){
 		//maze = new Maze(tController.getTheme(), lController.getLevel());
 		//int theme=mainController.getTController().getTheme();
 		//int level=mainController.getLController().getLevel();
 		maze = new Maze(theme, level);
+		this.theme = theme;
 		if(theme==1){
 			MAZE_LOAD_AUD="mc_donald.wav";
 			BONUS_AUD="pg4_t1_bonus.wav";
-			
+
 		}
 		else{
 			MAZE_LOAD_AUD="Deedee.wav";
@@ -96,7 +97,7 @@ public class GameController {
 		auGame = new Audio(BONUS_AUD);
 		game.setLevel(maze.getLevel());
 		game.setTheme(maze.getTheme());
-		
+
 	}
 
 	public void addListeners(){
@@ -132,9 +133,9 @@ public class GameController {
 		int gameScore = game.getScore();
 
 		if(arrMaze[playerX][playerY]==2){
-			
+
 			++mazeElementsFound;
-			
+
 			gameScore = gameScore + 10;
 			game.setScore(gameScore);
 			gView.setScore(game.getScore());
@@ -158,8 +159,8 @@ public class GameController {
 				gView.removeGlassPane(null);
 			}
 
-			
-			
+
+
 
 		}
 
@@ -188,12 +189,12 @@ public class GameController {
 		new Thread(new Runnable() {			
 			@Override
 			public void run() {		
-				
+
 				auLoad.setauFileName(MAZE_LOAD_AUD);
 				auLoad.playAudio();//pause for page load + before looping
-					} 
-				}).start();
-		
+			} 
+		}).start();
+
 	}
 	private class MyTimer implements ActionListener {
 		int temp;
@@ -202,13 +203,13 @@ public class GameController {
 			if(gView.getIsTimerPaused()){
 				time = game.getTime();
 				gView.setTime(time/60, time%60);
-				System.out.println("Timer Paused:" + time);
+//				System.out.println("Timer Paused:" + time);
 			}else{
 				temp++;
 				game.setTime(temp);
 				time = game.getTime();
 				gView.setTime(time/60, time%60);
-				System.out.println("Timer Resumed:" + time);
+//				System.out.println("Timer Resumed:" + time);
 			}
 		}
 
@@ -222,8 +223,37 @@ public class GameController {
 			int keyCode = e.getKeyCode();
 			if (keyCode == KeyEvent.VK_DOWN) {downKey = false;}
 		}
+		
+		private void playKeyPressAudio(int keyCode, int y, int x){
+			if(arrMaze[y][x] == 0){
+				switch (keyCode){
+				case KeyEvent.VK_UP:
+					Audio.playAudio("pg4_up.wav");
+					break;
+				case KeyEvent.VK_DOWN:
+					Audio.playAudio("pg4_down.wav");
+					break;
+				case KeyEvent.VK_LEFT:
+					Audio.playAudio("pg4_left.wav");
+					break;
+				case KeyEvent.VK_RIGHT:
+					Audio.playAudio("pg4_right.wav");
+					break;
+				
+				}
+			} else if(arrMaze[y][x] == 1){
+				if(theme == 1 ){
+					Audio.playAudio("thud.wav");
+				} else {
+					Audio.playAudio("pg4_t2_hitlog.wav");
+				}
+			}
+//			Audio audio = new Audio(fileName);
+//			audio.playAudio();
+		}
 
 		public void keyPressed (KeyEvent e) {
+			auLoad.stopAudio();
 			int keyCode = e.getKeyCode();
 			int currentX = player.getTileX();
 			int currentY = player.getTileY();
@@ -236,6 +266,7 @@ public class GameController {
 
 			if (keyCode == KeyEvent.VK_UP) {
 				if(currentY - 1 >= 0){
+					playKeyPressAudio(keyCode, currentY-1, currentX);
 					if(arrMaze[currentY - 1][currentX] != 1){
 						updatePlayerPosition(0,-1);
 					}
@@ -244,6 +275,7 @@ public class GameController {
 
 			if (keyCode == KeyEvent.VK_DOWN) {
 				if(currentY + 1 < arrMaze.length){
+					playKeyPressAudio(keyCode, currentY+1, currentX);
 					if(arrMaze[currentY + 1][currentX] != 1)
 						updatePlayerPosition(0,1);
 				}
@@ -252,6 +284,7 @@ public class GameController {
 			if (keyCode == KeyEvent.VK_LEFT) {
 				//playAudio("moveleft.wav");
 				if(currentX - 1 >= 0){
+					playKeyPressAudio(keyCode, currentY, currentX-1);
 					if(arrMaze[currentY][currentX-1] != 1)
 						updatePlayerPosition(-1,0);
 				}
@@ -261,6 +294,7 @@ public class GameController {
 			if (keyCode == KeyEvent.VK_RIGHT) {
 				//playAudio("moveright.wav");
 				if(currentX + 1 < arrMaze[0].length){
+					playKeyPressAudio(keyCode, currentY, currentX+1);
 					if(arrMaze[currentY][currentX+1] != 1)
 						updatePlayerPosition(1,0);
 				}
@@ -269,18 +303,18 @@ public class GameController {
 		}
 
 	}
-		private void playAudio(String fileName){
-			auGame.setauFileName(fileName);
-			new Thread(new Runnable(){
-				@Override
-				public void run(){
-					try{
-						auGame.playAudio();
-					}catch(Exception ex){}
-				}
-			}).start();
-		}
-	
+	private void playAudio(String fileName){
+		auGame.setauFileName(fileName);
+		new Thread(new Runnable(){
+			@Override
+			public void run(){
+				try{
+					auGame.playAudio();
+				}catch(Exception ex){}
+			}
+		}).start();
+	}
+
 }
 
 /*
@@ -299,4 +333,4 @@ public class GameController {
 				end.loadAudio();
 
 			}*/
- 
+

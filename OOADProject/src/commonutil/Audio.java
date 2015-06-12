@@ -90,4 +90,8 @@ public class Audio {
 		audioLine.flush();
 	}
 	
+	public static void playAudio(String fileName){
+		new Audio(fileName).playAudio();
+	}
+	
 }
