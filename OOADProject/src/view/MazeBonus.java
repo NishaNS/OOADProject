@@ -51,6 +51,6 @@ public class MazeBonus extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;	
 		//reDraw(g2);
 		if(iconLogo!=null)
-			g.drawImage(iconLogo.getImage(), 0, 0, this);
+			g.drawImage(iconLogo.getImage(), 0, 0,getWidth(),getHeight(), null);
 	}
 }

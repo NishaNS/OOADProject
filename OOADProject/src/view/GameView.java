@@ -115,12 +115,12 @@ public class GameView extends JPanel{
 		else if(theme==2 && level==1)
 			{
 			player.setInitialPositon(9, 0);
-			MAZE_BG="";
+			MAZE_BG=MAZE_BG+"Bck_pond.png";
 			}	
 		else
 			{
 			player.setInitialPositon(9, 0);
-			MAZE_BG="";
+			MAZE_BG=MAZE_BG+"Bck_pond.png";
 			}	
 		setName("Game");
 		initializeComponents();
@@ -144,10 +144,10 @@ public class GameView extends JPanel{
 	
 	public void setPnlDashBoard(int count){
 		if(theme==1)
-		{pnlDashboard.loadBonusImage("Egg"+Integer.toString(count));	
+		{pnlDashboard.loadBonusImage("Egg"+Integer.toString(count)+".png");	
 		pnlDashboard.reDraw();}
 		else{
-			pnlDashboard.loadBonusImage("Fish"+Integer.toString(count));
+			pnlDashboard.loadBonusImage("Fish"+Integer.toString(count)+".png");
 			pnlDashboard.reDraw();
 		}
 	}
@@ -168,6 +168,7 @@ public class GameView extends JPanel{
 		
 		pnlMaze.setOpaque(false);
 		pnlDashboard = new MazeBonus(maze.getTheme());	
+		pnlDashboard.setOpaque(false);
 		pnlScoreBoard = new JPanel();
 		pnlScoreBoard.setOpaque(false);
 		fileBackground = "Bck_Green_2_Sprayed Filter.png";

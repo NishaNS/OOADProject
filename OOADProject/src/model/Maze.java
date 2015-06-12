@@ -55,10 +55,10 @@ public class Maze {
 	private int level;
 	private int noOfElements;
 	private static String FILE_PATH = "image/";
-	private static String IMG_T1_PATH = "grass.png";
-	private static String IMG_T1_BLOCK = "tree.png";
-	private static String IMG_T2_PATH = "";
-	private static String IMG_T2_BLOCK = "grass.png";
+	private static String IMG_T1_PATH = "";
+	private static String IMG_T1_BLOCK = "haybale.png";
+	private static String IMG_T2_PATH = "waterpath.png";
+	private static String IMG_T2_BLOCK = "";
 	private static int COUNT_LEVEL1_MAZEELEMENTS = 5;
 	private static int COUNT_LEVEL2_MAZEELEMENTS = 10;
 	private MazeAnimals enumAnimal;
