@@ -57,6 +57,7 @@ public class GameController {
 	//end Mad
 	
 	private static String MAZE_LOAD_AUD="";
+	private static String BONUS_AUD="";
 	public int temp;
  	public GameController(MainDisplayController main) {
 		mainController=main;
@@ -80,16 +81,19 @@ public class GameController {
 		maze = new Maze(theme, level);
 		if(theme==1){
 			MAZE_LOAD_AUD="mc_donald.wav";
+			BONUS_AUD="pg4_t1_bonus.wav";
+			
 		}
 		else{
 			MAZE_LOAD_AUD="Deedee.wav";
+			BONUS_AUD="pg4_t2_bonus.wav";
 		}
 		game = new Game();
 		gView = new GameView(maze);
 		gView.control=this;
 		arrMaze = maze.getMazeLayout();
 		player = gView.getPlayer();
-		auGame = new Audio("goodjob.wav");
+		auGame = new Audio(BONUS_AUD);
 		game.setLevel(maze.getLevel());
 		game.setTheme(maze.getTheme());
 		
@@ -163,8 +167,9 @@ public class GameController {
 			gameScore = gameScore + 5;
 			game.setScore(gameScore);
 			gView.setScore(game.getScore());
-			gView.setPnlDashBoard(++mazebonusFound);
-			System.out.println("Bonus found"+ mazebonusFound);
+			++mazebonusFound;
+			gView.setPnlDashBoard(mazebonusFound);
+			//System.out.println("Bonus found"+ mazebonusFound);
 			//playaudio -- you found an egg
 			new Thread(new Runnable(){
 				@Override

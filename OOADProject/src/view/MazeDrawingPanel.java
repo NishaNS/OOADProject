@@ -61,6 +61,13 @@ public class MazeDrawingPanel extends JPanel {
 					if(arrMaze[y][x] == 1){
 						g.drawImage(maze.getBlock(), x*PIXEL_COUNT, y*PIXEL_COUNT, this);
 					}
+					if(arrMaze[y][x] == 0){
+						g.drawImage(maze.getPath(), x*PIXEL_COUNT, y*PIXEL_COUNT, this);
+					}
+					if(arrMaze[y][x] == 2){
+						g.drawImage(maze.getPath(), x*PIXEL_COUNT, y*PIXEL_COUNT, this);
+					}
+					
 				}
 			}
 			g.drawImage(player.getPlayer(), player.getTileX()*PIXEL_COUNT, player.getTileY()*PIXEL_COUNT, this);

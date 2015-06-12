@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import commonutil.AppImage;
 import commonutil.Audio;
-import commonutil.audio1;
 import model.Student;
 import model.ThemeModel;
 import view.LevelView;
@@ -30,7 +29,6 @@ public class ThemeController {
 	private MainDisplayController mainController;	
 	private static boolean btnSelected;		//variable for audio loop condition
 	private Audio auObj;
-	private audio1 au;
 	private Student student;
 
 	
