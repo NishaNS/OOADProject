@@ -46,27 +46,23 @@ public class EndGameView extends JPanel {
 	
 	
 	
-//	private int TIME;
-//	private int SCORE;
-//	private int THEME;
-//	private int LEVEL;
-//	private int selectionPerformed;
+	private int TIME;
+	private int THEME;
 	private int scanrate=1000;
 	
 	private Audio auEnd;
 	private Game game;
-//	private MainDisplayController mainController;
 	Toolkit toolkit =  Toolkit.getDefaultToolkit ();
 	private Dimension d=toolkit.getScreenSize();
 	
 	private String FOOTER_IMG;
-	private String BODY_IMG="image/cloud_burst.png";
+	private String BODY_IMG="image/bckEndGame.png";
 
-	private String CONTINUE_O_IMG="image/Continue.png";
-	private String CONTINUE_S_IMG="image/";
+	private String CONTINUE_O_IMG="image/BtnContinue-1.png";
+	private String CONTINUE_S_IMG="image/BtnContinue-1.png";
 	private String CONTINUE_IMG=CONTINUE_O_IMG;
-	private String EXIT_O_IMG="image/Exit.png";
-	private String EXIT_S_IMG;
+	private String EXIT_O_IMG="image/BtnExitGame.png";
+	private String EXIT_S_IMG="image/BtnExitGame.png";
 	private String EXIT_IMG=EXIT_O_IMG;
 	private String STAR_IMG="";
 	
@@ -88,8 +84,9 @@ public class EndGameView extends JPanel {
 		time_l=new JLabel();
 		score_l=new JLabel();
 		FOOTER_IMG="image/endGameTitle.png";
-		BODY_IMG="image/cloud_burst.png";
-		
+		BODY_IMG="image/bckEndGame.png";
+		THEME=game.getTheme();
+		TIME=game.getTime();
 		setButtons();
 		setPanel();
 		settings();
@@ -102,7 +99,7 @@ public class EndGameView extends JPanel {
 	 * The method to set buttons image 
 	 */
 	public void setButtons(){
-		cButton=new JButton("Continue"){
+		cButton=new JButton(){
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				cButton.setIcon(new ImageIcon(CONTINUE_IMG));
@@ -111,8 +108,8 @@ public class EndGameView extends JPanel {
 				cButton.setPreferredSize(new Dimension((int)(0.18*d.getWidth()),(int)(0.12*d.getHeight())));
 			}
 		};
-		
-		eButton=new JButton("Exit"){
+		 
+		eButton=new JButton(){
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				eButton.setIcon(new ImageIcon(EXIT_IMG));
@@ -191,15 +188,15 @@ public class EndGameView extends JPanel {
 	 */
 	public void loadStarImage(){
 		
-		if(game.getTime() < 100){
+		if((THEME==1 && TIME < 120) || (THEME==2 && TIME<180)){
 		 //star.setIcon(new ImageIcon("image/Three_star.png"));
 		STAR_IMG="image/Three_star.png";
 		}
-		else if(game.getTime() >= 100 && game.getTime()<=360){
+		else if((THEME==1 && TIME >= 120 && TIME<=240) || (THEME==2 && TIME >= 180 && TIME <=300) ){
 		//star.setIcon(new ImageIcon("image/Two_star.png"));
 			STAR_IMG="image/Two_star.png";
 		}
-		else if(game.getTime()>360){
+		else if((THEME==1 && TIME>240) || (THEME == 2 && TIME >300)){
 		System.out.println("one star");
 		//star.setIcon(new ImageIcon("image/One_star.png"));
 		STAR_IMG="image/One_star.png";
@@ -279,10 +276,10 @@ public class EndGameView extends JPanel {
 		time_p.setBackground(Color.getHSBColor(20, 20, 20));
 		time_p.setOpaque(false);
 		time_p.setPreferredSize(new Dimension(300,50));
-		font=new Font("Comic Sans MS",Font.ITALIC,40);
+		font=new Font("Comic Sans MS",Font.BOLD,40);
 		time_l.setFont(font);
 		time_l.setPreferredSize(new Dimension(300,50));
-		time_l.setForeground(Color.RED);
+		time_l.setForeground(Color.WHITE);
 		time_p.add(time_l);
 		time_p.setVisible(true);
 		body.add(time_p, constraints);
@@ -298,12 +295,12 @@ public class EndGameView extends JPanel {
 		score_l.setText("Score is "+game.getScore());
 		score_p.setBackground(Color.getHSBColor(20, 20, 20));
 		score_p.setPreferredSize(new Dimension(300,50));
-		font=new Font("Comic Sans MS",Font.ITALIC,40);
+		font=new Font("Comic Sans MS",Font.BOLD,40);
 		score_l.setFont(font);
 		score_p.setOpaque(false);
 		score_l.setPreferredSize(new Dimension(300,50));
 		score_p.setBorder(BorderFactory.createBevelBorder(10));
-		score_l.setForeground(Color.RED);
+		score_l.setForeground(Color.WHITE);
 		score_p.add(score_l);
 		body.add(score_p, constraints);
 		
@@ -365,7 +362,7 @@ public class EndGameView extends JPanel {
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(new ImageIcon(BODY_IMG).getImage(), 0, 0, this);
+		g.drawImage(new ImageIcon(BODY_IMG).getImage(), 0, 0,getWidth(),getHeight(), this);
 	}
 	
 
