@@ -24,7 +24,9 @@ public class GUIComponent {
 		if(imageFileName.isEmpty() && !btnText.isEmpty())
 		{
 			btn = new JButton(btnText);
-			btn.setBackground(Color.BLACK);
+			btn.setOpaque(false);
+			btn.setContentAreaFilled(false);
+			//btn.setBackground(Color.BLACK);
 		}
 		else
 			btn = new JButton(new ImageIcon(FILE_PATH.concat(imageFileName)));

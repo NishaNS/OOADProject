@@ -77,6 +77,7 @@ public class MainDisplayView extends JFrame {
 		this.height = tkit.getScreenSize().height;
 		setSize(this.width, this.height);
 		setUndecorated(false);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
