@@ -217,15 +217,15 @@ public class ScoreListGUI extends JPanel {
 			}
 		});
 
-		testAdd.setText("testAdd");
+		testAdd.setText("Add");
 		testAdd.setToolTipText("");
-		testAdd.setName("testAdd"); // NOI18N
+		testAdd.setName("Add"); // NOI18N
 
-		testUpdate.setText("testUpdate");
-		testUpdate.setName("testUpdate"); // NOI18N
+		testUpdate.setText("Update");
+		testUpdate.setName("Update"); // NOI18N
 
-		testDelete.setText("testDelete");
-		testDelete.setName("testDelete"); // NOI18N
+		testDelete.setText("Delete");
+		testDelete.setName("Delete"); // NOI18N
 
 		lblGameTheme.setText("Game Theme");
 		lblGameTheme.setName("lblGameTheme"); // NOI18N
