@@ -106,22 +106,22 @@ public class GameView extends JPanel{
 		if(theme==1 && level==1)
 			{
 			player.setInitialPositon(0, 0);
-			MAZE_BG=MAZE_BG+"MazeFarm.png";
+			MAZE_BG="MazeFarm.png";
 			}		
 		else if(theme==1 && level==2)
 			{
 			player.setInitialPositon(0, 0);
-			MAZE_BG=MAZE_BG+"MazeFarm.png";
+			MAZE_BG="MazeFarm.png";
 			}	
 		else if(theme==2 && level==1)
 			{
 			player.setInitialPositon(9, 0);
-			MAZE_BG=MAZE_BG+"Bck_pond.png";
+			MAZE_BG="Bck_pond.png";
 			}	
 		else
 			{
 			player.setInitialPositon(9, 0);
-			MAZE_BG=MAZE_BG+"Bck_pond.png";
+			MAZE_BG="Bck_pond.png";
 			}	
 		setName("Game");
 		initializeComponents();
@@ -395,11 +395,11 @@ public class GameView extends JPanel{
 		Image backgroundImage;
 		Image imgBackground = new AppImage(MAZE_BG).loadBackGroundImage();
 		File filename = null;
-		try {
-			filename = new File(MAZE_BG);
-		      backgroundImage = ImageIO.read(filename);
-		      g.drawImage( backgroundImage, 0, 0,getWidth(),getHeight(), this);
-		    } catch (IOException e) {System.out.println("Error in reading the maze panel background image");}
+//		try {
+//			filename = new File(MAZE_BG);
+//		      backgroundImage = ImageIO.read(filename);
+		      g.drawImage( imgBackground, 0, 0,getWidth(),getHeight(), this);
+//		    } catch (IOException e) {System.out.println("Error in reading the maze panel background image");}
 		
 	}
 	

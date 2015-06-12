@@ -23,29 +23,29 @@ public class Maze {
     };
 	
 	private final int[][] arrMaze2 = {
-			{0, 0, 3, 0, 2, 0, 0, 1, 0, 3},
+			{0, 0, 3, 0, 2, 0, 0, 0, 0, 3},
             {0, 0, 1, 2, 1, 0, 0, 2, 0, 2},
             {3, 2, 0, 0, 1, 2, 0, 1 ,1, 0},
             {0, 0, 1, 0, 1, 0, 0, 0 ,0, 3},
             {1, 2, 0, 2, 3, 0, 1, 2 ,0, 0},
-            {0, 0, 0, 0, 1, 0, 2, 0 ,0, 0}
+            {0, 0, 0, 0, 1, 0, 2, 1 ,0, 0}
 };
 	private final int[][] arrMaze3 = {
-			{0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
-            {2, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
-            {0, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
-            {2, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
-            {0, 0, 0, 0, 2, 0, 2, 0, 0, 0}
+			{1, 3, 0, 2, 0, 0, 2, 0, 3, 0},
+            {1, 0, 1, 1, 1, 1, 1, 1, 1, 0},
+            {1, 2, 1, 1, 1, 1, 1, 1 ,1, 1},
+            {1, 0, 1, 1, 1, 1, 1, 1 ,1, 2},
+            {1, 0, 0, 0, 2, 0, 3, 0 ,0, 0},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 	
 	private final int[][] arrMaze4 = {
-			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
-            {0, 0, 0, 0, 0, 0, 0, 0 ,0, 0},
+			{1, 2, 0, 0, 2, 3, 0, 2, 0, 0},
+            {1, 0, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 2, 0, 2, 0, 3, 2, 0 ,0, 2},
             {1, 1, 1, 1, 1, 1, 1, 1 ,1, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0 ,0, 0}
+            {1, 2, 0, 0, 2, 0, 0, 2 ,0, 3},
+            {1, 1, 1, 1, 1, 1, 1, 1 ,1, 1}
 };
 
 	private HashMap<Integer,String> map  = new HashMap<Integer,String>();
@@ -136,14 +136,20 @@ public class Maze {
 				createMazeObjects(arrMaze2);	
 			}
 		else if(theme == 2){
-				createKeyValuePair(mazeElementPosition,enumAlphabets);
-				if(level==1)
-				createMazeObjects(arrMaze3);
-				else 
-				createMazeObjects(arrMaze4);
+//				createKeyValuePair(mazeElementPosition,enumAlphabets);
+				if(level==1){
+					createKeyValuePairForTheme2Level1();
+					createMazeObjects(arrMaze3);
+				}
+				else {
+					createKeyValuePairForTheme2Level2();
+					createMazeObjects(arrMaze4);
+				}
 			}
 		}
-		
+
+
+
 	private void createKeyValuePair(int[] elementPosition,MazeAnimals enumAnimal){
 		int temp = 0;
 		int mazeElement = 0;
@@ -156,7 +162,27 @@ public class Maze {
             }
         }
 	}
-	
+
+	private void createKeyValuePairForTheme2Level1(){
+		map.put(6,MazeAlphabets.A.name());
+		map.put(3,MazeAlphabets.B.name());
+		map.put(21,MazeAlphabets.C.name());
+		map.put(39,MazeAlphabets.E.name());
+		map.put(44,MazeAlphabets.D.name());
+	}
+
+	private void createKeyValuePairForTheme2Level2() {
+		map.put(1,MazeAlphabets.C.name());
+		map.put(4,MazeAlphabets.B.name());
+		map.put(7,MazeAlphabets.A.name());
+		map.put(21,MazeAlphabets.D.name());
+		map.put(23,MazeAlphabets.E.name());
+		map.put(26,MazeAlphabets.F.name());
+		map.put(29,MazeAlphabets.G.name());
+		map.put(41,MazeAlphabets.J.name());
+		map.put(44,MazeAlphabets.I.name());
+		map.put(47,MazeAlphabets.H.name());
+	}
 	private void createKeyValuePair(int[] elementPosition,MazeAlphabets enumAlphabet){
 		int temp = 0;
 		while(temp<noOfElements){
