@@ -32,6 +32,8 @@ public class GameController {
 	private LevelController lController;
 	private GameModel gModel;
 	private Audio auGame;
+	private Audio auLoad; 
+	
 
 	private Maze maze;
 	private Player player;
@@ -53,13 +55,15 @@ public class GameController {
 	private int mazeElementsFound;
 	private int mazebonusFound;
 	//end Mad
-
+	
+	private static String MAZE_LOAD_AUD="";
 	public int temp;
  	public GameController(MainDisplayController main) {
 		mainController=main;
 		//initializeComponents();
 		//addListeners();
 		student=new Student();
+		auLoad=new Audio("");
 		
 //		int theme=mainController.getTController().getTheme();
 //		int level=mainController.getLController().getLevel();
@@ -74,6 +78,12 @@ public class GameController {
 		//int theme=mainController.getTController().getTheme();
 		//int level=mainController.getLController().getLevel();
 		maze = new Maze(theme, level);
+		if(theme==1){
+			MAZE_LOAD_AUD="mc_donald.wav";
+		}
+		else{
+			MAZE_LOAD_AUD="Deedee.wav";
+		}
 		game = new Game();
 		gView = new GameView(maze);
 		gView.control=this;
@@ -166,8 +176,8 @@ public class GameController {
 			@Override
 			public void run() {		
 				
-				auGame.setauFileName("mc_donald.wav");
-				auGame.playAudio();//pause for page load + before looping
+				auLoad.setauFileName(MAZE_LOAD_AUD);
+				auLoad.playAudio();//pause for page load + before looping
 					} 
 				}).start();
 		

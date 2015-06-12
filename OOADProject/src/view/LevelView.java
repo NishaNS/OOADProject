@@ -48,7 +48,7 @@ public class LevelView extends JPanel{
 	public static String BUTTON_EASY_O_IMG_T1 = "LvlBtnFarm1.png";
 	public static String BUTTON_HARD_O_IMG_T1 = "LvlBtnFarm2.png";	
 	public static String BUTTON_EASY_S_IMG_T1 = "LvlBtnFarmClicked_1.png";
-	public static String BUTTON_HARD_S_IMG_T1 = "LvlBtnFarmClicked_1.png";
+	public static String BUTTON_HARD_S_IMG_T1 = "LvlBtnFarmClicked_2.png";
 	
 	public static String PAGE_LOAD_AUD = "";
 	public static String PAGE_LOAD_AUD_T1 = "pg3_t1_lvl_onload.wav";
