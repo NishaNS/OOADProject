@@ -36,17 +36,17 @@ public class HomeView extends JPanel {
 	private JMenu options;
 	private JMenuItem help;
 	private JMenuItem credits;
-	private GridBagLayout gridbag;
-	private GridBagConstraints gridconstraints;	
+	private GridBagLayout gridbaglayout;
+	private GridBagConstraints gridconstraints;
 
 	public HomeView() {
 		//        AppImage img = new AppImage("TestingWelcomePage.png");
 		//        backgroundImage = img.loadBackGroundImage();
 
-		gridbag = new GridBagLayout();
+		gridbaglayout = new GridBagLayout();
 		gridconstraints = new GridBagConstraints();
-		this.setLayout(gridbag);
-		
+		this.setLayout(gridbaglayout);
+
 		PanelWithAudio  pnlTeacher = new PanelWithAudio(new Audio(""));
 		btnTeacherLgn = GUIComponent.createButton("BtnTeacherLogin.png", "");
 		btnTeacherLgn.setBorder(BorderFactory.createEmptyBorder());
@@ -55,6 +55,16 @@ public class HomeView extends JPanel {
 		pnlTeacher.add(btnTeacherLgn);
 		pnlTeacher.setOpaque(false);
 		//pnlTeacher.setBackground(Color.ORANGE);
+				
+		
+		gridconstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridconstraints.weightx = 0.5;
+		gridconstraints.weighty = 1;
+		gridconstraints.gridx = 2;
+		gridconstraints.gridy = 0;
+		gridconstraints.anchor = GridBagConstraints.SOUTH;
+		gridconstraints.insets = new Insets(0, 30, 5, 10);
+		gridbaglayout.setConstraints(pnlTeacher, gridconstraints);
 		audioPanels.add(pnlTeacher);
 
 		backgroundImage=new AppImage("bckWelcomePage.png");
@@ -66,10 +76,16 @@ public class HomeView extends JPanel {
 		pnlContinue.add(btnContinue);
 		pnlContinue.setOpaque(false);
 		//pnlContinue.setBackground(Color.ORANGE);
+		
+		gridconstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridconstraints.weightx = 0.5;
+		gridconstraints.weighty = 1;
+		gridconstraints.gridx = 3;
+		gridconstraints.gridy = 0;
+		gridconstraints.anchor = GridBagConstraints.SOUTH;
+		gridconstraints.insets = new Insets(0, 10, 5, 10);
+		gridbaglayout.setConstraints(pnlContinue, gridconstraints);		
 		audioPanels.add(pnlContinue);
-
-
-
 
 		Font font=new Font(Font.SANS_SERIF,Font.ITALIC,20);
 
@@ -131,9 +147,27 @@ public class HomeView extends JPanel {
 
 		//constraints.gridwidth;
 
+		
+		gridconstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridconstraints.weightx = 0.5;
+		gridconstraints.weighty = 1;
+		gridconstraints.gridx = 0;
+		gridconstraints.gridy = 0;
+		gridconstraints.insets = new Insets(0, 20, 10, 10);
+		gridconstraints.anchor = GridBagConstraints.SOUTH;
+		gridbaglayout.setConstraints(txtStudentFirstName, gridconstraints);
 		add(txtStudentFirstName);
-
+		
+		gridconstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridconstraints.weightx = 0.5;
+		gridconstraints.weighty = 1;
+		gridconstraints.gridx = 1;
+		gridconstraints.gridy = 0;
+		gridconstraints.insets = new Insets(0, 10, 10, 10);
+		gridconstraints.anchor = GridBagConstraints.SOUTH;
+		gridbaglayout.setConstraints(txtStudentLastName, gridconstraints);
 		add(txtStudentLastName); 
+		
 		options.add(help);
 		options.add(credits);
 		menuBar.add(options);
