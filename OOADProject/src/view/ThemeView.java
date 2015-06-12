@@ -8,7 +8,10 @@ import commonutil.CustomButton;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import controller.ThemeController;
@@ -37,7 +40,7 @@ public class ThemeView extends JPanel {
 	public static String AUD_BUTTON_FARM_S="pg2_theme1_selected.wav";
 	public static String AUD_BUTTON_ALPHA_S="pg2_theme2_selected.wav";
 	
-	private static String PAGE_BKGND = "Bck_Green_2_Sprayed Filter.png";
+	private static String PAGE_BKGND = "bckOptions_Theme.png";
 
 	/**
 	 * The constructor setups the elements and layout for the Theme page
@@ -95,5 +98,17 @@ public class ThemeView extends JPanel {
 		btnAlphabets.addKeyListener(adapter);
 	}
 
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		Image backgroundImage;
+		Image imgBackground = new AppImage(PAGE_BKGND).loadBackGroundImage();
+		File filename = null;
+		
+//			   filename = new File(PAGE_BKGND);
+//		      backgroundImage = ImageIO.read(filename);
+		      g.drawImage( imgBackground, 0, 0,getWidth(),getHeight(), this);
+		  
+		
+	}
 
 }

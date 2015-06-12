@@ -14,12 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
+import java.io.File;
 
 import javax.swing.*;
 
 import controller.LevelController;
 import controller.MainDisplayController;
 import controller.ThemeController;
+import commonutil.AppImage;
 import commonutil.Audio;
 import commonutil.CustomButton;
 /**
@@ -30,8 +32,8 @@ public class LevelView extends JPanel{
 
 	private CustomButton btnEasy;
 	private CustomButton btnHard;
-	private JLabel lblDisplay1;
-	private JLabel lblDisplay2;
+	//private JLabel lblDisplay1;
+	//private JLabel lblDisplay2;
 
 	private String imgEasy;
 	private String imgEasySelected;
@@ -79,7 +81,8 @@ public class LevelView extends JPanel{
 	public static String THEME_LEVEL_S="";
 	public static String LEVEL_T1_AUD_S="pg3_t1_lvl_selected.wav";
 	public static String LEVEL_T2_AUD_S="pg3_t2_lvl_selected.wav";
-	
+	private AppImage imgPageBck;
+	private static String PAGE_BKGND = "bckOptions_Level.png";
 	
 	
 	
@@ -87,6 +90,8 @@ public class LevelView extends JPanel{
 	 * LevelView constructor 
 	 */
 	public LevelView(int theme){
+		imgPageBck = new AppImage(PAGE_BKGND);
+		
 		System.out.println("Theme "+theme);
 		if(theme == 1)
 		{
@@ -118,8 +123,7 @@ public class LevelView extends JPanel{
 			btnHard=new CustomButton(BUTTON_HARD_O_IMG,BUTTON_HARD_AUD,"Hard","Level2");
 			setFocusable(true);
 	}
-		lblDisplay1=new JLabel("Select the level");
-		lblDisplay2=new JLabel("(Default level is easy)");
+	
 
 		GridBagLayout gridBag=new GridBagLayout();
 		this.setLayout(gridBag);
@@ -128,23 +132,12 @@ public class LevelView extends JPanel{
 		GridBagConstraints constraint=new GridBagConstraints();
 		constraint.gridx=0;
 		constraint.gridy=0;
-
-		lblDisplay1.setFont(font);
-		this.add(lblDisplay1,constraint);
 		constraint.gridy++;
-		lblDisplay2.setFont(font);
-		this.add(lblDisplay2,constraint);
-
 		constraint.gridy++;	
-
 		this.add(btnEasy,constraint);
 		constraint.gridx++;
-
 		this.setName("LevelView");
 		this.add(btnHard,constraint);
-		this.setSize(200, 200);
-		this.setBackground(Color.ORANGE);
-
 	}
 	
 	public void setTheme(int th){
@@ -200,9 +193,11 @@ public class LevelView extends JPanel{
 		btnHard.addActionListener(a);
 	}
 
-	/**
-	 * The method which plays the initial audio
-	 * @return void
-	 */
-
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		Image backgroundImage;
+		Image imgBackground = new AppImage(PAGE_BKGND).loadBackGroundImage();
+		File filename = null;
+		g.drawImage( imgBackground, 0, 0,getWidth(),getHeight(), this);
+	}
 }
