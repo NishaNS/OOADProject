@@ -123,7 +123,9 @@ public class EndGameController {
 					mainController.getScoreController().addEndResult(data_array);
 					storeDBResult = false;
 				}
-				
+				mainController.getView().setVisible(false);
+				mainController.getView().dispose();
+				mainController.close();
 			}
 		}
 	}
@@ -174,10 +176,15 @@ public class EndGameController {
 					mainController.getScoreController().addEndResult(data_array);
 					storeDBResult = false;
 				}
+				mainController.getView().setVisible(false);
+				mainController.getView().dispose();
+				mainController.close();
 			}
 		}
 	}
 	public EndGameView getView(){
+//		try{
+//		Thread.sleep(2000);}catch(Exception e){}
 		endGameView.settings();
 		return endGameView;
 	}
@@ -186,6 +193,8 @@ public class EndGameController {
 	 * The audio methods
 	 */
 	public void loadAudio(){
+//		try{
+//			Thread.sleep(3000);}catch(Exception e){}
 		new Thread(new Runnable() {			
 			@Override
 			public void run() {		

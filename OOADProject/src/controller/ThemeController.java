@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import commonutil.AppImage;
 import commonutil.Audio;
+import commonutil.audio1;
 import model.Student;
 import model.ThemeModel;
 import view.LevelView;
@@ -29,6 +30,7 @@ public class ThemeController {
 	private MainDisplayController mainController;	
 	private static boolean btnSelected;		//variable for audio loop condition
 	private Audio auObj;
+	private audio1 au;
 	private Student student;
 
 	
@@ -38,7 +40,7 @@ public class ThemeController {
 		mainController=mController;
 		btnSelected = false;
 		auObj = new Audio("");
-		
+		//au=new audio1();
 		student=new Student();
 		
 		tview.addBtnListener(new myActionListener());
@@ -77,6 +79,7 @@ public class ThemeController {
 						Thread.sleep(1000);	
 						auObj.setauFileName(ThemeView.AUD_PAGE_LOAD);					
 						auObj.playAudio();
+						//au.playClip(new File("image/"+ThemeView.AUD_PAGE_LOAD));
 						tview.getBtnFarm().requestFocus();
 						auObj.setauFileName(tview.getBtnFarm().getAudioFile());
 						tview.getBtnFarm().requestFocus();
@@ -126,6 +129,14 @@ public class ThemeController {
 
 				btnSelected = true; 
 				tmodel.setTheme(1);
+				auObj.setauFileName(ThemeView.AUD_BUTTON_FARM_S);
+//				try{
+//					Thread.sleep(100);
+//				}catch(Exception ex){}
+				auObj.playAudio();
+//				try{
+//					Thread.sleep(1000);
+//				}catch(Exception ex){}
 				LevelController lController = mainController.getLController();
 				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
@@ -143,6 +154,12 @@ public class ThemeController {
 
 				btnSelected = true; 
 				tmodel.setTheme(2);
+				auObj.setauFileName(ThemeView.AUD_BUTTON_ALPHA_S);
+				
+				auObj.playAudio();
+				try{
+					Thread.sleep(100);
+				}catch(Exception ex){}
 				LevelController lController = mainController.getLController();
 				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
@@ -165,18 +182,30 @@ public class ThemeController {
 			if(e.getSource().toString().contains("FARM") == true) {
 				btnSelected = true; 
 				tmodel.setTheme(1);
+				auObj.setauFileName(ThemeView.AUD_BUTTON_FARM_S);
+				auObj.playAudio();
+//				try{
+//				Thread.sleep(1000);
+//			}catch(Exception ex){}
 				LevelController lController = mainController.getLController();
 				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);
 				LevelView lView = lController.getView();
 				tview.setVisible(false);
 				(mainController.getView()).addPanels(lView);
-				lController.loadAudio();
+					lController.loadAudio();
+				
 
 			}
 			else if(e.getSource().toString().contains("ALPHABETS") == true) {
 				btnSelected = true; 
 				tmodel.setTheme(2);
+				auObj.setauFileName(ThemeView.AUD_BUTTON_ALPHA_S);
+				try{
+					Thread.sleep(100);
+				}catch(Exception ex){}
+				auObj.playAudio();
+				
 				LevelController lController = mainController.getLController();
 				lController.initializeView(mainController.getTController().getTheme());
 				lController.setStudent(student);

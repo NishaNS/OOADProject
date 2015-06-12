@@ -43,6 +43,7 @@ public class HomeController implements ActionListener{
 	private Timer timer;
 	private Student student;
 	private Component[] components;
+	private Audio au_P1;
 	private int currentPanel = 0;
 	private MainDisplayController mainController;
 	private HelpController helpController;
@@ -66,6 +67,7 @@ public class HomeController implements ActionListener{
 		timer = new Timer(4000,this);
 		addListeners();
 		timer.start();
+		au_P1=new Audio("");
 		student=new Student();
 		student.setFirstName(DEFAULT_FIRST_NAME);
 		student.setLastName(DEFAULT_LAST_NAME);
@@ -76,6 +78,13 @@ public class HomeController implements ActionListener{
 		menuSelected=m;
 	}
 	
+	public void loadAudio(){
+		au_P1.setauFileName("p1_welcome.wav");
+		au_P1.playAudio();
+		try{
+			Thread.sleep(2000);
+		}catch(Exception ex){}
+	}
 	
 	
 	private void addListeners(){
@@ -281,6 +290,7 @@ public class HomeController implements ActionListener{
 		java.util.List<PanelWithAudio> audioPanels = this.view.getAudioPanels();
 		for(PanelWithAudio panel: audioPanels){
 			panel.setBackground(Color.ORANGE);
+			//break;
 		}
 		PanelWithAudio panelWithAudio = audioPanels.get(currentPanel);
 		panelWithAudio.setBackground(Color.YELLOW);

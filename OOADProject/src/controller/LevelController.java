@@ -115,7 +115,7 @@ public class LevelController{
 			if(e.getSource().toString().contains("Level1")){
 				setSelectionPerformed(1);
 				levelModel.setLevel(1);
-				auLevel.setauFileName(LevelView.LEVEL_EASY_AUD_S);
+				auLevel.setauFileName(LevelView.THEME_LEVEL_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				gController.setStudent(student);
@@ -128,14 +128,15 @@ public class LevelController{
 				levelView.getBtnLevel1().setEnabled(false);
 				levelView.setEnabled(false);
 				levelView.setVisible(false);
-				
+				gController.loadAudio();
 				(mainController.getView()).addPanels(gView);
+				
 
 			}
 			else if(e.getSource().toString().contains("Level2")){
 				setSelectionPerformed(1);
 				levelModel.setLevel(2);
-				auLevel.setauFileName(LevelView.LEVEL_HARD_AUD_S);
+				auLevel.setauFileName(LevelView.THEME_LEVEL_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				
@@ -148,8 +149,9 @@ public class LevelController{
 				levelView.getBtnLevel2().setEnabled(false);
 				levelView.setEnabled(false);
 				levelView.setVisible(false);
-				
+				gController.loadAudio();
 				(mainController.getView()).addPanels(gView);
+				
 
 
 			}
@@ -171,7 +173,7 @@ public class LevelController{
 				System.out.println("Level 1 pressed!");
 				setSelectionPerformed(1);
 				levelModel.setLevel(1);
-				auLevel.setauFileName(LevelView.LEVEL_EASY_AUD_S);
+				auLevel.setauFileName(LevelView.THEME_LEVEL_S);
 				auLevel.playAudio();
 				
 				GameController gController = mainController.getGController();
@@ -184,14 +186,16 @@ public class LevelController{
 				levelView.getBtnLevel1().setFocusable(false);
 				levelView.setFocusable(false);
 				levelView.setVisible(false);
+				gController.loadAudio();
 				(mainController.getView()).addPanels(gView);
+				
 			}
 			if(e.getSource().toString().contains("Level2"))
 			{
 				System.out.println("Level 2 pressed!");
 				setSelectionPerformed(1);
 				levelModel.setLevel(2);
-				auLevel.setauFileName(LevelView.LEVEL_HARD_AUD_S);
+				auLevel.setauFileName(LevelView.THEME_LEVEL_S);
 				auLevel.playAudio();
 				GameController gController = mainController.getGController();
 				gController.setStudent(student);
@@ -203,7 +207,9 @@ public class LevelController{
 				levelView.getBtnLevel2().setFocusable(false);
 				levelView.setFocusable(false);
 				levelView.setVisible(false);
+				gController.loadAudio();
 				(mainController.getView()).addPanels(gView);
+				
 			}
 		}
 	}
@@ -222,7 +228,7 @@ public class LevelController{
 		levelView.setTrackVariable(1);
 		try {
 			while(true){
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			//System.out.println("true");
 			levelView.setTrackVariable(1);
 			if(getSelectionPerformed()!=1){

@@ -30,9 +30,13 @@ public class ThemeView extends JPanel {
 	public static String BUTTON_ALPHABETS_O_IMG = "Btn_Alphabets_Updated.png";
 	public static String BUTTON_FARM_S_IMG ="Btn_Farm_Updated_Clicked.png";
 	public static String BUTTON_ALPHABETS_S_IMG = "Btn_Alphabets_Updated_Clicked.png";
-	public static String AUD_PAGE_LOAD = "Theme_1.wav";
-	public static String AUD_BUTTON_FARM = "Theme_2.wav";
-	public static String AUD_BUTTON_ALPHABETS = "Theme_3.wav";
+	
+	public static String AUD_PAGE_LOAD = "pg2_theme_onload.wav";
+	public static String AUD_BUTTON_FARM = "pg2_theme1_selection.wav";
+	public static String AUD_BUTTON_ALPHABETS = "pg2_theme2_selection.wav";
+	public static String AUD_BUTTON_FARM_S="pg2_theme1_selected.wav";
+	public static String AUD_BUTTON_ALPHA_S="pg2_theme2_selected.wav";
+	
 	private static String PAGE_BKGND = "Bck_Green_2_Sprayed Filter.png";
 
 	/**

@@ -11,9 +11,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 
 import commonutil.Audio;
-
 import commonutil.MazeElementPane;
-
 import model.Game;
 import model.Student;
 import model.GameModel;
@@ -163,6 +161,17 @@ public class GameController {
 		}
 	}
 
+	public void loadAudio(){
+		new Thread(new Runnable() {			
+			@Override
+			public void run() {		
+				
+				auGame.setauFileName("mc_donald.wav");
+				auGame.playAudio();//pause for page load + before looping
+					} 
+				}).start();
+		
+	}
 	private class MyTimer implements ActionListener {
 		int temp;
 		int time;

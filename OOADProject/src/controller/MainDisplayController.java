@@ -50,6 +50,7 @@ public class MainDisplayController {
 		this.getView().setJMenuBar(hView.getMenu());
 		hView.setSize(mainView.getWindowWidth(), mainView.getWindowHeight());
 		mainView.addPanels(hView);
+		hController.loadAudio();
 	}
 	public CreditsController getCrController(){
 		return cController; 

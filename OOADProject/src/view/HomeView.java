@@ -40,7 +40,8 @@ public class HomeView extends JPanel {
     public HomeView() {
 //        AppImage img = new AppImage("TestingWelcomePage.png");
 //        backgroundImage = img.loadBackGroundImage();
-    	PanelWithAudio  pnlTeacher = new PanelWithAudio(new Audio("goodjob.wav"));
+    	
+    	PanelWithAudio  pnlTeacher = new PanelWithAudio(new Audio(""));
         btnTeacherLgn = GUIComponent.createButton("BtnTeacherLogin.png", "");
         btnTeacherLgn.setBorder(BorderFactory.createEmptyBorder());
         pnlTeacher.add(btnTeacherLgn);
@@ -48,7 +49,7 @@ public class HomeView extends JPanel {
         audioPanels.add(pnlTeacher);
         
     	backgroundImage=new ImageIcon("image/TestingWelcomePage.png").getImage();
-        PanelWithAudio pnlContinue = new PanelWithAudio(new Audio("continuekey.wav"));
+        PanelWithAudio pnlContinue = new PanelWithAudio(new Audio("pg1_continue.wav"));
         btnContinue = GUIComponent.createButton("BtnContinue.png", "");
         btnContinue.setBorder(BorderFactory.createEmptyBorder());
         pnlContinue.add(btnContinue);
